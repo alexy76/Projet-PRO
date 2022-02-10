@@ -4,6 +4,12 @@ require_once '../models/Database.php';
 require_once '../models/Users.php';
 require_once '../tools/cleanData.php';
 
+/** Initialisation des paramètres de la page */
+
+if(session_status() === PHP_SESSION_NONE) session_start();
+
+
+
 
 /** Affichage des formulaires selon la requête URL */
 
@@ -96,21 +102,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connection'])){
 
-    if(isset($_POST['mail'], $_POST['pwd'])){
+
+    if(isset($_POST['remember'])){
+    }
+
+    if(isset($_POST['mail'], $_POST['pwd']) && filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
 
         $Users = new Users;
+        $_POST['mail'] = strtolower($_POST['mail']);
         $userConnection = cleanData($_POST);
 
-        if($Users->getExistUsermail(strtolower($userConnection['mail']))){
+        if($Users->getExistUsermail($userConnection['mail'])){
 
-            if($Users->comparePassword($_POST['pwd'], strtolower($userConnection['mail']))){
+            if($Users->comparePassword($_POST['pwd'], $userConnection['mail'])){
 
                 if($Users->getStatusUser($userConnection['mail'])){
+
                     $messageAlert = ['success', "Vous êtes connecté"];
+                    $_SESSION = $Users->getUser($userConnection['mail']);
+
                 }else
-                    $messageAlert = ['info', "Votre compte n'a pas été activé, vérifier vos mails !"];
-
-
+                    $messageAlert = ['primary', "Votre compte n'a pas été activé, vérifier vos mails !"];
             }else
                 $messageAlert = ['danger', "Mail ou mot de passe incorrect"];
         }
@@ -142,7 +154,7 @@ if(isset($_GET['mail'], $_GET['key'])){
             }
             elseif(is_null($tokenMail))
             {
-                $messageAlert = ['info', "Votre adresse mail a déjà été confirmée"];
+                $messageAlert = ['primary', "Votre adresse mail a déjà été confirmée"];
                 $mail = $userConfirm['mail'];
             }
             else

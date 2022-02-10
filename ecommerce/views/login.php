@@ -16,24 +16,30 @@ require_once '../controllers/ctrLogin.php';
 
 <body class="bg-light">
 
-    <h1 class="text-center">Page de Connexion / Inscription</h1>
+    <h1 class="text-center mt-5">Page de Connexion / Inscription</h1>
 
-    <div class="container">
+    <div class="container mt-5">
 
         <div class="card text-center">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link <?= $action == 'connection' ? 'active' : '' ?>" aria-current="true" href="?action=connection">Connexion</a>
+                        <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'connection' ? 'active' : '') ?>" aria-current="true" href="?action=connection">Connexion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $action == 'subscribe' ? 'active' : '' ?>" href="?action=subscribe">Inscription</a>
+                        <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'subscribe' ? 'active' : '') ?>" href="?action=subscribe">Inscription</a>
                     </li>
+                <?php if(isset($_SESSION['id'])) : ?>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="logout.php">Se déconneter</a>
+                    </li>
+                <?php endif; ?>
                 </ul>
             </div>
             <div class="card-body">
                 <div class="row">
 
+                <?php if(!isset($_SESSION['id'])) : ?>
                     <!-- Formulaire d'inscription -->
 
                     <div id="formSubscribe" class="col-6-lg col-10 m-auto <?= $action == 'subscribe' ? '' : 'd-none' ?>">
@@ -80,11 +86,17 @@ require_once '../controllers/ctrLogin.php';
 
                         <h2 class="card-title mb-5">Se connecter à son compte</h2>
 
-                        <?php if(isset($messageAlert)) : ?>
+                        <?php if (isset($messageAlert)) : ?>
 
-                                <div class="alert alert-<?= $messageAlert[0] ?>" role="alert">
-                                    <?= $messageAlert[1] ?>
-                                </div>
+                            <div class="alert alert-<?= $messageAlert[0] ?>" role="alert">
+                                <?= $messageAlert[1] ?>
+                            </div>
+
+                        <?php elseif(isset($_GET['logout'])) : ?>
+
+                            <div class="alert alert-primary" role="alert">
+                                Vous avez bien été déconnecté
+                            </div>
 
                         <?php endif; ?>
 
@@ -98,6 +110,11 @@ require_once '../controllers/ctrLogin.php';
                                 <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Mot de passe" name="pwd" value="">
                             </div>
 
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="remember" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Connexion automatique</label>
+                            </div>
+
                             <div class="text-center mt-3">
                                 <input type="submit" name="connection" class="btn btn-dark" value="Se connecter">
                             </div>
@@ -105,6 +122,12 @@ require_once '../controllers/ctrLogin.php';
                         </form>
                         <p class="card-text"></p>
                     </div>
+
+                    <?php else : ?>
+
+                        <h2>Bienvenue sur votre espace clients</h2>
+
+                    <?php endif; ?>
                 </div>
 
             </div>

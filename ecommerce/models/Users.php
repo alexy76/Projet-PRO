@@ -121,5 +121,26 @@ class Users extends Database{
 
         return $statment->fetch()->activate;
     }
+
+
+    /**
+     * Méthode permettant de récupérer les informations d'un utilisateur (ouverture de session)
+     * @param string (adresse mail)
+     * @return array (données de l'utilisateur)
+     */
+    public function getUser(string $mail) : mixed
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT `usr_id` as 'id', `usr_mail` as 'mail', `usr_lastname` as 'lastname',
+                 `usr_firstname` as 'firstname', `usr_role` as 'role' 
+                FROM `ec_users` WHERE `usr_mail` = :mail";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':mail', $mail, PDO::PARAM_STR);
+        $statment->execute();
+
+        return $statment->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>
