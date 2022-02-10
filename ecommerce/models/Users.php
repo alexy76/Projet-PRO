@@ -51,7 +51,7 @@ class Users extends Database{
      * @param string (adresse email)
      * @return mixed (string | NULL)
      */
-    public function getTokenMail(string $mail) : mixed
+    public function getTokenMail(string $mail)
     {
         $db = $this->connectDB();
 
@@ -128,7 +128,7 @@ class Users extends Database{
      * @param string (adresse mail)
      * @return array (données de l'utilisateur)
      */
-    public function getUser(string $mail) : mixed
+    public function getUser(string $mail)
     {
         $db = $this->connectDB();
 

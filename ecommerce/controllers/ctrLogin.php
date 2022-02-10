@@ -77,18 +77,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
 
                 $lien = 'http://ecommerce.net/views/login.php?mail='.$userSubscribe['mail'].'&key='.$userSubscribe['token'];
 
-                var_dump($lien);
-
                 unset($userSubscribe);
 
-                // $to      = '';
-                // $subject = 'le sujet';
-                // $message = 'Bonjour !';
-                // $headers = 'From: webmaster@example.com' . "\r\n" .
-                // 'Reply-To: webmaster@example.com' . "\r\n" .
-                // 'X-Mailer: PHP/' . phpversion();
-
-                // mail($to, $subject, $message, $headers);
+                $to   = 'alexy.lepretre76@laposte.net';
+                $from = 'no-reply@ecommerce.fr';
+                $name = 'Ecommerce La Manu';
+                $subj = 'Test !';
+                $msg = 'Félicitation pour ton inscription, veuillez valider votre compte en cliquant sur : <a href="' . $lien . '">ce lien</a>';
+                
+                smtpmailer($to,$from, $name ,$subj, $msg);
             }
             else
                 $messageFlash = '';
@@ -118,8 +115,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connection'])){
 
                 if($Users->getStatusUser($userConnection['mail'])){
 
-                    $messageAlert = ['success', "Vous êtes connecté"];
                     $_SESSION = $Users->getUser($userConnection['mail']);
+                    // Faire une redirection plus tard dans le Dev (header());
 
                 }else
                     $messageAlert = ['primary', "Votre compte n'a pas été activé, vérifier vos mails !"];
