@@ -4,7 +4,7 @@ class Users extends Database{
 
     /**
      * Méthode permettant d'enregistrer un utilisateur
-     * @param array
+     * @param array (string mail, string password, string nom, string prenom, boolean newsletter, string tokem_mail)
      * @return bool
      */
     public function insertUser(array $user) : bool
@@ -29,7 +29,7 @@ class Users extends Database{
 
     /**
      * Méthode permettant de connaître l'existence d'une adresse mail en bdd
-     * @param string
+     * @param string (adresse email)
      * @return bool
      */
     public function getExistUsermail(string $mail) : bool
@@ -44,6 +44,13 @@ class Users extends Database{
         return $statment->fetch()->countMail > 0 ? true : false;
     }
 
+
+
+    /**
+     * Méthode permettant de récuperer le token de confirmation du mail
+     * @param string (adresse email)
+     * @return mixed (string | NULL)
+     */
     public function getTokenMail(string $mail) : mixed
     {
         $db = $this->connectDB();
@@ -56,6 +63,13 @@ class Users extends Database{
         return $statment->fetch()->token;
     }
 
+
+
+    /**
+     * Méthode permettant d'activer le compte utilisateur
+     * @param string (adresse email)
+     * @return bool
+     */
     public function setActivateAccount(string $mail) : bool
     {
         $db = $this->connectDB();
@@ -68,6 +82,13 @@ class Users extends Database{
         return $statment->execute();
     }
 
+
+
+    /**
+     * Méthode permettant de comparer le password de l'utilisateur a celui de la BDD
+     * @param string (password, adresse email)
+     * @return bool
+     */
     public function comparePassword(string $pwd, string $mail) : bool
     {
         $db = $this->connectDB();
@@ -81,6 +102,13 @@ class Users extends Database{
         return password_verify($pwd, $statment->fetch()->pwd);
     }
 
+
+
+    /**
+     * Méthode permettant de connaître si un utilisateur a validé son email
+     * @param string (adresse email)
+     * @return bool
+     */
     public function getStatusUser(string $mail) : bool
     {
         $db = $this->connectDB();
