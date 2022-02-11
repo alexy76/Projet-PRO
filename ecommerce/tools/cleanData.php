@@ -1,6 +1,5 @@
 <?php
 require_once "../tools/PHPMailer/PHPMailerAutoload.php";
-// require_once "../../pwd.php";
 
 function smtpmailer($to, $from, $from_name, $subject, $body)
 {
@@ -12,7 +11,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = 465;  
     $mail->Username = 'ecommerce.lamanu@gmail.com';
-    $mail->Password = PWD_GMAIL;   
+    $mail->Password = '**********';   
 
 //   $path = 'reseller.pdf';
 //   $mail->AddAttachment($path);

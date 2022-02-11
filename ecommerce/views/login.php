@@ -11,6 +11,7 @@ require_once '../controllers/ctrLogin.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 
@@ -60,7 +61,7 @@ require_once '../controllers/ctrLogin.php';
                                     <span class="text-danger"><?= $errors['mail'] ?? '' ?></span>
                                     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com" name="mail" value="<?= $userSubscribe['mail'] ?? '' ?>">
                                 </div>
-                                <hr class="my-4 m-auto px-5" style="color: black; opacity: 100">
+                                <!-- <hr class="my-4 m-auto px-5" style="color: black; opacity: 100"> -->
                                 <div class="mb-3">
                                     <span class="text-danger"><?= $errors['pwd'] ?? '' ?></span>
                                     <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Mot de passe" name="pwd">
@@ -71,6 +72,10 @@ require_once '../controllers/ctrLogin.php';
                                 <div class="form-check form-switch">
                                     <input class="form-check-input form-check-input-checked-dark form-check-input-checked-bg-dark" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="newsLetter" <?= isset($userSubscribe['newsLetter']) && $userSubscribe['newsLetter'] === true ? 'checked' : '' ?>>
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Je souhaite bénéficier des offres exclusives en m'inscrivant à la Newsletter !</label>
+                                </div>
+                                <div class="mt-3">
+                                    <span class="text-danger"><?= $errors['reCaptcha'] ?? '' ?></span>
+                                    <div class="g-recaptcha" data-sitekey="6LdB5HAeAAAAAFSg6xSD0ZUXvFLUt2kSQB6cp5Zp"></div>
                                 </div>
                                 <div class="text-center mt-3">
                                     <input type="submit" name="subscribe" class="btn btn-dark" value="S'inscrire">

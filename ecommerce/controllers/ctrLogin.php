@@ -63,6 +63,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
             $errors['pwd'] = "Le mot de passe doit contenir au minimum 8 caractères";
 
 
+        if (empty($_POST['g-recaptcha-response']))
+            $errors['reCaptcha'] = 'Veuillez valider le reCAPTCHA';
+        else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode('6LdB5HAeAAAAAChezk16TaVcl5O2ACuH_2KrZPfV') .  '&response=' . urlencode($_POST['g-recaptcha-response']);
+            $responseKeys = json_decode(file_get_contents($url), true);
+
+            if (!$responseKeys["success"]) 
+                $errors['reCaptcha'] = 'Bots interdit sur ce site';
+        }
+
+
         if (empty($errors)) {
 
             $userSubscribe['lastName'] = ucfirst(strtolower($userSubscribe['lastName']));
@@ -75,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
             {
                 $messageFlash = '';
 
-                $lien = 'http://ecommerce.net/views/login.php?mail='.$userSubscribe['mail'].'&key='.$userSubscribe['token'];
+                $lien = 'http://'. $_SERVER['SERVER_NAME'] . '/' . $_SERVER['SCRIPT_NAME'] .'?mail='. urlencode($userSubscribe['mail']) .'&key='. urlencode($userSubscribe['token']);
 
                 unset($userSubscribe);
 
@@ -83,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
                 $from = 'no-reply@ecommerce.fr';
                 $name = 'Ecommerce La Manu';
                 $subj = 'Test !';
-                $msg = 'Félicitation pour ton inscription, veuillez valider votre compte en cliquant sur : <a href="' . $lien . '">ce lien</a>';
+                $msg = 'Felicitation pour ton inscription, valide ton compte en cliquant sur : <a href="' . $lien . '">ce lien</a>';
                 
                 smtpmailer($to,$from, $name ,$subj, $msg);
             }
@@ -120,8 +132,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connection'])){
 
                 }else
                     $messageAlert = ['primary', "Votre compte n'a pas été activé, vérifier vos mails !"];
-            }else
+            }else{
                 $messageAlert = ['danger', "Mail ou mot de passe incorrect"];
+                $mail = $userConnection['mail'];
+            }
         }
         else
             $messageAlert = ['danger', "Mail ou mot de passe incorrect"];
