@@ -11,7 +11,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = 465;  
     $mail->Username = 'ecommerce.lamanu@gmail.com';
-    $mail->Password = '*******';
+    $mail->Password = 'EcomLaManu76';
 
 //   $path = 'reseller.pdf';
 //   $mail->AddAttachment($path);

@@ -43,7 +43,7 @@ require_once '../controllers/ctrLogin.php';
                     <?php if (!isset($_SESSION['id'])) : ?>
                         <!-- Formulaire d'inscription -->
 
-                        <div id="formSubscribe" class="col-lg-6- col-12 m-auto <?= $action == 'subscribe' ? '' : 'd-none' ?>">
+                        <div id="formSubscribe" class="col-lg-6 col-12 m-auto <?= $action == 'subscribe' ? '' : 'd-none' ?>">
 
                             <h2 class="card-title mb-5">Créer un compte</h2>
 
@@ -70,7 +70,7 @@ require_once '../controllers/ctrLogin.php';
                                     <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Confirmation mot de passe" name="pwdConfirm">
                                 </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input form-check-input-checked-dark form-check-input-checked-bg-dark" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="newsLetter" <?= isset($userSubscribe['newsLetter']) && $userSubscribe['newsLetter'] === true ? 'checked' : '' ?>>
+                                    <input class="form-check-input form-check-input-checked-dark form-check-input-checked-bg-dark" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="newsLetter" checked>
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Je souhaite bénéficier des offres exclusives en m'inscrivant à la Newsletter !</label>
                                 </div>
                                 <div class="mt-3">
@@ -128,7 +128,7 @@ require_once '../controllers/ctrLogin.php';
 
 
                                     <div class="form-check form-switch col-lg-6 col-12 ps-2">
-                                        <input class=" form-check-input ms-2" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="remember" checked>
+                                        <input class=" form-check-input ms-2" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="remember">
                                         <label class="form-check-label ms-1" for="flexSwitchCheckChecked">Connexion automatique</label>
                                     </div>
 

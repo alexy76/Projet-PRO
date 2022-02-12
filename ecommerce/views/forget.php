@@ -24,7 +24,7 @@ require_once '../controllers/ctrForget.php';
         <div class="card text-center">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link colorlink" aria-current="true" href="login.php?action=connection">Connexion</a>
                     </li>
                     <li class="nav-item">
@@ -44,21 +44,30 @@ require_once '../controllers/ctrForget.php';
 
                         <h2 class="card-title mb-5">Mot de passe oublié ?</h2>
 
+                        <?php if (isset($messageAlert)) : ?>
 
-                        <form class="text-start" method="POST" action="?action=connection">
-
-                            <div class="mb-3">
-                                <span class="text-danger"></span>
-                                <input type="mail" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com" name="mail" value="<?= $mail ?? '' ?>">
+                            <div class="alert alert-<?= $messageAlert[0] ?>" role="alert">
+                                <?= $messageAlert[1] ?>
                             </div>
 
+                        <?php endif; ?>
+
+
+                        <p class="text-start">Vous avez perdu votre mot de passe ? Il vous suffit d'entrer votre adresse mail ci-dessous et vous recevrez un mail contenant un mot de passe temporaire afin de réinitialiser votre mot de passe.</p>
+                        <form class="text-start" method="POST" action="">
+
                             <div class="mb-3">
-                                <span class="text-danger"></span>
-                                <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Mot de passe" name="pwd" value="">
+                                <span class="text-danger"><?= $errors['mail'] ?? '' ?></span>
+                                <input type="mail" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com" name="mail" value="">
+                            </div>
+
+                            <div class="mt-3">
+                                <span class="text-danger"><?= $errors['reCaptcha'] ?? '' ?></span>
+                                <div class="g-recaptcha" data-sitekey="6LdB5HAeAAAAAFSg6xSD0ZUXvFLUt2kSQB6cp5Zp"></div>
                             </div>
 
                             <div class="text-center mt-3">
-                                <input type="submit" name="connection" class="btn btn-dark" value="Se connecter">
+                                <input type="submit" name="renewPwd" class="btn btn-dark" value="Renouveler mon mot de passe">
                             </div>
 
                         </form>
