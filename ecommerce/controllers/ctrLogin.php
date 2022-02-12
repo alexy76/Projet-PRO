@@ -156,9 +156,7 @@ if(isset($_GET['mail'], $_GET['key'])){
     
         if($Users->getExistUsermail($userConfirm['mail'])){
     
-            $tokenMail = $Users->getTokenMail($userConfirm['mail']);
-    
-            if($tokenMail == $userConfirm['key']){
+            if($Users->getTokenMail($userConfirm['mail']) == $userConfirm['key']){
 
                 $Users->setActivateAccount($userConfirm['mail']);
                 $mail = $userConfirm['mail'];
@@ -194,9 +192,11 @@ if(isset($_POST['sendConfirmMail'], $_POST['confirmMail']) && filter_var($_POST[
             $subj = 'Test !';
             $msg = 'Felicitation pour ton inscription, valide ton compte en cliquant sur : <a href="' . $lien . '">ce lien</a>';
             
-            if(smtpmailer($to,$from, $name ,$subj, $msg)){
+            if(smtpmailer($to,$from, $name ,$subj, $msg))
+
                 $messageAlert = ['success', "Le mail a bien été envoyé à l'adresse : <b>".$mailConfirm."</b>"];
-            }else
+            else
+
                 $messageAlert = ['danger', "Une erreur s'est produite lors de l'envoi du mail, à l'adresse : <b>".$mailConfirm."</b>"];
         }
 }

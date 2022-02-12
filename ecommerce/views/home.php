@@ -20,7 +20,8 @@ require_once '../controllers/ctrLogin.php';
 
     <h1>Page Accueil</h1>
 
-    <p><a class="btn btn-primary" href="login.php">Fonctionnalité "Page de connexion / inscription"</a></p>
+    <p class="mt-5"><a class="btn btn-dark text-white w-50" href="login.php">Fonctionnalité "Page de connexion / inscription"</a></p>
+    <p class="mt-2"><a class="btn btn-secondary text-white w-50" href="forget.php">Fonctionnalité "Page de mot de passe oublié"</a></p>
     
 </div>
     

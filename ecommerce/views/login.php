@@ -123,7 +123,7 @@ require_once '../controllers/ctrLogin.php';
                                 <div class="row d-flex flex-row-reverse">
 
                                     <div class="text-lg-end text-start col-lg-6 col-12 fs-lg-6">
-                                        <a class="linklogin colorlink" href="">Mot de passe oublié ?</a>
+                                        <a class="linklogin colorlink" href="forget.php">Mot de passe oublié ?</a>
                                     </div>
 
 
