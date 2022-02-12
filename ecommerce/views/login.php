@@ -25,10 +25,10 @@ require_once '../controllers/ctrLogin.php';
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'connection' ? 'active' : '') ?>" aria-current="true" href="?action=connection">Connexion</a>
+                        <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'connection' ? 'active' : 'colorlink') ?>" aria-current="true" href="?action=connection">Connexion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'subscribe' ? 'active' : '') ?>" href="?action=subscribe">Inscription</a>
+                        <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'subscribe' ? 'active' : 'colorlink') ?>" href="?action=subscribe">Inscription</a>
                     </li>
                     <?php if (isset($_SESSION['id'])) : ?>
                         <li class="nav-item active">
@@ -43,7 +43,7 @@ require_once '../controllers/ctrLogin.php';
                     <?php if (!isset($_SESSION['id'])) : ?>
                         <!-- Formulaire d'inscription -->
 
-                        <div id="formSubscribe" class="col-6-lg col-10 m-auto <?= $action == 'subscribe' ? '' : 'd-none' ?>">
+                        <div id="formSubscribe" class="col-lg-6- col-12 m-auto <?= $action == 'subscribe' ? '' : 'd-none' ?>">
 
                             <h2 class="card-title mb-5">Créer un compte</h2>
 
@@ -87,7 +87,7 @@ require_once '../controllers/ctrLogin.php';
 
                         <!-- Formulaire de connexion -->
 
-                        <div id="formConnection" class="col-6-lg col-6 m-auto <?= $action == 'connection' ? '' : 'd-none' ?>">
+                        <div id="formConnection" class="col-lg-6 col m-auto <?= $action == 'connection' ? '' : 'd-none' ?>">
 
                             <h2 class="card-title mb-5">Se connecter à son compte</h2>
 
@@ -103,6 +103,12 @@ require_once '../controllers/ctrLogin.php';
                                     Vous avez bien été déconnecté
                                 </div>
 
+                            <?php elseif (isset($_GET['validatedSubscribe'])) : ?>
+
+                                <div class="alert alert-success" role="alert">
+                                    Votre inscription a bien été validée, veuillez vérifier vos mails afin de confirmer votre compte
+                                </div>
+
                             <?php endif; ?>
 
                             <form class="text-start" method="POST" action="?action=connection">
@@ -114,11 +120,24 @@ require_once '../controllers/ctrLogin.php';
                                     <span class="text-danger"></span>
                                     <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Mot de passe" name="pwd" value="">
                                 </div>
+                                <div class="row d-flex flex-row-reverse">
 
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="remember" checked>
-                                    <label class="form-check-label" for="flexSwitchCheckChecked">Connexion automatique</label>
+                                    <div class="text-lg-end text-start col-lg-6 col-12 fs-lg-6">
+                                        <a class="linklogin colorlink" href="">Mot de passe oublié ?</a>
+                                    </div>
+
+
+                                    <div class="form-check form-switch col-lg-6 col-12 ps-2">
+                                        <input class=" form-check-input ms-2" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="remember" checked>
+                                        <label class="form-check-label ms-1" for="flexSwitchCheckChecked">Connexion automatique</label>
+                                    </div>
+
+
+
                                 </div>
+
+
+
 
                                 <div class="text-center mt-3">
                                     <input type="submit" name="connection" class="btn btn-dark" value="Se connecter">
@@ -131,8 +150,8 @@ require_once '../controllers/ctrLogin.php';
                     <?php else : ?>
 
                         <h2>Bienvenue sur votre espace clients</h2>
-                        <div class="col-6 m-auto mt-5">
-                            <table class="table table-striped table-dark">
+                        <div class="col-lg-6 col-12 m-auto mt-5">
+                            <table class="table table-striped table-dark table-responsive">
                                 <thead>
                                     <tr>
                                         <th scope="col">Information utilisateur</th>

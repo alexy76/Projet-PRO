@@ -9,8 +9,6 @@ require_once '../tools/cleanData.php';
 if(session_status() === PHP_SESSION_NONE) session_start();
 
 
-
-
 /** Affichage des formulaires selon la requête URL */
 
 if(isset($_GET['action']) && ($_GET['action'] == 'connection' || $_GET['action'] == 'subscribe'))
@@ -29,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
     {
         $Users = new Users;
         $errors =  [];
-        $userSubscribe = cleanData($_POST);
+        $userSubscribe = cleanDataArray($_POST);
         $userSubscribe['newsLetter'] = isset($userSubscribe['newsLetter']) ? true : false;
 
         if (!preg_match(REGEX_NAME, $userSubscribe['lastName'])) 
@@ -85,11 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
 
             if($Users->insertUser($userSubscribe))
             {
-                $messageFlash = '';
+                $lien = 'http://'. $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] .'?mail='. urlencode($userSubscribe['mail']) .'&key='. urlencode($userSubscribe['token']);
 
-                $lien = 'http://'. $_SERVER['SERVER_NAME'] . '/' . $_SERVER['SCRIPT_NAME'] .'?mail='. urlencode($userSubscribe['mail']) .'&key='. urlencode($userSubscribe['token']);
-
-                unset($userSubscribe);
+                //unset($userSubscribe);
 
                 $to   = 'alexy.lepretre76@laposte.net';
                 $from = 'no-reply@ecommerce.fr';
@@ -97,7 +93,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
                 $subj = 'Test !';
                 $msg = 'Felicitation pour ton inscription, valide ton compte en cliquant sur : <a href="' . $lien . '">ce lien</a>';
                 
-                smtpmailer($to,$from, $name ,$subj, $msg);
+                if(smtpmailer($to,$from, $name ,$subj, $msg)){
+                    header('Location: login?validatedSubscribe');
+                    exit();
+                }else
+                    echo "Le mail n'a pas été envoyé";
+
+                
             }
             else
                 $messageFlash = '';
@@ -119,7 +121,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connection'])){
 
         $Users = new Users;
         $_POST['mail'] = strtolower($_POST['mail']);
-        $userConnection = cleanData($_POST);
+        $userConnection = cleanDataArray($_POST);
 
         if($Users->getExistUsermail($userConnection['mail'])){
 
@@ -131,7 +133,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connection'])){
                     // Faire une redirection plus tard dans le Dev (header());
 
                 }else
-                    $messageAlert = ['primary', "Votre compte n'a pas été activé, vérifier vos mails !"];
+                    $messageAlert = ['primary', "Votre compte n'a pas encore été activé ! Veuillez vérifier vos mails ou vos Spams. <br>Si toutefois vous ne l'aurez pas reçu, cliquez <form class='d-inline' method='POST' action=''><input type='hidden' value='". $userConnection['mail'] ."' name='confirmMail'><input class='link-button colorlink' type='submit' value='ici' name='sendConfirmMail'></form>"];
             }else{
                 $messageAlert = ['danger', "Mail ou mot de passe incorrect"];
                 $mail = $userConnection['mail'];
@@ -150,7 +152,7 @@ if(isset($_GET['mail'], $_GET['key'])){
     if(filter_var($_GET['mail'], FILTER_VALIDATE_EMAIL) && strlen($_GET['key']) == 64){
 
         $Users = new Users;
-        $userConfirm = cleanData($_GET);
+        $userConfirm = cleanDataArray($_GET);
     
         if($Users->getExistUsermail($userConfirm['mail'])){
     
@@ -173,3 +175,30 @@ if(isset($_GET['mail'], $_GET['key'])){
         }
     }
 }
+
+
+if(isset($_POST['sendConfirmMail'], $_POST['confirmMail']) && filter_var($_POST['confirmMail'], FILTER_VALIDATE_EMAIL)){
+
+    $Users = new Users();
+    $mailConfirm = strtolower(cleanData($_POST['confirmMail']));
+
+    if($Users->getExistUsermail($mailConfirm))
+
+        if(!$Users->getStatusUser($mailConfirm)){
+            
+            $lien = 'http://'. $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] .'?mail='. urlencode($mailConfirm) .'&key='. urlencode($Users->getTokenMail($mailConfirm));
+
+            $to   = 'alexy.lepretre76@laposte.net';
+            $from = 'no-reply@ecommerce.fr';
+            $name = 'Ecommerce La Manu';
+            $subj = 'Test !';
+            $msg = 'Felicitation pour ton inscription, valide ton compte en cliquant sur : <a href="' . $lien . '">ce lien</a>';
+            
+            if(smtpmailer($to,$from, $name ,$subj, $msg)){
+                $messageAlert = ['success', "Le mail a bien été envoyé à l'adresse : <b>".$mailConfirm."</b>"];
+            }else
+                $messageAlert = ['danger', "Une erreur s'est produite lors de l'envoi du mail, à l'adresse : <b>".$mailConfirm."</b>"];
+        }
+}
+
+?>

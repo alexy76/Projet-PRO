@@ -11,7 +11,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = 465;  
     $mail->Username = 'ecommerce.lamanu@gmail.com';
-    $mail->Password = '**********';   
+    $mail->Password = '*********';
 
 //   $path = 'reseller.pdf';
 //   $mail->AddAttachment($path);
@@ -24,25 +24,22 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Subject = $subject;
     $mail->Body = $body;
     $mail->AddAddress($to);
-    if(!$mail->Send())
-    {
-        $error ="Please try Later, Error Occured while Processing...";
-        return $error; 
-    }
-    else 
-    {
-        $error = "Thanks You !! Your email is sent.";  
-        return $error;
-    }
+
+    return $mail->Send();
 }
 
-function cleanData(array $postData)
+function cleanDataArray(array $dataArray)
 {
     return array_map(
         function($elt){
             return trim(stripslashes(htmlspecialchars($elt)));
         }
-    , $postData);
+    , $dataArray);
+}
+
+function cleanData(string $elt)
+{
+    return trim(stripslashes(htmlspecialchars($elt)));
 }
 
 ?>
