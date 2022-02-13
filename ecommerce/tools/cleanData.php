@@ -1,7 +1,7 @@
 <?php
 require_once "../tools/PHPMailer/PHPMailerAutoload.php";
 
-function smtpmailer($to, $from, $from_name, $subject, $body)
+function smtpmailer($to, $from, $from_name, $subject, $body) : bool
 {
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -28,7 +28,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     return $mail->Send();
 }
 
-function cleanDataArray(array $dataArray)
+function cleanDataArray(array $dataArray) : array
 {
     return array_map(
         function($elt){
@@ -37,9 +37,18 @@ function cleanDataArray(array $dataArray)
     , $dataArray);
 }
 
-function cleanData(string $elt)
+function cleanData(string $elt) : string
 {
     return trim(stripslashes(htmlspecialchars($elt)));
+}
+
+function emptyArray(array $tab, int $nb) : bool
+{
+    $arrayData = array_filter($tab, function($elt){
+        return !empty($elt);
+    });
+
+    return count($arrayData) == $nb ? true : false;
 }
 
 ?>

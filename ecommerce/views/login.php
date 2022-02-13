@@ -49,6 +49,14 @@ require_once '../controllers/ctrLogin.php';
 
                             <form class="text-start" method="POST" action="?action=subscribe">
 
+                                <?php if (isset($messageAlert)) : ?>
+
+                                    <div class="alert alert-<?= $messageAlert[0] ?> text-center" role="alert">
+                                        <?= $messageAlert[1] ?>
+                                    </div>
+
+                                <?php endif; ?>
+
                                 <div class="mb-3">
                                     <span class="text-danger"><?= $errors['lastName'] ?? '' ?></span>
                                     <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Votre Nom" name="lastName" value="<?= $userSubscribe['lastName'] ?? '' ?>">

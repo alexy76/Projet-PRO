@@ -58,7 +58,7 @@ require_once '../controllers/ctrForget.php';
 
                             <div class="mb-3">
                                 <span class="text-danger"><?= $errors['mail'] ?? '' ?></span>
-                                <input type="mail" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com" name="mail" value="">
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com" name="mail" value="">
                             </div>
 
                             <div class="mt-3">
