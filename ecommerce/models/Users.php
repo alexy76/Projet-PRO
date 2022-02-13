@@ -123,6 +123,7 @@ class Users extends Database{
     }
 
 
+
     /**
      * Méthode permettant de récupérer les informations d'un utilisateur (ouverture de session)
      * @param string (adresse mail)
@@ -141,6 +142,28 @@ class Users extends Database{
         $statment->execute();
 
         return $statment->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+
+    /**
+     * Méthode permettant de créer un jeton pour la récupération du mot de passe
+     * @param string
+     * @return bool
+     */
+    public function setTokenPassword(int $code, string $token, string $mail) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_users` 
+                SET `usr_token_password` = :token, `usr_time_validity_token` = NOW() + INTERVAL 10 MINUTE 
+                WHERE `usr_mail` = :mail";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':mail', $mail, PDO::PARAM_STR);
+        $statment->bindValue(':token', $token, PDO::PARAM_STR);
+
+        return $statment->execute();
     }
 }
 ?>

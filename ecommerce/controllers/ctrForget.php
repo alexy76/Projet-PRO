@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['renewPwd'])) {
     elseif(!filter_var($mail, FILTER_VALIDATE_EMAIL))
         $errors['mail'] = 'Le format de l\'email est incorrect';
     elseif (!$Users->getExistUsermail($mail)){
-        $messageAlert = ['warning', 'Cette adresse mail n\'existe pas'];
+        $messageAlert = ['danger', 'Cette adresse mail n\'existe pas'];
         $errors['mail'] = '';
     }
 
@@ -46,3 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['renewPwd'])) {
         echo 'c"est cool';
     }
 }
+
+// $Users = new Users;
+// if($Users->setTokenPassword('alexy.lepretre76@laposte.net'))
+//     echo "ok";
+// else
+//     echo "pas ok";

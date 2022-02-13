@@ -127,8 +127,8 @@ require_once '../controllers/ctrLogin.php';
                                     </div>
 
 
-                                    <div class="form-check form-switch col-lg-6 col-12 ps-2">
-                                        <input class=" form-check-input ms-2" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="remember">
+                                    <div class="form-check form-switch col-lg-6 col-12 ps-2 mt-3">
+                                        <input class=" form-check-input ms-2" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="remember" checked>
                                         <label class="form-check-label ms-1" for="flexSwitchCheckChecked">Connexion automatique</label>
                                     </div>
 

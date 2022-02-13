@@ -156,14 +156,14 @@ if(isset($_GET['mail'], $_GET['key'])){
     
         if($Users->getExistUsermail($userConfirm['mail'])){
     
-            if($Users->getTokenMail($userConfirm['mail']) == $userConfirm['key']){
+            if(($token = $Users->getTokenMail($userConfirm['mail'])) == $userConfirm['key']){
 
                 $Users->setActivateAccount($userConfirm['mail']);
                 $mail = $userConfirm['mail'];
                 $messageAlert = ['success', "Votre adresse mail a bien été confirmée"];
 
             }
-            elseif(is_null($tokenMail))
+            elseif(is_null($token))
             {
                 $messageAlert = ['primary', "Votre adresse mail a déjà été confirmée"];
                 $mail = $userConfirm['mail'];
@@ -174,6 +174,9 @@ if(isset($_GET['mail'], $_GET['key'])){
     }
 }
 
+
+
+/** Contrôleur permettant d'envoyer a nouveau un mail de confirmation d'adresse mail client */
 
 if(isset($_POST['sendConfirmMail'], $_POST['confirmMail']) && filter_var($_POST['confirmMail'], FILTER_VALIDATE_EMAIL)){
 
