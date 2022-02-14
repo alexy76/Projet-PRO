@@ -11,7 +11,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) : bool
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = 465;  
     $mail->Username = 'ecommerce.lamanu@gmail.com';
-    $mail->Password = '*********';
+    $mail->Password = 'EcomLaManu76';
 
 //   $path = 'reseller.pdf';
 //   $mail->AddAttachment($path);
@@ -30,11 +30,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) : bool
 
 function cleanDataArray(array $dataArray) : array
 {
-    return array_map(
-        function($elt){
-            return trim(stripslashes(htmlspecialchars($elt)));
-        }
-    , $dataArray);
+    return array_map(function($elt){ return trim(stripslashes(htmlspecialchars($elt))); }, $dataArray);
 }
 
 function cleanData(string $elt) : string
@@ -44,11 +40,9 @@ function cleanData(string $elt) : string
 
 function emptyArray(array $tab, int $nb) : bool
 {
-    $arrayData = array_filter($tab, function($elt){
-        return !empty($elt);
-    });
-
-    return count($arrayData) == $nb ? true : false;
+    return count(array_filter($tab, function($elt){ return !empty($elt); })) == $nb ? true : false;
 }
+
+
 
 ?>

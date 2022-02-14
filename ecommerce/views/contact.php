@@ -50,17 +50,17 @@ require_once '../controllers/ctrContact.php';
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Vos coordonnées pour être recontacté :</label>
-                                <span class="text-danger"><?= $errors['fromName'] ?? '' ?></span>
-                                <input type="text" name="fromName" class="form-control" id="exampleFormControlInput1" placeholder="Nom et prénom">
+                                <br><span class="text-danger"><?= $errors['fromName'] ?? '' ?></span>
+                                <input type="text" name="fromName" class="form-control" id="exampleFormControlInput1" placeholder="Nom et prénom" value="<?= isset($formContact['fromName']) ? $formContact['fromName'] : '' ?>">
                             </div>
                             <div class="mb-3">
                                 <span class="text-danger"><?= $errors['fromMail'] ?? '' ?></span>
-                                <input type="email" name="fromMail" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com">
+                                <input type="email" name="fromMail" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com" value="<?= isset($formContact['fromMail']) ? $formContact['fromMail'] : '' ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Votre message (0 / 250):</label>
-                                <span class="text-danger"><?= $errors['messageMail'] ?? '' ?></span>
-                                <textarea name="messageMail" class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                                <br><span class="text-danger"><?= $errors['messageMail'] ?? '' ?></span>
+                                <textarea name="messageMail" class="form-control" id="exampleFormControlTextarea1" rows="6"><?= $formContact['messageMail'] ?? '' ?></textarea>
                             </div>
 
                             <div class="row mt-3">
@@ -73,12 +73,6 @@ require_once '../controllers/ctrContact.php';
 
 
                         </form>
-
-                        <p>
-                            <?php
-                            var_dump($_POST);
-                            ?>
-                        </p>
 
 
                     </div>
