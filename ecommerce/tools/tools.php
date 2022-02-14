@@ -30,7 +30,8 @@ function smtpmailer($to, $from, $from_name, $subject, $body) : bool
 
 function cleanDataArray(array $dataArray) : array
 {
-    return array_map(function($elt){ return trim(stripslashes(htmlspecialchars($elt))); }, $dataArray);
+    return array_map(function($elt){ 
+        return trim(stripslashes(htmlspecialchars($elt))); }, $dataArray);
 }
 
 function cleanData(string $elt) : string
@@ -40,7 +41,8 @@ function cleanData(string $elt) : string
 
 function emptyArray(array $tab, int $nb) : bool
 {
-    return count(array_filter($tab, function($elt){ return !empty($elt); })) == $nb ? true : false;
+    return count(array_filter($tab, function($elt){ 
+        return !empty($elt); })) == $nb ? true : false;
 }
 
 

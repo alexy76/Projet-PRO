@@ -20,6 +20,9 @@ include '../views/templates/header.php';
                         <li class="nav-item active">
                             <a class="nav-link" href="logout.php">Se déconnecter</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="account.php">Mon compte</a>
+                        </li>
                     <?php endif; ?>
                 </ul>
             </div>
@@ -143,7 +146,7 @@ include '../views/templates/header.php';
 
                     <?php else : ?>
 
-                        <h2>Bienvenue sur votre espace clients</h2>
+                        <h2>Affichage de $_SESSION pendant la période de développement</h2>
                         <div class="col-lg-6 col-12 m-auto mt-5">
                             <table class="table table-striped table-dark table-responsive">
                                 <thead>
