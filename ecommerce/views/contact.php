@@ -1,12 +1,9 @@
 <?php
 require_once '../controllers/ctrContact.php';
-include_once '../views/templates/header.php';
+include '../views/templates/header.php';
 ?>
 
-
-<body class="bg-dark">
-
-    <h1 class="text-center mt-5 text-white">Page de contact</h1>
+    <a href="/" class="linklogin"><h1 class="text-center mt-5 text-white">Page de contact</h1></a>
 
     <div class="container mt-5">
 
@@ -73,5 +70,5 @@ include_once '../views/templates/header.php';
     </div>
 
 <?php
-include_once '../views/templates/header.php';
+include '../views/templates/footer.php';
 ?>

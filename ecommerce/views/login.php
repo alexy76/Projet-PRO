@@ -1,9 +1,9 @@
 <?php
 require_once '../controllers/ctrLogin.php';
-include_once '../views/templates/header.php';
+include '../views/templates/header.php';
 ?>
 
-    <h1 class="text-center mt-5 text-white">Page de Connexion / Inscription</h1>
+<a href="/" class="linklogin"><h1 class="text-center mt-5 text-white">Page de Connexion / Inscription</h1></a>
 
     <div class="container mt-5">
 
@@ -186,5 +186,5 @@ include_once '../views/templates/header.php';
     </div>
 
 <?php
-include_once '../views/templates/header.php';
+include '../views/templates/footer.php';
 ?>

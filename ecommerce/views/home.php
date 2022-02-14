@@ -1,11 +1,11 @@
 <?php
 require_once '../controllers/ctrHome.php';
-include_once '../views/templates/header.php';
+include '../views/templates/header.php';
 ?>
 
     <div class="text-center">
 
-        <h1 class="text-white">Page Accueil</h1>
+    <a href="/" class="linklogin"><h1 class="text-white">Page Accueil</h1></a>
 
         <p class="mt-5"><a class="btn btn-dark text-white w-50" href="login.php">Fonctionnalité "Page de connexion / inscription"</a></p>
         <p class="mt-2"><a class="btn btn-secondary text-white w-50" href="forget.php">Fonctionnalité "Page de mot de passe oublié"</a></p>
@@ -30,5 +30,5 @@ include_once '../views/templates/header.php';
 
 
 <?php
-include_once '../views/templates/header.php';
+include '../views/templates/footer.php';
 ?>
