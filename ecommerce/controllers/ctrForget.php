@@ -8,6 +8,10 @@ require_once '../tools/tools.php';
 /** Initialisation des paramètres de la page */
 if (session_status() === PHP_SESSION_NONE) session_start();
 
+/** Valeur des metas */
+$meta_title = 'Récupération de votre mot de passe | ECOMMERCE.NET';
+$meta_description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus magnam odit voluptate quo, numquam corrupti, eveniet veniam, repellendus reprehenderit recusandae at asperiores! Beatae, ipsa quidem adipisci impedit necessitatibus eius laudantium.";
+
 
 //session set var datetime redirect to timer !
 

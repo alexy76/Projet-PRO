@@ -8,6 +8,10 @@ require_once '../tools/tools.php';
 
 if(session_status() === PHP_SESSION_NONE) session_start();
 
+/** Valeur des metas */
+$meta_title = 'Se connecter a son compte | ECOMMERCE.NET';
+$meta_description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus magnam odit voluptate quo, numquam corrupti, eveniet veniam, repellendus reprehenderit recusandae at asperiores! Beatae, ipsa quidem adipisci impedit necessitatibus eius laudantium.";
+
 
 /** Affichage des formulaires selon la requête URL */
 
