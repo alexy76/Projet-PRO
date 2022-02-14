@@ -3,7 +3,7 @@
 require_once '../config.php';
 require_once '../models/Database.php';
 require_once '../models/Newsletters.php';
-require_once '../tools/cleanData.php';
+require_once '../tools/tools.php';
 
 /** Initialisation des paramètres de la page */
 

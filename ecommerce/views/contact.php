@@ -1,18 +1,7 @@
 <?php
 require_once '../controllers/ctrContact.php';
+include_once '../views/templates/header.php';
 ?>
-
-<!doctype html>
-<html lang="fr">
-
-<head>
-    <title>Page de contact</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-</head>
 
 
 <body class="bg-dark">
@@ -49,18 +38,18 @@ require_once '../controllers/ctrContact.php';
                             <?php endif; ?>
 
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Vos coordonnées pour être recontacté :</label>
+                                <label for="" class="form-label">Vos coordonnées pour être recontacté :</label>
                                 <br><span class="text-danger"><?= $errors['fromName'] ?? '' ?></span>
-                                <input type="text" name="fromName" class="form-control" id="exampleFormControlInput1" placeholder="Nom et prénom" value="<?= isset($formContact['fromName']) ? $formContact['fromName'] : '' ?>">
+                                <input type="text" name="fromName" class="form-control" id="" placeholder="Nom et prénom" value="<?= isset($formContact['fromName']) ? $formContact['fromName'] : '' ?>">
                             </div>
                             <div class="mb-3">
                                 <span class="text-danger"><?= $errors['fromMail'] ?? '' ?></span>
-                                <input type="email" name="fromMail" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com" value="<?= isset($formContact['fromMail']) ? $formContact['fromMail'] : '' ?>">
+                                <input type="email" name="fromMail" class="form-control" id="" placeholder="mail@example.com" value="<?= isset($formContact['fromMail']) ? $formContact['fromMail'] : '' ?>">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Votre message (0 / 250):</label>
+                                <label for="textContact" class="form-label">Votre message (<span id="nbChars">0</span> / 500):</label>
                                 <br><span class="text-danger"><?= $errors['messageMail'] ?? '' ?></span>
-                                <textarea name="messageMail" class="form-control" id="exampleFormControlTextarea1" rows="6"><?= $formContact['messageMail'] ?? '' ?></textarea>
+                                <textarea name="messageMail" class="form-control" id="textContact" rows="6"><?= $formContact['messageMail'] ?? '' ?></textarea>
                             </div>
 
                             <div class="row mt-3">
@@ -83,14 +72,6 @@ require_once '../controllers/ctrContact.php';
 
     </div>
 
-    <?php if (isset($messageFlash)) : ?>
-        <span id="messageFlash"></span>
-    <?php endif; ?>
-
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../assets/js/app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-</body>
-
-</html>
+<?php
+include_once '../views/templates/header.php';
+?>
