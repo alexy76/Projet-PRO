@@ -186,5 +186,38 @@ class Users extends Database{
 
         return $statment->execute();
     }
+
+    
+
+    /**
+     * 
+     */
+    public function verifyPasswordClient(int $id, string $pwd) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT `usr_password` as 'pwd' FROM `ec_users` WHERE `usr_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+        $statment->execute();
+        
+        return password_verify($pwd, $statment->fetch()->pwd);
+    }
+
+
+
+    public function setNewPassword(int $id, string $pwd) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_users` SET `usr_password` = :pwd WHERE `usr_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+        $statment->bindValue(':pwd', $pwd, PDO::PARAM_STR);
+
+        return $statment->execute();
+    }
 }
 ?>

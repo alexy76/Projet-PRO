@@ -72,14 +72,22 @@ include '../views/templates/header.php';
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                <button id="modifyPwd" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                                     Modifier mon mot de passe
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse <?= isset($messageAlertPassword) ? 'show' : ''?>" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
 
-                                    <form class="mt-3" method="POST" action="">
+                                    <?php if (isset($messageAlertPassword)) : ?>
+
+                                        <div class="alert alert-<?= $messageAlertPassword[0] ?>" role="alert">
+                                            <?= $messageAlertPassword[1] ?>
+                                        </div>
+
+                                    <?php endif; ?>
+
+                                    <form class="mt-3" method="POST" action="#modifyPwd">
                                         <div class="mb-3">
                                             <input type="text" name="oldPassword" class="form-control" placeholder="Mot de passe actuel">
                                         </div>
