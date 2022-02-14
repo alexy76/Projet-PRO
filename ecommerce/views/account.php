@@ -34,7 +34,82 @@ include '../views/templates/header.php';
                     </div>
                 </div>
                 <div class="col-lg-8 col-12">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                    Modifier mes informations client
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body">
 
+                                    <?php if (isset($messageAlertName)) : ?>
+
+                                        <div class="alert alert-<?= $messageAlertName[0] ?>" role="alert">
+                                            <?= $messageAlertName[1] ?>
+                                        </div>
+
+                                    <?php endif; ?>
+
+                                    <form class="mt-3" method="POST" action="">
+                                        <div class="mb-3">
+                                            <input class="form-control" type="text" value="<?= $_SESSION['mail'] ?>" aria-label="readonly input example" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" name="lastName" class="form-control" id="exampleFormControlInput1" placeholder="Prénom" value="<?= $_SESSION['lastname'] ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" name="firstName" class="form-control" id="exampleFormControlInput1" placeholder="Nom de famille" value="<?= $_SESSION['firstname'] ?>">
+                                        </div>
+                                        <div class="mt-3">
+                                            <input type="submit" name="modifyProfilName" class="btn btn-dark" value="Modifier">
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                    Modifier mon mot de passe
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                <div class="accordion-body">
+
+                                    <form class="mt-3" method="POST" action="">
+                                        <div class="mb-3">
+                                            <input type="text" name="oldPassword" class="form-control" placeholder="Mot de passe actuel">
+                                        </div>
+                                        <hr>
+                                        <div class="mb-3">
+                                            <input type="text" name="newPassword" class="form-control" placeholder="Nouveau mot de passe">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" name="confirmNewPassword" class="form-control" placeholder="Confirmation du nouveau mot de passe">
+                                        </div>
+                                        <div class="mt-3">
+                                            <input type="submit" name="modifyPassword" class="btn btn-dark" value="Modifier">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                    Modifier mon adresse de livraison
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                                <div class="accordion-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 

@@ -165,5 +165,26 @@ class Users extends Database{
 
         return $statment->execute();
     }
+
+
+
+    /**
+     * Méthode permettant de mettre à jour le nom et le prénom d'un client
+     * @param array (nom et prénom du client)
+     * @return bool
+     */
+    public function setNameClient(array $name, int $id) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_users` SET `usr_lastname` = :lastname, `usr_firstname` = :firstname WHERE `usr_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':lastname', $name['lastName'], PDO::PARAM_STR);
+        $statment->bindValue(':firstname', $name['firstName'], PDO::PARAM_STR);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
 }
 ?>
