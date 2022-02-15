@@ -134,8 +134,9 @@ class Users extends Database{
         $db = $this->connectDB();
 
         $query = "SELECT `usr_id` as 'id', `usr_mail` as 'mail', `usr_lastname` as 'lastname',
-                 `usr_firstname` as 'firstname', `usr_role` as 'role' 
-                FROM `ec_users` WHERE `usr_mail` = :mail";
+        `usr_firstname` as 'firstname', `usr_role` as 'role', `usr_adress` as 'address', 
+        `usr_zip_code` as 'zipcode', `usr_city` as 'city', `usr_country` as 'country' 
+        FROM `ec_users` WHERE `usr_mail` = :mail";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':mail', $mail, PDO::PARAM_STR);
@@ -216,6 +217,24 @@ class Users extends Database{
         $statment = $db->prepare($query);
         $statment->bindValue(':id', $id, PDO::PARAM_INT);
         $statment->bindValue(':pwd', $pwd, PDO::PARAM_STR);
+
+        return $statment->execute();
+    }
+
+    public function setAddress(array $addr, int $id) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_users` 
+                SET `usr_adress` = :address, `usr_zip_code` = :zipcode, `usr_city` = :city, `usr_country` = :country
+                WHERE `usr_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':address', $addr['address'], PDO::PARAM_STR);
+        $statment->bindValue(':zipcode', $addr['zipCode'], PDO::PARAM_STR);
+        $statment->bindValue(':city', $addr['city'], PDO::PARAM_STR);
+        $statment->bindValue(':country', $addr['country'], PDO::PARAM_STR);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
 
         return $statment->execute();
     }

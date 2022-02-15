@@ -14,8 +14,6 @@ $meta_title = "Profil du compte client | ECOMMERCE.NET";
 $meta_description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus magnam odit voluptate quo, numquam corrupti, eveniet veniam, repellendus reprehenderit recusandae at asperiores! Beatae, ipsa quidem adipisci impedit necessitatibus eius laudantium.";
 
 
-var_dump($_POST);
-
 /** Contrôleur permettant la modification du nom et du prénom du client */
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyProfilName'])) {
@@ -76,5 +74,64 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyPassword'])) {
         }
         else
             $messageAlertPassword = ['danger', 'Tous les champs sont obligatoires'];
+    }
+}
+
+
+/** Contrôleur permettant la modification de l'adresse de livraison du client */
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyAddress'])) 
+{
+    if (isset($_POST['address'], $_POST['zipCode'], $_POST['city'], $_POST['country'])) 
+    {
+        $errors = [];
+
+        $address = cleanDataArray($_POST);
+
+        if(!preg_match(REGEX_ZIP, $address['zipCode']))
+        {
+            $errors['zipCode'] = "Le format du code postal est incorrect";
+            unset($address['zipCode']);
+        }
+
+        if(!preg_match(REGEX_ADDR, $address['address']))
+        {
+            $errors['address'] = "Le format de l'adresse est incorrect";
+            unset($address['address']);
+        }
+
+        if(!preg_match(REGEX_CITY, $address['city']))
+        {
+            $errors['city'] = "Le format du nom de la ville est incorrect";
+            unset($address['city']);
+        }
+
+        if(!preg_match(REGEX_CITY, $address['country']))
+        {
+            $errors['country'] = "Le format du nom du pays est incorrect";
+            unset($address['country']);
+        }
+
+        if(empty($errors))
+        {
+            $Users = new Users;
+            
+            if($Users->setAddress($address, (int)$_SESSION['id']))
+            {
+                $messageAlertAddress = ['success', 'Votre adresse a été enregistré'];
+
+                $_SESSION['address'] = $address['address'];
+                $_SESSION['zipcode'] = $address['zipCode'];
+                $_SESSION['city'] = $address['city'];
+                $_SESSION['country'] = $address['country'];
+
+                unset($address);
+            }
+            else
+                $messageAlertAddress = ['danger', 'une erreur s\'est produite'];
+            
+        }
+        else
+            $messageAlertAddress = ['warning', 'Aucune modification apportée'];
     }
 }

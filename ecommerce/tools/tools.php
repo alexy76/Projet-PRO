@@ -15,6 +15,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) : bool
 
 //   $path = 'reseller.pdf';
 //   $mail->AddAttachment($path);
+    $mail->CharSet = 'UTF-8';
 
     $mail->IsHTML(true);
     $mail->From="ecommerce.lamanu@gmail.com";

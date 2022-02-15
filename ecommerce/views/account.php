@@ -26,6 +26,7 @@ include '../views/templates/header.php';
 
                 <div class="col-lg-4 col-12">
                     <div class="list-group">
+                    
                         <a href="account.php" class="list-group-item list-group-item-action bg-dark text-white disabled" aria-current="true">
                             Mon compte client
                         </a>
@@ -41,7 +42,7 @@ include '../views/templates/header.php';
                                     Modifier mes informations client
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse <?= isset($messageAlertAddress) || isset($messageAlertPassword) ? '' : 'show' ?>" aria-labelledby="panelsStayOpen-headingOne">
                                 <div class="accordion-body">
 
                                     <?php if (isset($messageAlertName)) : ?>
@@ -76,7 +77,7 @@ include '../views/templates/header.php';
                                     Modifier mon mot de passe
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse <?= isset($messageAlertPassword) ? 'show' : ''?>" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse <?= isset($messageAlertPassword) ? 'show' : '' ?>" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
 
                                     <?php if (isset($messageAlertPassword)) : ?>
@@ -89,14 +90,14 @@ include '../views/templates/header.php';
 
                                     <form class="mt-3" method="POST" action="#modifyPwd">
                                         <div class="mb-3">
-                                            <input type="text" name="oldPassword" class="form-control" placeholder="Mot de passe actuel">
+                                            <input type="password" name="oldPassword" class="form-control" placeholder="Mot de passe actuel">
                                         </div>
                                         <hr>
                                         <div class="mb-3">
-                                            <input type="text" name="newPassword" class="form-control" placeholder="Nouveau mot de passe">
+                                            <input type="password" name="newPassword" class="form-control" placeholder="Nouveau mot de passe">
                                         </div>
                                         <div class="mb-3">
-                                            <input type="text" name="confirmNewPassword" class="form-control" placeholder="Confirmation du nouveau mot de passe">
+                                            <input type="password" name="confirmNewPassword" class="form-control" placeholder="Confirmation du nouveau mot de passe">
                                         </div>
                                         <div class="mt-3">
                                             <input type="submit" name="modifyPassword" class="btn btn-dark" value="Modifier">
@@ -107,13 +108,41 @@ include '../views/templates/header.php';
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                <button id="modifyAdress" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                                     Modifier mon adresse de livraison
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse <?= isset($messageAlertAddress) ? 'show' : '' ?>" aria-labelledby="panelsStayOpen-headingThree">
                                 <div class="accordion-body">
+                                    <?php if (isset($messageAlertAddress)) : ?>
 
+                                        <div class="alert alert-<?= $messageAlertAddress[0] ?>" role="alert">
+                                            <?= $messageAlertAddress[1] ?>
+                                        </div>
+
+                                    <?php endif; ?>
+
+                                    <form class="mt-3 text-start" method="POST" action="#modifyAdress">
+                                        <div class="mb-3">
+                                            <span class="text-danger"><?= $errors['address'] ?? '' ?></span>
+                                            <input type="text" name="address" class="form-control" placeholder="Adresse complète" value="<?= isset($address['address']) ? $address['address'] : $_SESSION['address']  ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="text-danger"><?= $errors['zipCode'] ?? '' ?></span>
+                                            <input type="text" name="zipCode" class="form-control" placeholder="Code postal" value="<?= isset($address['zipCode']) ? $address['zipCode'] : $_SESSION['zipcode']  ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="text-danger"><?= $errors['city'] ?? '' ?></span>
+                                            <input type="text" name="city" class="form-control" placeholder="Ville" value="<?= isset($address['city']) ? $address['city'] : $_SESSION['city']  ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="text-danger"><?= $errors['country'] ?? '' ?></span>
+                                            <input type="text" name="country" class="form-control" placeholder="Pays" value="<?= isset($address['country']) ? $address['country'] : $_SESSION['country']  ?>">
+                                        </div>
+                                        <div class="mt-3 text-center">
+                                            <input type="submit" name="modifyAddress" class="btn btn-dark" value="Modifier">
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
