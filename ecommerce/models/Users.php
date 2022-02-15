@@ -133,9 +133,10 @@ class Users extends Database{
     {
         $db = $this->connectDB();
 
-        $query = "SELECT `usr_id` as 'id', `usr_mail` as 'mail', `usr_lastname` as 'lastname',
-        `usr_firstname` as 'firstname', `usr_role` as 'role', `usr_adress` as 'address', 
-        `usr_zip_code` as 'zipcode', `usr_city` as 'city', `usr_country` as 'country' 
+        $query = "SELECT `usr_id` AS 'id', `usr_mail` AS 'mail', `usr_lastname` AS 'lastname',
+        `usr_firstname` AS 'firstname', `usr_role` AS 'role', `usr_adress` AS 'address', 
+        `usr_zip_code` AS 'zipcode', `usr_city` AS 'city', `usr_country` AS 'country', 
+        `usr_accept_newsletters` AS 'newsletters', `usr_registered` AS 'registered'
         FROM `ec_users` WHERE `usr_mail` = :mail";
 
         $statment = $db->prepare($query);
@@ -234,6 +235,22 @@ class Users extends Database{
         $statment->bindValue(':zipcode', $addr['zipCode'], PDO::PARAM_STR);
         $statment->bindValue(':city', $addr['city'], PDO::PARAM_STR);
         $statment->bindValue(':country', $addr['country'], PDO::PARAM_STR);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
+
+    /**
+     * 
+     */
+    public function setActivateNewsletters(int $id) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_users` SET `usr_accept_newsletters` = TRUE WHERE `usr_id` = :id";
+
+        $statment = $db->prepare($query);
         $statment->bindValue(':id', $id, PDO::PARAM_INT);
 
         return $statment->execute();

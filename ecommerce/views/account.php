@@ -26,19 +26,32 @@ include '../views/templates/header.php';
 
                 <div class="col-lg-4 col-12">
                     <div class="list-group">
-                    
+
                         <a href="account.php" class="list-group-item list-group-item-action bg-dark text-white disabled" aria-current="true">
                             Mon compte client
                         </a>
                         <a href="orders.php" class="list-group-item list-group-item-action">Mes commandes</a>
                         <a href="bills.php" class="list-group-item list-group-item-action">Mes factures</a>
                     </div>
+
+                    <p class="mt-3 fw-light">Inscrit(e) depuis le <span class=""><?= date('d/m/Y', strtotime($_SESSION['registered'])) ?></span></p>
+
+                    <?php if ($_SESSION['newsletters'] == 0) : ?>
+                        <div class="card">
+                            <img src="../assets/img/newsletters.png" class="card-img-top" alt="Solde">
+                            <div class="card-body">
+                                <h5 class="card-title">Profitez-en maintenant</h5>
+                                <p class="card-text">En s'inscrivant à notre Newsletter, vous bénéficierez d'offres exceptionnelles</p>
+                                <a href="?action=subscribeNewsletters" class="btn btn-outline-info">Je profite des offres privées</a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <div class="col-lg-8 col-12">
+                <div class="col-lg-8 col-12 mt-lg-0 mt-4">
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <button id="profil" class="accordion-button <?= isset($messageAlertAddress) || isset($messageAlertPassword) ? 'collapsed' : '' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="<?= isset($messageAlertAddress) || isset($messageAlertPassword) ? 'false' : 'true' ?>" aria-controls="panelsStayOpen-collapseOne">
                                     Modifier mes informations client
                                 </button>
                             </h2>
@@ -53,7 +66,7 @@ include '../views/templates/header.php';
 
                                     <?php endif; ?>
 
-                                    <form class="mt-3" method="POST" action="">
+                                    <form class="mt-3" method="POST" action="account.php#profil">
                                         <div class="mb-3">
                                             <input class="form-control" type="text" value="<?= $_SESSION['mail'] ?>" aria-label="readonly input example" readonly>
                                         </div>
@@ -73,7 +86,7 @@ include '../views/templates/header.php';
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                <button id="modifyPwd" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                <button id="modifyPwd" class="accordion-button <?= isset($messageAlertPassword) ? '' : 'collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="<?= isset($messageAlertPassword) ? 'true' : 'false' ?>" aria-controls="panelsStayOpen-collapseTwo">
                                     Modifier mon mot de passe
                                 </button>
                             </h2>
@@ -88,7 +101,7 @@ include '../views/templates/header.php';
 
                                     <?php endif; ?>
 
-                                    <form class="mt-3" method="POST" action="#modifyPwd">
+                                    <form class="mt-3" method="POST" action="account.php#modifyPwd">
                                         <div class="mb-3">
                                             <input type="password" name="oldPassword" class="form-control" placeholder="Mot de passe actuel">
                                         </div>
@@ -108,7 +121,7 @@ include '../views/templates/header.php';
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                <button id="modifyAdress" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                <button id="modifyAdress" class="accordion-button <?= isset($messageAlertAddress) ? '' : 'collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="<?= isset($messageAlertAddress) ? 'true' : 'false' ?>" aria-controls="panelsStayOpen-collapseThree">
                                     Modifier mon adresse de livraison
                                 </button>
                             </h2>
@@ -122,7 +135,7 @@ include '../views/templates/header.php';
 
                                     <?php endif; ?>
 
-                                    <form class="mt-3 text-start" method="POST" action="#modifyAdress">
+                                    <form class="mt-3 text-start" method="POST" action="account.php#modifyAdress">
                                         <div class="mb-3">
                                             <span class="text-danger"><?= $errors['address'] ?? '' ?></span>
                                             <input type="text" name="address" class="form-control" placeholder="Adresse complète" value="<?= isset($address['address']) ? $address['address'] : $_SESSION['address']  ?>">
@@ -141,6 +154,7 @@ include '../views/templates/header.php';
                                         </div>
                                         <div class="mt-3 text-center">
                                             <input type="submit" name="modifyAddress" class="btn btn-dark" value="Modifier">
+                                            <a href="?action=deleteAddr#modifyAdress" class="btn btn-outline-dark">Supprimer mon adresse</a>
                                         </div>
                                     </form>
                                 </div>

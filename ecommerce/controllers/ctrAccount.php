@@ -54,10 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyPassword'])) {
         if (!emptyArray($_POST, 1)) {
             $Users = new Users;
 
-            if ($Users->verifyPasswordClient($_SESSION['id'], $_POST['oldPassword'])) 
-            {
-                if ($_POST['newPassword'] === $_POST['confirmNewPassword'] && !empty($_POST['newPassword'])) 
-                {
+            if ($Users->verifyPasswordClient($_SESSION['id'], $_POST['oldPassword'])) {
+                if ($_POST['newPassword'] === $_POST['confirmNewPassword'] && !empty($_POST['newPassword'])) {
 
                     $Users = new Users;
 
@@ -71,8 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyPassword'])) {
                     $messageAlertPassword = ['danger', 'La confirmation du mot de passe est incorrect'];
             } else
                 $messageAlertPassword = ['danger', 'Le mot de passe actuel ne correspond pas'];
-        }
-        else
+        } else
             $messageAlertPassword = ['danger', 'Tous les champs sont obligatoires'];
     }
 }
@@ -80,58 +77,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyPassword'])) {
 
 /** Contrôleur permettant la modification de l'adresse de livraison du client */
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyAddress'])) 
-{
-    if (isset($_POST['address'], $_POST['zipCode'], $_POST['city'], $_POST['country'])) 
-    {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyAddress'])) {
+    if (isset($_POST['address'], $_POST['zipCode'], $_POST['city'], $_POST['country'])) {
         $errors = [];
 
         $address = cleanDataArray($_POST);
 
-        if(!preg_match(REGEX_ZIP, $address['zipCode']))
-        {
+        if (!preg_match(REGEX_ZIP, $address['zipCode'])) {
             $errors['zipCode'] = "Le format du code postal est incorrect";
             unset($address['zipCode']);
         }
 
-        if(!preg_match(REGEX_ADDR, $address['address']))
-        {
+        if (!preg_match(REGEX_ADDR, $address['address'])) {
             $errors['address'] = "Le format de l'adresse est incorrect";
             unset($address['address']);
         }
 
-        if(!preg_match(REGEX_CITY, $address['city']))
-        {
+        if (!preg_match(REGEX_CITY, $address['city'])) {
             $errors['city'] = "Le format du nom de la ville est incorrect";
             unset($address['city']);
         }
 
-        if(!preg_match(REGEX_CITY, $address['country']))
-        {
+        if (!preg_match(REGEX_CITY, $address['country'])) {
             $errors['country'] = "Le format du nom du pays est incorrect";
             unset($address['country']);
         }
 
-        if(empty($errors))
-        {
-            $Users = new Users;
-            
-            if($Users->setAddress($address, (int)$_SESSION['id']))
-            {
-                $messageAlertAddress = ['success', 'Votre adresse a été enregistré'];
+        if (empty($errors)) {
+            if ($_SESSION['address'] == $address['address'] && $_SESSION['zipcode'] == $address['zipCode'] && $_SESSION['city'] == $address['city'] && $_SESSION['country'] == $address['country']) {
+                $messageAlertAddress = ['warning', 'Les données n\'ont pas été modifiées'];
+            } else {
+                $Users = new Users;
 
-                $_SESSION['address'] = $address['address'];
-                $_SESSION['zipcode'] = $address['zipCode'];
-                $_SESSION['city'] = $address['city'];
-                $_SESSION['country'] = $address['country'];
+                if ($Users->setAddress($address, (int)$_SESSION['id'])) {
+                    $messageAlertAddress = ['success', 'Votre adresse a été enregistré'];
 
-                unset($address);
+                    $_SESSION['address'] = $address['address'];
+                    $_SESSION['zipcode'] = $address['zipCode'];
+                    $_SESSION['city'] = $address['city'];
+                    $_SESSION['country'] = $address['country'];
+
+                    unset($address);
+                } else
+                    $messageAlertAddress = ['danger', 'une erreur s\'est produite'];
             }
-            else
-                $messageAlertAddress = ['danger', 'une erreur s\'est produite'];
-            
-        }
-        else
+        } else
             $messageAlertAddress = ['warning', 'Aucune modification apportée'];
     }
 }
+
+
+
+/** Contrôleur permettant à un client de s'inscrire a la newsletter */
+
+if (isset($_GET['action']) && $_GET['action'] == 'subscribeNewsletters' && $_SESSION['newsletters'] == 0) {
+
+    $Users = new Users;
+
+    if ($Users->setActivateNewsletters((int) $_SESSION['id'])) {
+        $flashToast = true;
+        $flashMsg = ['success', 'Vous êtes bien inscrit à nos offres privées :)'];
+        $_SESSION['newsletters'] = '1';
+    } else {
+        $flashToast = true;
+        $flashMsg = ['error', 'Une erreur est survenue'];
+    }
+}
+
+
+
+/** Contrôleur permettant à un client de supprimer son adresse de livraison */
+
+if (isset($_GET['action']) && $_GET['action'] == 'deleteAddr' && isset($_SESSION['id'])) {
+
+
+
+    $messageAlertAddress = ['success', 'Votre adresse de livraison a bien été supprimée'];
+}
+
+//var_dump($_SESSION);

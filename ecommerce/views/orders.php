@@ -32,16 +32,29 @@ include '../views/templates/header.php';
                         <a href="orders.php" class="list-group-item list-group-item-action bg-dark text-white disabled">Mes commandes</a>
                         <a href="bills.php" class="list-group-item list-group-item-action">Mes factures</a>
                     </div>
-                </div>
-                <div class="col-lg-8 col-12">
+                    <p class="mt-3 fw-light">Inscrit(e) depuis le <span class=""><?= date('d/m/Y', strtotime($_SESSION['registered'])) ?></span></p>
 
+                    <?php if ($_SESSION['newsletters'] == 0) : ?>
+                        <div class="card">
+                            <img src="../assets/img/newsletters.png" class="card-img-top" alt="Solde">
+                            <div class="card-body">
+                                <h5 class="card-title">Profitez-en maintenant</h5>
+                                <p class="card-text">En s'inscrivant à notre Newsletter, vous bénéficierez d'offres exceptionnelles</p>
+                                <a href="?action=subscribeNewsletters" class="btn btn-outline-info">Je profite des offres privées</a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
-
+            </div>
+            <div class="col-lg-8 col-12">
 
             </div>
 
+
         </div>
+
     </div>
+</div>
 
 </div>
 
