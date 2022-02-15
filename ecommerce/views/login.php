@@ -146,39 +146,10 @@ include '../views/templates/header.php';
 
                     <?php else : ?>
 
-                        <h2>Affichage de $_SESSION pendant la période de développement</h2>
-                        <div class="col-lg-6 col-12 m-auto mt-5">
-                            <table class="table table-striped table-dark table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Information utilisateur</th>
-                                        <th scope="col">Valeur</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">ID</th>
-                                        <td><?= $_SESSION['id'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Nom</th>
-                                        <td><?= $_SESSION['lastname'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Prénom</th>
-                                        <td><?= $_SESSION['firstname'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Adresse Mail</th>
-                                        <td><?= $_SESSION['mail'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Rôle utilisateur</th>
-                                        <td><?= $_SESSION['role'] ?></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <h2 class="mb-5">Debug pendant le DEV</h2>
+                        
+
+                        <?php var_dump($_SESSION); ?>
 
                     <?php endif; ?>
                 </div>

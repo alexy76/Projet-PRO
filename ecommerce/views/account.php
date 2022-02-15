@@ -14,6 +14,9 @@ include '../views/templates/header.php';
 
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
+                    <a class="nav-link" aria-current="true" href="login.php">Debug session</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" aria-current="true" href="logout.php">Déconnexion</a>
                 </li>
                 <li class="nav-item">

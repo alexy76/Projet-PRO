@@ -150,9 +150,27 @@ if (isset($_GET['action']) && $_GET['action'] == 'subscribeNewsletters' && $_SES
 
 if (isset($_GET['action']) && $_GET['action'] == 'deleteAddr' && isset($_SESSION['id'])) {
 
+    if(is_null($_SESSION['address']) && is_null($_SESSION['zipcode']) && is_null($_SESSION['city']) && is_null($_SESSION['country']))
+    {
+        $messageAlertAddress = ['warning', 'Votre adresse de livraison a déjà été supprimée'];
+    }
+    else
+    {
+        $Users = new Users;
 
-
-    $messageAlertAddress = ['success', 'Votre adresse de livraison a bien été supprimée'];
+        if($Users->deleteAddrClient((int) $_SESSION['id']))
+        {
+            $messageAlertAddress = ['success', 'Votre adresse de livraison a bien été supprimée'];
+            $_SESSION['address'] = null;
+            $_SESSION['zipcode'] = null;
+            $_SESSION['city'] = null;
+            $_SESSION['country'] = null;
+        }
+        else{
+            $flashToast = true;
+            $flashMsg = ['error', 'Une erreur est survenue'];
+        }
+    }
 }
 
 //var_dump($_SESSION);

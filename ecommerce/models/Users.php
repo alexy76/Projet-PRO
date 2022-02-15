@@ -255,5 +255,22 @@ class Users extends Database{
 
         return $statment->execute();
     }
+
+
+
+    /**
+     * 
+     */
+    public function deleteAddrClient(int $id) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_users` SET `usr_adress` = NULL, `usr_zip_code` = NULL, `usr_city` = NULL, `usr_country` = NULL WHERE `usr_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
 }
 ?>
