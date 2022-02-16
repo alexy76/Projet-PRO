@@ -1,7 +1,11 @@
 <?php
 /** Initialisation des paramètres de la page */
 if (session_status() === PHP_SESSION_NONE) session_start();
-if(!isset($_SESSION['id'])) header('Location: login.php?noAllowed');
+if(!isset($_SESSION['id']))
+{
+    header('Location: login.php?unauthorized');
+    exit();
+}
 
 
 
@@ -128,7 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modifyAddress'])) {
             $messageAlertAddress = ['warning', 'Aucune modification apportée'];
     }
 }
-
 
 
 /** Contrôleur permettant à un client de s'inscrire a la newsletter */

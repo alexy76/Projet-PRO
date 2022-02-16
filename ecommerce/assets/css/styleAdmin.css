@@ -1,0 +1,24 @@
+/*body{
+    background-color: rgb(179, 179, 179);
+}*/
+
+.colorlink{
+    color: #afafaf!important;
+}
+
+.linklogin{
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.link-button { 
+    background: none;
+    border: none;
+    color: #0066ff;
+    text-decoration: underline;
+    cursor: pointer; 
+}
+
+.bgadmin{
+    background-color: #383838;
+}

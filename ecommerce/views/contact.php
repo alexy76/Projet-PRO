@@ -37,11 +37,11 @@ include '../views/templates/header.php';
                             <div class="mb-3">
                                 <label for="" class="form-label">Vos coordonnées pour être recontacté :</label>
                                 <br><span class="text-danger"><?= $errors['fromName'] ?? '' ?></span>
-                                <input type="text" name="fromName" class="form-control" id="" placeholder="Nom et prénom" value="<?= isset($formContact['fromName']) ? $formContact['fromName'] : '' ?>">
+                                <input type="text" name="fromName" class="form-control" id="" placeholder="Nom et prénom" value="<?= isset($_SESSION['id']) ? $_SESSION['firstname'].' '.$_SESSION['lastname'] : (isset($formContact['fromName']) ? $formContact['fromName'] : '') ?>">
                             </div>
                             <div class="mb-3">
                                 <span class="text-danger"><?= $errors['fromMail'] ?? '' ?></span>
-                                <input type="email" name="fromMail" class="form-control" id="" placeholder="mail@example.com" value="<?= isset($formContact['fromMail']) ? $formContact['fromMail'] : '' ?>">
+                                <input type="email" name="fromMail" class="form-control" id="" placeholder="mail@example.com" value="<?= isset($_SESSION['id']) ? $_SESSION['mail'] : (isset($formContact['fromMail']) ? $formContact['fromMail'] : '') ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="textContact" class="form-label">Votre message (<span id="nbChars">0</span> / 500):</label>

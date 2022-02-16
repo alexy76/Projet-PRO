@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-textContact.addEventListener('keypress', (e) => {
+textContact.addEventListener('keyup', (e) => {
     let lenghtText = textContact.value.length;
 
     if(lenghtText > 500)

@@ -108,7 +108,7 @@ include '../views/templates/header.php';
                                 Votre inscription a bien été validée, veuillez vérifier vos mails afin de confirmer votre compte
                             </div>
 
-                        <?php elseif (isset($_GET['noAllowed'])) : ?>
+                        <?php elseif (isset($_GET['unauthorized'])) : ?>
 
                             <div class="alert alert-danger" role="alert">
                                 Vous n'êtes pas connecté !

@@ -22,6 +22,11 @@ include '../views/templates/header.php';
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="true" href="">Mon compte</a>
                 </li>
+                <?php if ($_SESSION['role'] == 2) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="true" href="admin/index.php">Panel Admin</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="card-body">
@@ -38,6 +43,13 @@ include '../views/templates/header.php';
                     </div>
 
                     <p class="mt-3 fw-light">Inscrit(e) depuis le <span class=""><?= date('d/m/Y', strtotime($_SESSION['registered'])) ?></span></p>
+
+                    <div class="list-group mb-4">
+                        <a href="contact.php" class="btn btn-outline-dark" aria-current="true">
+                            Nous contacter
+                        </a>
+                    </div>
+
 
                     <?php if ($_SESSION['newsletters'] == 0) : ?>
                         <div class="card">
