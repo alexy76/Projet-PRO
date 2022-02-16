@@ -1,12 +1,15 @@
 <?php
+/** Initialisation des paramètres de la page */
+if (session_status() === PHP_SESSION_NONE) session_start();
+if(!isset($_SESSION['id'])) header('Location: login.php?noAllowed');
+
+
 
 require_once '../config.php';
 require_once '../models/Database.php';
 require_once '../models/Users.php';
 require_once '../tools/tools.php';
 
-/** Initialisation des paramètres de la page */
-if (session_status() === PHP_SESSION_NONE) session_start();
 
 
 /** Valeur des metas */
@@ -172,5 +175,3 @@ if (isset($_GET['action']) && $_GET['action'] == 'deleteAddr' && isset($_SESSION
         }
     }
 }
-
-//var_dump($_SESSION);

@@ -6,15 +6,17 @@ require_once '../models/Newsletters.php';
 require_once '../tools/tools.php';
 
 /** Initialisation des paramètres de la page */
-
 if(session_status() === PHP_SESSION_NONE) session_start();
+
+
 
 /** Valeur des metas */
 $meta_title = "Contactez-nous | ECOMMERCE.NET";
 $meta_description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus magnam odit voluptate quo, numquam corrupti, eveniet veniam, repellendus reprehenderit recusandae at asperiores! Beatae, ipsa quidem adipisci impedit necessitatibus eius laudantium.";
 
-/**Contrôleur du formulaire de contact */
 
+
+/**Contrôleur du formulaire de contact */
 if(isset($_POST['fromName'], $_POST['fromMail'], $_POST['messageMail'], $_POST['g-recaptcha-response'], $_POST['sendMail']))
 {
     if(!emptyArray($_POST, 1))

@@ -4,9 +4,10 @@ require_once '../models/Database.php';
 require_once '../models/Users.php';
 require_once '../tools/tools.php';
 
-
 /** Initialisation des paramètres de la page */
 if (session_status() === PHP_SESSION_NONE) session_start();
+
+
 
 /** Valeur des metas */
 $meta_title = 'Récupération de votre mot de passe | ECOMMERCE.NET';
