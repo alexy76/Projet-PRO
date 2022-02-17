@@ -7,7 +7,6 @@ if(!isset($_SESSION['id']) || $_SESSION['role'] != 2)
     exit();
 }
 
-
 require_once "../../tools/PHPMailer/PHPMailerAutoload.php";
 require_once '../../config.php';
 require_once '../../models/Database.php';

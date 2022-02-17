@@ -340,5 +340,34 @@ class Users extends Database{
 
         return $statment->fetchAll();
     }
+
+
+    /**
+     * 
+     */
+    public function getCount_AccountNotActivated() : int
+    {
+        $db = $this->connectDB();
+        return $db->query("SELECT count(`usr_id`) as 'nbClients' FROM `ec_users` WHERE `usr_account_activate` = FALSE")->fetch()->nbClients;
+    }
+
+
+
+    /**
+     * 
+     */
+    public function get_AccountNotActivated(string $optional = '', int $nbElt, int $offset) : array
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT * FROM `ec_users` WHERE `usr_account_activate` = FALSE";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
+        $statment->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetchAll();
+    }
 }
 ?>

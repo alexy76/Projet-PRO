@@ -38,22 +38,22 @@ require_once '../../controllers/admin/ctrIndex.php';
                 <div class="row justify-content-evenly">
                     <div class="col-lg-3 col-12 rounded-3 bg-light text-dark px-0" style="max-height: 250px;">
                         <div class="list-group bg-light">
-                            <a href="#" class="list-group-item list-group-item-action btnBlue text-white d-inline-block text-start" aria-current="true">
+                            <a href="index.php" class="list-group-item list-group-item-action btnBlue text-white d-inline-block text-start" aria-current="true">
                                 <i class="bi bi-people"></i><span class="ms-3 d-inline-block m-auto">Gestion des utilisateurs</span>
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
+                            <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                                 <i class="bi bi-folder-plus"></i></i><span class="ms-3 d-inline-block m-auto">Ajouter une collection</span>
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
+                            <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                                 <i class="bi bi-bag-plus-fill"></i><span class="ms-3 d-inline-block m-auto">Ajouter un produit</span>
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
+                            <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                                 <i class="bi bi-pencil-square"></i><span class="ms-3 d-inline-block m-auto">Modifier un produit</span>
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-8 col-12 rounded-2 text-dark shadow">
-                        <h1 class="h6 fw-normal btnBlue text-white border border-dark rounded-1 py-3 radius-bottom-left">Gestionnaire des utilisateurs</h1>
+                        <h1 class="mt-3 h6 fw-normal btnBlue text-white py-3 radius-bottom-left radius-top-right">Gestionnaire des utilisateurs</h1>
 
 
                         <div class="input-group mt-4">
@@ -66,11 +66,13 @@ require_once '../../controllers/admin/ctrIndex.php';
 
                         </div>
 
+                        <a href="?search=AccountNotActivated">Afficher les comptes non activé</a>
+
                         <div class="table-responsive rounded-3">
                             <table class="table table-light table-striped table-hover mt-4">
-                                <thead class="border border-dark">
+                                <thead class="">
                                     <tr>
-                                        <th class="btnBlue text-white radius-top-left text-start" scope="col">Mail</th>
+                                        <th class="btnBlue text-white text-start" scope="col">Mail</th>
                                         <th class="btnBlue text-white text-start" scope="col">Nom</th>
                                         <th class="btnBlue text-white" scope="col">Activé</th>
                                         <th class="btnBlue text-white" scope="col">Newsletters</th>
@@ -78,25 +80,37 @@ require_once '../../controllers/admin/ctrIndex.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($getAllClients as $user) : ?>
+                                    <?php if (!$getAllClients) : ?>
                                         <tr>
-                                            <th class="text-start" scope="row"><?= $user->usr_mail ?></th>
-                                            <td class="text-start"><?= $user->usr_firstname ?></td>
-                                            <td><input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" <?= $user->usr_account_activate == 1 ? 'checked' : '' ?> disabled></td>
-                                            <td><input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" <?= $user->usr_accept_newsletters == 1 ? 'checked' : '' ?> disabled></td>
+                                            <th class="text-start" scope="row">Aucunes données trouvées</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td>
-                                                <div class="btn-group">
-                                                    <button class="btn btnBlue btn-sm dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="bi bi-person-x-fill"></i> Action
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Voir ses commandes</a></li>
-                                                        <li><a class="dropdown-item" href="#">Supprimer l'utilisateur</a></li>
-                                                    </ul>
-                                                </div>
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                        <?php
+                                    else :
+                                        foreach ($getAllClients as $user) : ?>
+                                            <tr>
+                                                <th class="text-start" scope="row"><?= $user->usr_mail ?></th>
+                                                <td class="text-start"><?= $user->usr_firstname ?></td>
+                                                <td><input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" <?= $user->usr_account_activate == 1 ? 'checked' : '' ?> disabled></td>
+                                                <td><input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" <?= $user->usr_accept_newsletters == 1 ? 'checked' : '' ?> disabled></td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btnBlue btn-sm dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="bi bi-person-x-fill"></i> Action
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="#">Voir ses commandes</a></li>
+                                                            <li><a class="dropdown-item" href="#">Supprimer l'utilisateur</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
 
