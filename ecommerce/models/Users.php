@@ -272,5 +272,73 @@ class Users extends Database{
 
         return $statment->execute();
     }
+
+
+
+    /**
+     *
+     */
+    public function getCount_AllClients() : int
+    {
+        $db = $this->connectDB();
+        return $db->query("SELECT count(`usr_id`) as 'nbClients' FROM `ec_users`")->fetch()->nbClients;
+    }
+
+
+
+    /**
+     * 
+     */
+    public function get_AllClients(string $optional = '', int $nbElt, int $offset) : array
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT * FROM `ec_users` LIMIT :nbElt OFFSET :offset";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
+        $statment->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetchAll();
+    }
+
+
+
+    /**
+     * 
+     */
+    public function getCount_NameClient(string $firstname) : int
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT count(`usr_id`) as 'nbClients' FROM `ec_users` WHERE `usr_firstname` LIKE :firstname";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':firstname', $firstname, PDO::PARAM_STR);
+        $statment->execute();
+
+        return $statment->fetch()->nbClients;
+    }
+
+
+
+    /**
+     * 
+     */
+    public function get_NameClient(string $firstname, int $nbElt, int $offset) : array
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT * FROM `ec_users` WHERE `usr_firstname` LIKE :firstname LIMIT :nbElt OFFSET :offset";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':firstname', $firstname, PDO::PARAM_STR);
+        $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
+        $statment->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetchAll();
+    }
 }
 ?>

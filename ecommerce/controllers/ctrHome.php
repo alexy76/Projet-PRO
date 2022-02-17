@@ -1,4 +1,5 @@
 <?php
+require_once "../tools/PHPMailer/PHPMailerAutoload.php";
 require_once '../config.php';
 require_once '../models/Database.php';
 require_once '../models/Newsletters.php';

@@ -6,6 +6,11 @@
     color: #afafaf!important;
 }
 
+.btnBlue{
+    background-color: #5d779e!important;
+    color: white;
+}
+
 .linklogin{
     text-decoration: none;
     font-size: 14px;
@@ -21,4 +26,21 @@
 
 .bgadmin{
     background-color: #383838;
+}
+
+.radius-top-left{
+    border-top-left-radius: 3px;
+}
+.radius-top-right{
+    border-top-right-radius: 3px;
+}
+
+.radius-bottom-left{
+    border-bottom-left-radius: 
+    15px;
+}
+
+
+.radius-bottom-right{
+    border-bottom-right-radius: 30px;
 }

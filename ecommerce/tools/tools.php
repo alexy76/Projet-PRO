@@ -1,5 +1,4 @@
 <?php
-require_once "../tools/PHPMailer/PHPMailerAutoload.php";
 
 function smtpmailer($to, $from, $from_name, $subject, $body) : bool
 {
