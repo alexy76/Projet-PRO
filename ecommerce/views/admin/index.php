@@ -90,6 +90,9 @@ require_once '../../controllers/admin/ctrIndex.php';
                         <table class="table table-light table-striped table-hover mt-4">
                             <thead class="">
                                 <tr>
+                                    <th class="btnBlue text-white text-start" scope="col">
+                                        <input id="allCheckbox" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    </th>
                                     <th class="btnBlue text-white text-start" scope="col">Mail</th>
                                     <th class="btnBlue text-white text-start" scope="col">Nom</th>
                                     <th class="btnBlue text-white" scope="col">Activé</th>
@@ -98,6 +101,7 @@ require_once '../../controllers/admin/ctrIndex.php';
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <?php if (!$getAllClients) : ?>
                                     <tr>
                                         <th class="text-start" scope="row">Aucunes données trouvées</th>
@@ -107,10 +111,13 @@ require_once '../../controllers/admin/ctrIndex.php';
                                         <td>
                                         </td>
                                     </tr>
-                                    <?php
-                                else :
-                                    foreach ($getAllClients as $user) : ?>
+                                <?php else : ?>
+
+                                    <?php foreach ($getAllClients as $user) : ?>
                                         <tr>
+                                            <td class="text-start">
+                                                <input class="form-check-input inputDelete" type="checkbox" value="<?= $user->usr_id ?>">
+                                            </td>
                                             <th class="text-start" scope="row"><?= $user->usr_mail ?></th>
                                             <td class="text-start"><?= $user->usr_lastname ?></td>
                                             <td><input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" <?= $user->usr_account_activate == 1 ? 'checked' : '' ?> disabled></td>
@@ -136,8 +143,17 @@ require_once '../../controllers/admin/ctrIndex.php';
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
+
                             </tbody>
                         </table>
+
+                        <form id="formInputsDelete" method="POST" action="" class="d-none">
+                            <div id="inputGenerate">
+                            </div>
+                            <div class="text-end mb-3">
+                                <input type="submit" value="Supprimer" name="deleteAll" class="btn btn-sm btn-danger d-inline-block text-end">
+                            </div>
+                        </form>
 
                         <nav class="text-center d-inline-block" aria-label="...">
                             <ul class="pagination">
@@ -205,6 +221,7 @@ require_once '../../controllers/admin/ctrIndex.php';
             })
         }
     </script>
+    <script src="../../assets/js/appAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
