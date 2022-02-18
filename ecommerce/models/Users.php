@@ -293,7 +293,7 @@ class Users extends Database{
     {
         $db = $this->connectDB();
 
-        $query = "SELECT * FROM `ec_users` LIMIT :nbElt OFFSET :offset";
+        $query = "SELECT * FROM `ec_users` ORDER BY `usr_lastname` LIMIT :nbElt OFFSET :offset";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
@@ -308,14 +308,14 @@ class Users extends Database{
     /**
      * 
      */
-    public function getCount_NameClient(string $firstname) : int
+    public function getCount_NameClient(string $lastname) : int
     {
         $db = $this->connectDB();
 
-        $query = "SELECT count(`usr_id`) as 'nbClients' FROM `ec_users` WHERE `usr_firstname` LIKE :firstname";
+        $query = "SELECT count(`usr_id`) as 'nbClients' FROM `ec_users` WHERE `usr_lastname` LIKE :lastname";
 
         $statment = $db->prepare($query);
-        $statment->bindValue(':firstname', $firstname, PDO::PARAM_STR);
+        $statment->bindValue(':lastname', $lastname, PDO::PARAM_STR);
         $statment->execute();
 
         return $statment->fetch()->nbClients;
@@ -326,14 +326,14 @@ class Users extends Database{
     /**
      * 
      */
-    public function get_NameClient(string $firstname, int $nbElt, int $offset) : array
+    public function get_NameClient(string $lastname, int $nbElt, int $offset) : array
     {
         $db = $this->connectDB();
 
-        $query = "SELECT * FROM `ec_users` WHERE `usr_firstname` LIKE :firstname LIMIT :nbElt OFFSET :offset";
+        $query = "SELECT * FROM `ec_users` WHERE `usr_lastname` LIKE :lastname ORDER BY `usr_lastname` LIMIT :nbElt OFFSET :offset";
 
         $statment = $db->prepare($query);
-        $statment->bindValue(':firstname', $firstname, PDO::PARAM_STR);
+        $statment->bindValue(':lastname', $lastname, PDO::PARAM_STR);
         $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
         $statment->bindValue(':offset', $offset, PDO::PARAM_INT);
         $statment->execute();
@@ -360,7 +360,7 @@ class Users extends Database{
     {
         $db = $this->connectDB();
 
-        $query = "SELECT * FROM `ec_users` WHERE `usr_account_activate` = FALSE";
+        $query = "SELECT * FROM `ec_users` WHERE `usr_account_activate` = FALSE ORDER BY `usr_lastname` LIMIT :nbElt OFFSET :offset";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
@@ -368,6 +368,43 @@ class Users extends Database{
         $statment->execute();
 
         return $statment->fetchAll();
+    }
+
+
+
+    /**
+     * 
+     */
+    public function getName(string $stringName) : array
+    {
+        $db = $this->connectDB();
+
+        $search = $stringName.'%';
+
+        $query = "SELECT `usr_lastname` FROM `ec_users` WHERE `usr_lastname` LIKE :search ORDER BY `usr_lastname` LIMIT 10 OFFSET 0";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':search', $search, PDO::PARAM_STR);
+        $statment->execute();
+
+        return $statment->fetchAll();
+    }
+
+
+
+    /**
+     * 
+     */
+    public function deleteUser(string $id) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "DELETE FROM `ec_users` WHERE `usr_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_STR);
+
+        return $statment->execute();
     }
 }
 ?>

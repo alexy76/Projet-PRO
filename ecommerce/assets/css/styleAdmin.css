@@ -24,12 +24,29 @@
     cursor: pointer; 
 }
 
+.linkBtnDelete{
+    background-color : rgba(182, 24, 24, 0.774);
+    border: none;
+    padding: 5px 0;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer; 
+}
+
+.linkBtnDelete:hover{
+    background-color : rgba(255, 0, 0, 0.774);
+}
+
 .bgadmin{
     background-color: #383838;
 }
 
 .bg-grey{
     background-color: #e4e4e4c7;
+}
+
+.bg-greyblue{
+    background-color: #868686a2;
 }
 
 .radius-top-left{
