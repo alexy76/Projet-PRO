@@ -28,6 +28,10 @@
     background-color: #383838;
 }
 
+.bg-grey{
+    background-color: #e4e4e4c7;
+}
+
 .radius-top-left{
     border-top-left-radius: 3px;
 }

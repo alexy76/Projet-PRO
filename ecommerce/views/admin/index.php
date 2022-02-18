@@ -34,9 +34,9 @@ require_once '../../controllers/admin/ctrIndex.php';
         </div>
 
 
-        <div class="card-body bg-white pt-5">
+        <div class="card-body bg-grey pt-5">
             <div class="row justify-content-evenly">
-                <div class="col-lg-3 col-12 rounded-3 bg-light text-dark px-0">
+                <div class="col-lg-3 col-12 rounded-3 bg-light text-dark px-0" style="height: 100vh">
                     <div class="list-group bg-light">
                         <a href="index.php" class="list-group-item list-group-item-action btnBlue text-white d-inline-block text-start" aria-current="true">
                             <i class="bi bi-people"></i><span class="ms-3 d-inline-block m-auto">Gestion des utilisateurs</span>
@@ -52,7 +52,7 @@ require_once '../../controllers/admin/ctrIndex.php';
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-8 col-12 rounded-2 text-dark shadow">
+                <div class="col-lg-8 col-12 rounded-2 text-dark shadow bg-white">
                     <h1 class="mt-3 h6 fw-normal btnBlue text-white py-3 radius-bottom-left radius-top-right">Gestionnaire des utilisateurs</h1>
 
 
