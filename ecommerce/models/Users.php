@@ -289,7 +289,7 @@ class Users extends Database{
     /**
      * 
      */
-    public function get_AllClients(string $optional = '', int $nbElt, int $offset) : array
+    public function get_AllClients(string $optional = null, int $nbElt, int $offset) : array
     {
         $db = $this->connectDB();
 
@@ -356,7 +356,7 @@ class Users extends Database{
     /**
      * 
      */
-    public function get_AccountNotActivated(string $optional = '', int $nbElt, int $offset) : array
+    public function get_AccountNotActivated(string $optional = null, int $nbElt, int $offset) : array
     {
         $db = $this->connectDB();
 

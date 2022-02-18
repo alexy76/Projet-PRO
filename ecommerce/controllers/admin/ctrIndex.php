@@ -18,7 +18,7 @@ $Users = new Users;
 
 $nameMethod = 'AllClients';
 
-if(isset($_POST['req']))                            $req = $_POST['req'];
+if(isset($_POST['req']) && !empty($_POST['req']))                            $req = $_POST['req'];
 if(isset($_GET['req']) && $_GET['req'] != '')       $req = $_GET['req'];
 
 if(isset($_GET['search']) && method_exists($Users, 'getCount_'.$_GET['search']))
