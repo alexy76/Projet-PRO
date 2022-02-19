@@ -11,6 +11,11 @@
     color: white;
 }
 
+.btnBlueDark{
+    background-color: #2e3c50!important;
+    color: white;
+}
+
 .linklogin{
     text-decoration: none;
     font-size: 14px;

@@ -29,7 +29,7 @@ require_once '../../controllers/admin/ctrIndex.php';
         <div class="card-header btnBlue pt-4 pb-4">
             <ul class="nav nav-tabs card-header-tabs bg-light mx-4 border-bottom border-light rounded-3">
                 <li class="nav-item">
-                    <a class="nav-link active btnBlue text-white" aria-current="true" href="">Administration</a>
+                    <a class="nav-link active btnBlueDark text-white" aria-current="true" href="">Administration</a>
                 </li>
                 <li class="nav-item ms-2">
                     <a class="nav-link colorlink" href="../login.php">Retour sur le site</a>
@@ -40,18 +40,18 @@ require_once '../../controllers/admin/ctrIndex.php';
 
         <div class="card-body bg-grey pt-5">
             <div class="row justify-content-evenly">
-                <div class="col-lg-3 col-12 rounded-3 bg-light text-dark px-0" style="height: 100vh">
+                <div class="col-lg-3 col-12 rounded-3 bg-light text-dark px-0" style="max-height: 300px;">
                     <div class="list-group bg-light">
 
 
-                        <span class="list-group-item list-group-item-action btnBlue text-white d-inline-block text-start" aria-current="true">
+                        <span class="list-group-item list-group-item-action btnBlueDark text-white d-inline-block text-start" aria-current="true">
                             <i class="bi bi-people"></i><span class="ms-3 d-inline-block m-auto">Gestion des utilisateurs</span>
                         </span>
                         <a href="index.php" class="list-group-item list-group-item-action bg-grey text-dark d-inline-block text-start <?= $nameMethod == 'AllClients' ? 'fw-bold' : '' ?>" aria-current="true">
-                            <span class="ms-3 d-inline-block m-auto"><i class="bi bi-arrow-return-right me-3"></i>Tous les clients</span>
+                            <span class="ms-3 d-inline-block m-auto"><i class="bi bi-arrow-return-right me-3"></i>Liste des clients <?= $nameMethod == 'AllClients' ? '(' . $nbClients . ')' : '' ?></span>
                         </a>
                         <a href="?search=AccountNotActivated" class="list-group-item list-group-item-action bg-grey text-dark d-inline-block text-start <?= $nameMethod == 'AccountNotActivated' ? 'fw-bold' : '' ?>" aria-current="true">
-                            <span class="ms-3 d-inline-block m-auto"><i class="bi bi-arrow-return-right me-3"></i>Comptes inactifs</span>
+                            <span class="ms-3 d-inline-block m-auto"><i class="bi bi-arrow-return-right me-3"></i>Comptes non activés <?= $nameMethod == 'AccountNotActivated' ? '(' . $nbClients . ')' : '' ?></span>
                         </a>
                         <hr class="m-0 p-0">
 
@@ -59,7 +59,7 @@ require_once '../../controllers/admin/ctrIndex.php';
 
 
 
-                        <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
+                        <a href="collections.php" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                             <i class="bi bi-folder-plus"></i></i><span class="ms-3 d-inline-block m-auto">Ajouter une collection</span>
                         </a>
                         <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
@@ -75,12 +75,13 @@ require_once '../../controllers/admin/ctrIndex.php';
 
 
                     <!-- <div class="input-group mt-4"> -->
-                    <form action="?search=NameClient" method="POST" class="w-100 input-group mt-4">
-                        <input id="name" type="text" list="res" class="form-control form-control-sm" placeholder="Nom du client" name="req" autocomplete="off" onkeyup="getdata();">
+                    <form action="" method="GET" class="w-100 input-group mt-4">
+                    <input type="hidden" name="search" value="NameClient">
+                        <input id="name" type="text" list="res" value="<?= $req ?? '' ?>" class="form-control form-control-sm" placeholder="Nom du client" name="req" autocomplete="off" onkeyup="getdata();">
                         <div class="input-group-append">
-                            <button class="btn btn-sm btnBlue" type="submit">Rechercher</button>
+                            <button class="btn btn-sm btnBlueDark" type="submit">Rechercher</button>
                         </div>
-                        <datalist id="res">
+                        <datalist id="res" style="width: 1000px;">
                         </datalist>
                     </form>
 
@@ -124,11 +125,11 @@ require_once '../../controllers/admin/ctrIndex.php';
                                             <td><input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" <?= $user->usr_accept_newsletters == 1 ? 'checked' : '' ?> disabled></td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button class="btn btnBlue btn-sm dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btnBlueDark btn-sm dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="bi bi-person-x-fill"></i> Action
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Voir ses commandes</a></li>
+                                                        <li><a class="dropdown-item" href="#">Consulter la fiche client</a></li>
                                                         <li>
                                                             <form method="POST" action="">
                                                                 <input type="hidden" value="<?= $user->usr_firstname . ' ' . $user->usr_lastname ?>" name="nameUser">
@@ -158,15 +159,15 @@ require_once '../../controllers/admin/ctrIndex.php';
                         <nav class="text-center d-inline-block" aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item <?= $pageActual == 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual - 1 ?>">Previous</a>
+                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual - 1 ?>">Previous</a>
                                 </li>
                                 <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
                                     <li class="page-item">
-                                        <a class="page-link <?= $i == $pageActual ? 'btnBlue text-white' : 'text-dark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $i ?>"><?= $i ?></a>
+                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $i ?>"><?= $i ?></a>
                                     </li>
                                 <?php endfor; ?>
-                                <li class="page-item <?= $pageActual == $nbPages ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual + 1 ?>">Next</a>
+                                <li class="page-item <?= $pageActual == $nbPages || ($pageActual == 1 && $nbPages == 0) ? 'disabled' : '' ?>">
+                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual + 1 ?>">Next</a>
                                 </li>
                             </ul>
                         </nav>
@@ -181,17 +182,17 @@ require_once '../../controllers/admin/ctrIndex.php';
 
     <script type="text/javascript">
         function getdata() {
+
             var name = $('#name').val();
-            console.log($('#name').val());
+
             if (name) {
                 $.ajax({
                     type: 'post',
-                    url: './getName.php',
+                    url: '../../controllers/ctrAjax.php',
                     data: {
                         name: name,
                     },
                     success: function(response) {
-                        console.log($('#res').html(response));
                         $('#res').html(response);
                     }
                 });
@@ -205,7 +206,9 @@ require_once '../../controllers/admin/ctrIndex.php';
 
             const Toast = Swal.mixin({
                 toast: true,
-                position: 'top-end',
+                position: 'middle-middle',
+                background: "#2e3c50",
+                color: "#fff",
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,

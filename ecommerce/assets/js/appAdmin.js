@@ -26,7 +26,7 @@ if (inputDelete.length > 0) {
 
     inputDelete.forEach(element => {
 
-        element.addEventListener('change', (e) => {
+        element.addEventListener('change', () => {
 
             inputGenerate.innerHTML = '';
             let count = 0;
@@ -34,20 +34,23 @@ if (inputDelete.length > 0) {
 
             Array.from(document.getElementsByClassName('inputDelete')).forEach(elt => {
 
-                if (!allCheckbox.checked) {
                     if (elt.checked)
                         inputGenerate.innerHTML += `<input type="hidden" name="deleteUsers[]" value="${elt.value}">`;
                     else
                         count++;
-                }
-                else
-                    formInputsDelete.classList.replace('d-block', 'd-none');
             });
 
-            if(count == countInputs)
+            if(count == countInputs){
                 formInputsDelete.classList.replace('d-block', 'd-none');
-            else
+                allCheckbox.checked = false;
+            }else if(count < countInputs && count != 0){
                 formInputsDelete.classList.replace('d-none', 'd-block');
+                allCheckbox.checked = false;
+            }else{
+                formInputsDelete.classList.replace('d-none', 'd-block');
+                allCheckbox.checked = true;
+            }
+                
         });
     });
 }

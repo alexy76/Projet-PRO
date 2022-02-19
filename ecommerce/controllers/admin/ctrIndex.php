@@ -18,7 +18,7 @@ $Users = new Users;
 
 
 /** Contrôleur de suppression de plusieurs utilisateurs */
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteAll'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteAll']) && isset($_POST['deleteUsers'])) {
     $errors = [];
     foreach ($_POST['deleteUsers'] as $key => $userID) {
 
@@ -40,6 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteUser'])) {
     if ($Users->deleteUser((int)$_POST['idUser'])) {
         $flashToast = true;
         $flashMsg = ['success', 'Le compte de ' . $_POST['nameUser'] . ' a été supprimé'];
+    } else {
+        $flashToast = true;
+        $flashMsg = ['error', 'Une erreur est survenue'];
     }
 }
 
@@ -47,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteUser'])) {
 /** Pagination des utilisateurs en fonction de la méthode de tri sélectionnée */
 $nameMethod = 'AllClients';
 
-if (isset($_POST['req']) && !empty($_POST['req']))   $req = $_POST['req'];
-if (isset($_GET['req']) && $_GET['req'] != '')       $req = $_GET['req'];
+
+if (isset($_GET['req']))       $req = !empty($_GET['req']) ? $_GET['req'] : ' ';
 
 if (isset($_GET['search']) && method_exists($Users, 'getCount_' . $_GET['search']))
     $nameMethod = $_GET['search'];
