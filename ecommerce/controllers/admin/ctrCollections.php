@@ -18,6 +18,16 @@ $Category = new Category;
 $Collections = new Collections;
 
 
+
+foreach($Collections->getCollections() as $key => $value){
+
+    $final[$key]['collections'] = array_combine(explode(',', $value->idCol), explode(',', $value->nameCol));
+    $final[$key]['category'] = [$value->idCat => $value->nameCat];
+}
+
+var_dump($final);
+
+
 /** Contrôleur permettant l'ajout d'une nouvelle catégorie */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCategory']) && isset($_POST['nameCategory'])) {
     $nameCategory = cleanData($_POST['nameCategory']);

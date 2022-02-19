@@ -18,4 +18,16 @@ class Collections extends Database{
 
         return $statment->execute();
     }
+
+
+    /**
+     * 
+     */
+    public function getCollections() : array
+    {
+        $db = $this->connectDB();
+        return $db->query("SELECT group_concat(`col_name`) AS 'nameCol', `cat_name` AS 'nameCat', group_concat(`col_id`) AS 'idCol', `cat_id` AS 'idCat' FROM `ec_collection`
+        NATURAL JOIN `ec_category`
+        GROUP BY `cat_id`")->fetchAll();
+    }
 }
