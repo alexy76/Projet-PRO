@@ -40,7 +40,7 @@ require_once '../../controllers/admin/ctrCollections.php';
 
         <div class="card-body bg-grey pt-5">
             <div class="row justify-content-evenly">
-                <div class="col-lg-3 col-12 rounded-3 bg-light text-dark px-0" style="max-height: 300px;">
+                <div class="col-lg-3 col-12 rounded-3 bg-light text-dark px-0" style="max-height: 165px;">
                     <div class="list-group bg-light">
 
 
@@ -70,6 +70,50 @@ require_once '../../controllers/admin/ctrCollections.php';
 
                 <div class="col-lg-8 col-12 rounded-2 text-dark shadow bg-white">
                     <h1 class="mt-3 h6 fw-normal btnBlue text-white py-3 radius-bottom-left radius-top-right">Gestionnaire des catégories</h1>
+
+                    <h2 class="h5 mt-3 mb-3">Ajoutez une catégorie</h2>
+
+
+                    <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
+                        <input id="exampleFormControlInput1" autocomplete="off" name="nameCategory" type="text" class="form-control form-control-sm" placeholder="Nom de la catégorie" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btnBlueDark btn-sm" type="submit" id="button-addon2" name="addCategory">Ajouter une catégorie</button>
+                    </form>
+
+                    <?php if (!empty($listCategory)) : ?>
+
+                        <h2 class="h5 mt-3 mb-3">Ajoutez une collection</h2>
+
+
+                        <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
+                            <div class="input-group mb-3">
+                                <input autocomplete="off" name="nameCollection" type="text" class="form-control form-control-sm" placeholder="Nom de la collection" aria-label="Recipient's username" aria-describedby="button-addon2">
+
+                                <select class="form-select form-select-sm" id="inputGroupSelect02" name="catCollection">
+                                    <option selected disabled>Sélectionner une catégorie</option>
+
+                                    <?php foreach ($listCategory as $category) : ?>
+
+                                        <option value="<?= $category->cat_id ?>"><?= $category->cat_name ?></option>
+
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <button type="submit" name="addCollection" class="btn btnBlueDark btn-sm" for="inputGroupSelect02">Ajouter une collection</button>
+                            </div>
+                        </form>
+
+
+
+                    <?php else : ?>
+
+                        <div class="alert alert-info mt-3">Une catégorie doit être créée avant d'ajouter une collection</div>
+
+                    <?php endif; ?>
+
+
+
+
+
 
                 </div>
             </div>
