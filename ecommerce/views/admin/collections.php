@@ -1,5 +1,6 @@
 <?php
 require_once '../../controllers/admin/ctrCollections.php';
+var_dump($_FILES);
 ?>
 
 <!doctype html>
@@ -102,7 +103,24 @@ require_once '../../controllers/admin/ctrCollections.php';
                             </div>
                         </form>
 
+                        <div id="wrapper">
+                            <div class="list">
+                                <span class="">Element 1</span>
+                            </div>
+                            <div class="list">
+                                <span class="">Element 2</span>
+                            </div>
+                            <div class="list">
+                                <span class="">Element 3</span>
+                            </div>
+                            <div class="list">
+                                <span class="">Element 4</span>
+                            </div>
+                            </ul>
+                        </div>
 
+                        <?php //var_dump($final ?? 'Rien nada'); 
+                        ?>
 
                     <?php else : ?>
 
@@ -163,6 +181,14 @@ require_once '../../controllers/admin/ctrCollections.php';
                 title: '<?= $flashMsg[1] ?? '' ?>'
             })
         }
+    </script>
+    <script src="../../assets/js/sortable.js"></script>
+    <script>
+        const dragList = document.getElementById('wrapper');
+
+        new Sortable(dragList, {
+            animation: 300
+        })
     </script>
     <script src="../../assets/js/appAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

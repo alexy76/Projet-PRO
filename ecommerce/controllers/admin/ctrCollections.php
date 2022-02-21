@@ -18,18 +18,9 @@ $Category = new Category;
 $Collections = new Collections;
 
 
-
-foreach($Collections->getCollections() as $key => $value){
-
-    $final[$key]['collections'] = array_combine(explode(',', $value->idCol), explode(',', $value->nameCol));
-    $final[$key]['category'] = [$value->idCat => $value->nameCat];
-}
-
-var_dump($final);
-
-
 /** Contrôleur permettant l'ajout d'une nouvelle catégorie */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCategory']) && isset($_POST['nameCategory'])) {
+
     $nameCategory = cleanData($_POST['nameCategory']);
 
     if ($Category->setCategory($nameCategory)) {
@@ -37,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCategory']) && isse
         $flashMsg = ['success', 'La catégorie "' . $nameCategory . '" a été ajoutée'];
     }
 }
+
+
 
 /** Contrôleur permettant l'ajout d'une collection dans une catégorie */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCollection'])) {
@@ -52,14 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCollection'])) {
         } else {
             echo "ok";
             $nameCollection = cleanData($_POST['nameCollection']);
-            if($Collections->setNameCollection($nameCollection, $_POST['catCollection'])){
+            if ($Collections->setNameCollection($nameCollection, $_POST['catCollection'])) {
                 var_dump("Ajout de la collection ok ");
             }
         }
-    }else{
+    } else {
         var_dump("Veuillez entrer un nom pour la collection");
     }
 }
-var_dump($_POST);
+
+var_dump($Collections->getCollections());
+
 
 $listCategory = $Category->getCategory();

@@ -50,7 +50,6 @@ if (inputDelete.length > 0) {
                 formInputsDelete.classList.replace('d-none', 'd-block');
                 allCheckbox.checked = true;
             }
-                
         });
     });
 }

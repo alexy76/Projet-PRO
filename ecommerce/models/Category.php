@@ -15,6 +15,19 @@ class Category extends Database {
     }
 
 
+
+    /**
+     * 
+     */
+    private function getCountCategory() : string
+    {
+        $db = $this->connectDB();
+
+        return $db->query("SELECT count(*) as 'countCategory' FROM `ec_category`")->fetch()->countCategory;
+    }
+
+
+
     /**
      * 
      */
@@ -22,10 +35,11 @@ class Category extends Database {
     {
         $db = $this->connectDB();
 
-        $query = "INSERT INTO `ec_category` (`cat_name`) VALUES (:nameCategory);";
+        $query = "INSERT INTO `ec_category` (`cat_name`, `cat_position`) VALUES (:nameCategory, :positionCategory);";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':nameCategory', $nameCategory, PDO::PARAM_STR);
+        $statment->bindValue(':positionCategory', $this->getCountCategory() + 1, PDO::PARAM_INT);
 
         return $statment->execute();
     }
