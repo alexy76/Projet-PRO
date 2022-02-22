@@ -60,4 +60,21 @@ class Category extends Database {
 
         return $statment->fetch() === false ? false : true;
     }
+
+
+    /**
+     * 
+     */
+    public function setNewPositionCategory(int $id, int $position) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_category` SET `cat_position` = :position WHERE `cat_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':position', $position, PDO::PARAM_INT);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
 }

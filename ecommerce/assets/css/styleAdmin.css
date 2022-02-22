@@ -3,7 +3,7 @@
 }*/
 
 .colorlink{
-    color: #afafaf!important;
+    color: #5d779e!important;
 }
 
 .btnBlue{
@@ -22,10 +22,10 @@
     color: #2e3c50;
 }
 
-.btnBlueDarkOutline:hover{
+/* .btnBlueDarkOutline:hover{
     background-color: #2e3c50!important;
     color: white;
-}
+} */
 
 .linklogin{
     text-decoration: none;

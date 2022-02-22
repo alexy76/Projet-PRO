@@ -54,9 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCollection'])) {
     }
 }
 
-//var_dump($Collections->getCollections());
-
-
 $listCategory = $Category->getCategory();
 
 $listCollections = $Collections->getCollections();
+

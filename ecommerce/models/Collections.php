@@ -71,4 +71,21 @@ class Collections extends Database{
         return $collections;
     }
 
+
+
+    /**
+     * 
+     */
+    public function setNewPositionCollection(int $id, int $position) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_collection` SET `col_position` = :position WHERE `col_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':position', $position, PDO::PARAM_INT);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
 }

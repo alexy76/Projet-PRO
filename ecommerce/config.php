@@ -2,7 +2,7 @@
 
 /* INFORMATIONS DE CONNEXION A LA BDD */
 define('DB_NAME', 'ecommerce');
-define('DB_USER', '');
+define('DB_USER', 'ecom');
 define('DB_PWD', 'ecom');
 
 

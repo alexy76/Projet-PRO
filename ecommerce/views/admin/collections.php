@@ -103,20 +103,23 @@ require_once '../../controllers/admin/ctrCollections.php';
                         </form>
 
                         <h2 class="mt-4">Personnalisation de la Navbar</h2>
+                        <button id="positionSaveCategory" type="button" class="link-button mb-3" title="Sauvegarder la position">Sauvegarder la position des catégories</button>
 
-                        <div class="row justify-content-evenly">
+                        <div id="wrapperCategory" class="row justify-content-evenly">
                             <?php foreach ($listCollections as $key => $catcol) : ?>
 
-                                <div class="col-lg-3 col-6 px-2 mt-5">
+                                <div class="col-lg-3 col-6 px-2 mt-5" data-idCategory="<?= $catcol['category']['id'] ?>">
 
 
 
 
                                     <div class="border border-light border-2 bg-grey shadow" style="height: 100%">
                                         <h3 class="m-0 h4 btnBlueDark py-2 rounded"><?= $catcol['category']['name'] ?></h2>
-                                        <button id="positionSave<?= $key ?>" type="button" class="link-button mb-3 text-end d-inline-block" title="Sauvegarder la position"><i class="text-dark bi bi-save-fill"></i></button>
-                                            <div id="wrapper<?= $key ?>" ?><?php foreach ($catcol['collections'] as $collections) : ?><div data-idCollection="<?= $collections['id'] ?>" data-idCategory="<?= $catcol['category']['id'] ?>" class="list btnBlueDarkOutline rounded py-2 mx-5 mb-2" style="cursor: grab;"><span class=""><?= $collections['name'] ?></span></div><?php endforeach; ?></div>
-                                            
+                                            <div class="text-end">
+                                                <button id="positionSave<?= $key ?>" type="button" class="link-button mb-3" title="Sauvegarder la position"><i class="colorlink bi bi-save-fill"></i></button>
+                                            </div>
+                                            <div id="wrapper<?= $key ?>" ?><?php foreach ($catcol['collections'] as $collections) : ?><div data-idCollection="<?= $collections['id'] ?>" class="list btnBlueDarkOutline rounded py-2 mx-3 mb-2" style="cursor: grab;"><span class=""><?= $collections['name'] ?></span></div><?php endforeach; ?></div>
+
                                     </div>
                                 </div>
 
@@ -185,6 +188,77 @@ require_once '../../controllers/admin/ctrCollections.php';
     </script>
     <script src="../../assets/js/sortable.js"></script>
     <script>
+        new Sortable(document.getElementById('wrapperCategory'), {
+            animation: 300
+        })
+        document.getElementById('positionSaveCategory').addEventListener('click', () => {
+
+            let arraySetPositionCategoryAjax = [];
+
+            document.getElementById('wrapperCategory').childNodes.forEach(elt => {
+
+                if (elt.nodeName == 'DIV') {
+
+                    arraySetPositionCategoryAjax.push(elt.dataset.idcategory)
+                }
+            })
+
+            if (arraySetPositionCategoryAjax.length > 1) {
+                $.ajax({
+                    type: 'post',
+                    url: '../../controllers/ctrAjax.php',
+                    data: {
+                        positionCategory: arraySetPositionCategoryAjax,
+                    },
+                    success: function(response) {
+
+                        if (response == 'ok') {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'center',
+                                background: "#2e3c50",
+                                color: "#fff",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Les changements ont été effectués !'
+                            })
+                        } else {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'center',
+                                background: "#2e3c50",
+                                color: "#fff",
+                                showConfirmButton: false,
+                                timer: 10000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+
+                            Toast.fire({
+                                icon: 'error',
+                                title: `La position des IDs ${response} n'ont pas étés modifiés !`
+                            })
+                        }
+                    }
+                });
+            } else {
+                console.log('pas ok');
+            }
+        })
+    </script>
+    <script>
         <?php for ($i = 0; $i < count($listCollections); $i++) : ?>
 
             new Sortable(document.getElementById('wrapper<?= $i ?>'), {
@@ -199,8 +273,6 @@ require_once '../../controllers/admin/ctrCollections.php';
 
                     arraySetAjax.push(index.dataset.idcollection)
                 })
-                console.log(arraySetAjax.length);
-
 
                 if (arraySetAjax.length > 1) {
                     $.ajax({
@@ -210,7 +282,46 @@ require_once '../../controllers/admin/ctrCollections.php';
                             position: arraySetAjax,
                         },
                         success: function(response) {
-                            console.log(response);
+
+                            if (response == 'ok') {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'center',
+                                    background: "#2e3c50",
+                                    color: "#fff",
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                })
+
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Les changements ont été effectués !'
+                                })
+                            } else {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'center',
+                                    background: "#2e3c50",
+                                    color: "#fff",
+                                    showConfirmButton: false,
+                                    timer: 10000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                })
+
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: `La position des IDs ${response} n'ont pas étés modifiés !`
+                                })
+                            }
                         }
                     });
                 } else {
