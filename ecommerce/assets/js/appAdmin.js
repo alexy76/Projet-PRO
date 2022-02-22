@@ -53,3 +53,7 @@ if (inputDelete.length > 0) {
         });
     });
 }
+
+
+
+console.log(document.getElementById('wrapper0').childNodes);

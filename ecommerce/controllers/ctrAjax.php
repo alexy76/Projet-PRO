@@ -18,3 +18,8 @@ if (isset($_POST['name']))
         echo "<option>" . $user->usr_lastname . "</option>";
     }
 }
+
+
+if(isset($_POST['position'])){
+    echo print_r($_POST['position']);
+}

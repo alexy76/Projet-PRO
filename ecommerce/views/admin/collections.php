@@ -1,6 +1,5 @@
 <?php
 require_once '../../controllers/admin/ctrCollections.php';
-var_dump($_FILES);
 ?>
 
 <!doctype html>
@@ -69,7 +68,7 @@ var_dump($_FILES);
 
 
 
-                <div class="col-lg-8 col-12 rounded-2 text-dark shadow bg-white">
+                <div class="col-lg-8 col-12 rounded-2 text-dark shadow bg-white pb-5">
                     <h1 class="mt-3 h6 fw-normal btnBlue text-white py-3 radius-bottom-left radius-top-right">Gestionnaire des catégories</h1>
 
                     <h2 class="h5 mt-3 mb-3">Ajoutez une catégorie</h2>
@@ -103,24 +102,26 @@ var_dump($_FILES);
                             </div>
                         </form>
 
-                        <div id="wrapper">
-                            <div class="list">
-                                <span class="">Element 1</span>
-                            </div>
-                            <div class="list">
-                                <span class="">Element 2</span>
-                            </div>
-                            <div class="list">
-                                <span class="">Element 3</span>
-                            </div>
-                            <div class="list">
-                                <span class="">Element 4</span>
-                            </div>
-                            </ul>
-                        </div>
+                        <h2 class="mt-4">Personnalisation de la Navbar</h2>
 
-                        <?php //var_dump($final ?? 'Rien nada'); 
-                        ?>
+                        <div class="row justify-content-evenly">
+                            <?php foreach ($listCollections as $key => $catcol) : ?>
+
+                                <div class="col-lg-3 col-6 px-2 mt-5">
+
+
+
+
+                                    <div class="border border-light border-2 bg-grey shadow" style="height: 100%">
+                                        <h3 class="m-0 h4 btnBlueDark py-2 rounded"><?= $catcol['category']['name'] ?></h2>
+                                        <button id="positionSave<?= $key ?>" type="button" class="link-button mb-3 text-end d-inline-block" title="Sauvegarder la position"><i class="text-dark bi bi-save-fill"></i></button>
+                                            <div id="wrapper<?= $key ?>" ?><?php foreach ($catcol['collections'] as $collections) : ?><div data-idCollection="<?= $collections['id'] ?>" data-idCategory="<?= $catcol['category']['id'] ?>" class="list btnBlueDarkOutline rounded py-2 mx-5 mb-2" style="cursor: grab;"><span class=""><?= $collections['name'] ?></span></div><?php endforeach; ?></div>
+                                            
+                                    </div>
+                                </div>
+
+                            <?php endforeach; ?>
+                        </div>
 
                     <?php else : ?>
 
@@ -184,11 +185,40 @@ var_dump($_FILES);
     </script>
     <script src="../../assets/js/sortable.js"></script>
     <script>
-        const dragList = document.getElementById('wrapper');
+        <?php for ($i = 0; $i < count($listCollections); $i++) : ?>
 
-        new Sortable(dragList, {
-            animation: 300
-        })
+            new Sortable(document.getElementById('wrapper<?= $i ?>'), {
+                animation: 300
+            })
+
+            document.getElementById('positionSave<?= $i ?>').addEventListener('click', () => {
+
+                let arraySetAjax = [];
+
+                document.getElementById('wrapper<?= $i ?>').childNodes.forEach(index => {
+
+                    arraySetAjax.push(index.dataset.idcollection)
+                })
+                console.log(arraySetAjax.length);
+
+
+                if (arraySetAjax.length > 1) {
+                    $.ajax({
+                        type: 'post',
+                        url: '../../controllers/ctrAjax.php',
+                        data: {
+                            position: arraySetAjax,
+                        },
+                        success: function(response) {
+                            console.log(response);
+                        }
+                    });
+                } else {
+                    console.log('pas ok');
+                }
+            })
+
+        <?php endfor; ?>
     </script>
     <script src="../../assets/js/appAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
