@@ -57,4 +57,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCollection'])) {
 $listCategory = $Category->getCategory();
 
 $listCollections = $Collections->getCollections();
-

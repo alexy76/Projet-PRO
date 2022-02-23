@@ -46,7 +46,7 @@ class Collections extends Database{
         $db = $this->connectDB();
         $req = $db->query("SELECT `cat_name` as 'nameCategory', `cat_position` as 'positionCat', `cat_id` as 'idCat', 
                         group_concat(`col_name`) AS 'nameCol', group_concat(`col_position`) AS 'positionCol', 
-                        group_concat(`col_id`) AS 'idCol'
+                        group_concat(`col_id`) AS 'idCol', group_concat(`col_slug`) AS 'slugCol'
                         FROM `ec_collection`
                         NATURAL JOIN `ec_category`
                         GROUP BY `cat_id`
@@ -63,6 +63,7 @@ class Collections extends Database{
             {
                 $collections[$key]['collections'][explode(',', $category->positionCol)[$i]]['id'] = explode(',', $category->idCol)[$i];
                 $collections[$key]['collections'][explode(',', $category->positionCol)[$i]]['name'] = explode(',', $category->nameCol)[$i];
+                $collections[$key]['collections'][explode(',', $category->positionCol)[$i]]['slug'] = explode(',', $category->slugCol)[$i];
             }
         
             ksort($collections[$key]['collections']);

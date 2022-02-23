@@ -11,7 +11,7 @@ class Category extends Database {
     {
         $db = $this->connectDB();
 
-        return $db->query("SELECT * FROM `ec_category`")->fetchAll();
+        return $db->query("SELECT * FROM `ec_category` ORDER BY `cat_position`")->fetchAll();
     }
 
 

@@ -108,17 +108,17 @@ require_once '../../controllers/admin/ctrCollections.php';
                         <div id="wrapperCategory" class="row justify-content-evenly">
                             <?php foreach ($listCollections as $key => $catcol) : ?>
 
-                                <div class="col-lg-3 col-6 px-2 mt-5" data-idCategory="<?= $catcol['category']['id'] ?>">
+                                <div class="col-lg-2 col-6 px-2 mt-5" data-idCategory="<?= $catcol['category']['id'] ?>">
 
 
 
 
-                                    <div class="border border-light border-2 bg-grey shadow" style="height: 100%">
-                                        <h3 class="m-0 h4 btnBlueDark py-2 rounded"><?= $catcol['category']['name'] ?></h2>
+                                    <div class="border border-light border-2 bg-grey" style="height: 100%">
+                                        <h3 class="m-0 h6 btnBlueDark py-2 rounded"><?= $catcol['category']['name'] ?></h2>
                                             <div class="text-end">
                                                 <button id="positionSave<?= $key ?>" type="button" class="link-button mb-3" title="Sauvegarder la position"><i class="colorlink bi bi-save-fill"></i></button>
                                             </div>
-                                            <div id="wrapper<?= $key ?>" ?><?php foreach ($catcol['collections'] as $collections) : ?><div data-idCollection="<?= $collections['id'] ?>" class="list btnBlueDarkOutline rounded py-2 mx-3 mb-2" style="cursor: grab;"><span class=""><?= $collections['name'] ?></span></div><?php endforeach; ?></div>
+                                            <div id="wrapper<?= $key ?>" ?><?php foreach ($catcol['collections'] as $collections) : ?><div data-idCollection="<?= $collections['id'] ?>" class="list btnBlueDarkOutline rounded py-1 mx-3 mb-2" style="cursor: grab;"><span class=""><?= $collections['name'] ?></span></div><?php endforeach; ?></div>
 
                                     </div>
                                 </div>
