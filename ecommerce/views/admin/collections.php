@@ -142,27 +142,7 @@ require_once '../../controllers/admin/ctrCollections.php';
         </div>
     </div>
 
-    <script type="text/javascript">
-        function getdata() {
 
-            var name = $('#name').val();
-
-            if (name) {
-                $.ajax({
-                    type: 'post',
-                    url: '../../controllers/ctrAjax.php',
-                    data: {
-                        name: name,
-                    },
-                    success: function(response) {
-                        $('#res').html(response);
-                    }
-                });
-            } else {
-                $('#res').html("Entrez le nom de l'utilisateur");
-            }
-        }
-    </script>
     <script type="text/javascript">
         if (<?= $flashToast ?? 'false' ?>) {
 

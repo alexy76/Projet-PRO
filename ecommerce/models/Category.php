@@ -33,15 +33,18 @@ class Category extends Database {
     /**
      * Méthodes permettant d'enregistrer une nouvelle catégorie dans la table
      * @param string (nom de la catégorie)
+     * @param string (slug de la collection)
+     * @return bool
      */
-    public function setCategory(string $nameCategory) : bool
+    public function setCategory(string $nameCategory, string $slug) : bool
     {
         $db = $this->connectDB();
 
-        $query = "INSERT INTO `ec_category` (`cat_name`, `cat_position`) VALUES (:nameCategory, :positionCategory);";
+        $query = "INSERT INTO `ec_category` (`cat_name`, `cat_position`, `cat_slug`) VALUES (:nameCategory, :positionCategory, :slug);";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':nameCategory', $nameCategory, PDO::PARAM_STR);
+        $statment->bindValue(':slug', $slug, PDO::PARAM_STR);
         $statment->bindValue(':positionCategory', $this->getCountCategory() + 1, PDO::PARAM_INT);
 
         return $statment->execute();

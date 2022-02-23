@@ -18,14 +18,24 @@ $Category = new Category;
 $Collections = new Collections;
 
 
+
 /** Contrôleur permettant l'ajout d'une nouvelle catégorie */
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCategory']) && isset($_POST['nameCategory'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCategory'], $_POST['nameCategory'])) {
 
-    $nameCategory = cleanData($_POST['nameCategory']);
+    if (!empty($_POST['nameCategory'])) {
 
-    if ($Category->setCategory($nameCategory)) {
+        $nameCategory = cleanData($_POST['nameCategory']);
+
+        if ($Category->setCategory($nameCategory, formatSlug($nameCategory))) {
+            $flashToast = true;
+            $flashMsg = ['success', 'La catégorie "' . $nameCategory . '" a été ajoutée'];
+        } else {
+            $flashToast = true;
+            $flashMsg = ['error', 'Une erreur s\'est produite'];
+        }
+    } else {
         $flashToast = true;
-        $flashMsg = ['success', 'La catégorie "' . $nameCategory . '" a été ajoutée'];
+        $flashMsg = ['warning', 'Entrez un nom de catégorie'];
     }
 }
 
@@ -33,27 +43,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCategory']) && isse
 
 /** Contrôleur permettant l'ajout d'une collection dans une catégorie */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCollection'])) {
-    // var_dump($Category->existIdCategory(18));
+
 
     if (!empty($_POST['nameCollection'])) {
-        if (isset($_POST['catCollection']) && !ctype_digit($_POST['catCollection'])) {
-            var_dump('Veuillez selectionner une catégorie qui existe');
-        } elseif (isset($_POST['catCollection']) && !$Category->existIdCategory($_POST['catCollection'])) {
-            var_dump('N\'existe pas en base de données !');
-        } elseif (!isset($_POST['catCollection'])) {
-            var_dump('Veuillez selectionner une catégorie');
-        } else {
-            echo "ok";
-            $nameCollection = cleanData($_POST['nameCollection']);
-            if ($Collections->setNameCollection($nameCollection, $_POST['catCollection'])) {
-                var_dump("Ajout de la collection ok ");
+
+        if (isset($_POST['catCollection'])) {
+
+            if (ctype_digit($_POST['catCollection'])) {
+
+                if ($Category->existIdCategory(intval($_POST['catCollection']))) {
+
+                    $nameCollection = cleanData($_POST['nameCollection']);
+
+                    if ($Collections->setNameCollection($nameCollection, formatSlug($nameCollection), intval($_POST['catCollection']))) {
+                        $flashToast = true;
+                        $flashMsg = ['success', "La collection a été ajoutée"];
+                    }
+
+                } else {
+                    $flashToast = true;
+                    $flashMsg = ['error', "La catégorie n'existe pas"];
+                }
             }
+        } else {
+            $flashToast = true;
+            $flashMsg = ['warning', 'Veuillez choisir une catégorie'];
         }
     } else {
-        var_dump("Veuillez entrer un nom pour la collection");
+        $flashToast = true;
+        $flashMsg = ['warning', 'Entrez un nom de collection'];
     }
 }
 
-$listCategory = $Category->getCategory();
 
+
+$listCategory = $Category->getCategory();
 $listCollections = $Collections->getCollections();

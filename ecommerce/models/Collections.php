@@ -7,17 +7,19 @@ class Collections extends Database{
     /**
      * Méthode permettant d'enregistrer une nouvelle collection
      * @param string (Nom de la collection)
+     * @param string (slug de la collection)
      * @param int (identifiant de la catégorie associée à la collection)
      * @return bool
      */
-    public function setNameCollection(string $nameCollection, int $idCat) : bool
+    public function setNameCollection(string $nameCollection, string $slugCollection, int $idCat) : bool
     {
         $db = $this->connectDB();
 
-        $query = "INSERT INTO `ec_collection` (`col_name`, `col_position`, `cat_id`) VALUES (:nameCollection, :positionCollection, :idCat)";
+        $query = "INSERT INTO `ec_collection` (`col_name`, `col_position`, `col_slug`, `cat_id`) VALUES (:nameCollection, :positionCollection, :slugCollection, :idCat)";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':nameCollection', $nameCollection, PDO::PARAM_STR);
+        $statment->bindValue(':slugCollection', $slugCollection, PDO::PARAM_STR);
         $statment->bindValue(':idCat', $idCat, PDO::PARAM_INT);
         $statment->bindValue(':positionCollection', $this->getCountCollectionPerCategory($idCat) + 1, PDO::PARAM_INT);
 
