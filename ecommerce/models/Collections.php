@@ -3,8 +3,12 @@
 class Collections extends Database{
 
 
+
     /**
-     * 
+     * Méthode permettant d'enregistrer une nouvelle collection
+     * @param string (Nom de la collection)
+     * @param int (identifiant de la catégorie associée à la collection)
+     * @return bool
      */
     public function setNameCollection(string $nameCollection, int $idCat) : bool
     {
@@ -22,9 +26,10 @@ class Collections extends Database{
 
 
     /**
-     * 
+     * Méthode permettant d'obtenir le nombre de collections enregistrées pour une catégorie (utilisée notamment pour les positions)
+     * @return int (nombre de collections)
      */
-    private function getCountCollectionPerCategory(int $id) : string
+    private function getCountCollectionPerCategory(int $id) : int
     {
         $db = $this->connectDB();
 
@@ -39,7 +44,9 @@ class Collections extends Database{
 
 
     /**
-     * 
+     * Méthode permettant d'obtenir la liste des catégories et des collections associées,
+     * triée par position des catégories et ensuite par la position des collections
+     * @return array 
      */
     public function getCollections() : array
     {
@@ -75,7 +82,10 @@ class Collections extends Database{
 
 
     /**
-     * 
+     * Méthode utilisée avec AJAX permettant d'enregistrée la nouvelle position d'une collection
+     * @param int (identifiant collection)
+     * @param int (nouvelle position)
+     * @return bool
      */
     public function setNewPositionCollection(int $id, int $position) : bool
     {

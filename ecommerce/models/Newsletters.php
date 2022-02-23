@@ -4,7 +4,7 @@ class Newsletters extends Database
 {
 
     /**
-     * Méthode qui permet d'inscrire un email dans la table Newsletters
+     * Méthode permettant d'enregistrer un email dans la table Newsletters
      * @param string (adresse mail)
      * @return bool
      */

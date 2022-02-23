@@ -5,7 +5,8 @@ class Category extends Database {
 
 
     /**
-     * 
+     * Méthode permettant d'obtenir les données de la table des Catégories
+     * @return array
      */
     public function getCategory() : array
     {
@@ -17,9 +18,10 @@ class Category extends Database {
 
 
     /**
-     * 
+     * Méthode permettant d'obtenir le nombre de catégories enregistrées (utilisée notamment pour les positions)
+     * @return int (nombre de catégorie)
      */
-    private function getCountCategory() : string
+    private function getCountCategory() : int
     {
         $db = $this->connectDB();
 
@@ -29,7 +31,8 @@ class Category extends Database {
 
 
     /**
-     * 
+     * Méthodes permettant d'enregistrer une nouvelle catégorie dans la table
+     * @param string (nom de la catégorie)
      */
     public function setCategory(string $nameCategory) : bool
     {
@@ -45,8 +48,11 @@ class Category extends Database {
     }
 
 
+
     /**
-     * 
+     * Méthode permettant de vérifier si une catégorie existe dans la table en fonction de l'identifiant
+     * @param int (identifiant catégorie)
+     * @return bool
      */
     public function existIdCategory(int $id) : bool
     {
@@ -62,8 +68,12 @@ class Category extends Database {
     }
 
 
+
     /**
-     * 
+     * Méthode utilisée avec AJAX permettant d'enregistrée la nouvelle position d'une catégorie
+     * @param int (identifiant catégorie)
+     * @param int (nouvelle position)
+     * @return bool
      */
     public function setNewPositionCategory(int $id, int $position) : bool
     {

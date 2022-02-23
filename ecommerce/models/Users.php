@@ -4,7 +4,7 @@ class Users extends Database{
 
     /**
      * Méthode permettant d'enregistrer un utilisateur
-     * @param array (string mail, string password, string nom, string prenom, boolean newsletter, string tokem_mail)
+     * @param array (string 'mail',string 'pwd', string 'lastName', string 'firstName', boolean 'newsLetter', string 'token')
      * @return bool
      */
     public function insertUser(array $user) : bool
@@ -86,7 +86,8 @@ class Users extends Database{
 
     /**
      * Méthode permettant de comparer le password de l'utilisateur a celui de la BDD
-     * @param string (password, adresse email)
+     * @param string (password)
+     * @param string (adresse email)
      * @return bool
      */
     public function comparePassword(string $pwd, string $mail) : bool
@@ -125,7 +126,7 @@ class Users extends Database{
 
 
     /**
-     * Méthode permettant de récupérer les informations d'un utilisateur (ouverture de session)
+     * Méthode permettant de récupérer les données d'un utilisateur (ouverture de session)
      * @param string (adresse mail)
      * @return array (données de l'utilisateur)
      */
@@ -149,8 +150,9 @@ class Users extends Database{
 
 
     /**
-     * Méthode permettant de créer un jeton pour la récupération du mot de passe
-     * @param string
+     * Méthode permettant d'enregistrer un jeton(token), (récupération du mot de passe)
+     * @param string (token)
+     * @param string (adresse email)
      * @return bool
      */
     public function setTokenPassword(int $code, string $token, string $mail) : bool
@@ -172,7 +174,7 @@ class Users extends Database{
 
     /**
      * Méthode permettant de mettre à jour le nom et le prénom d'un client
-     * @param array (nom et prénom du client)
+     * @param array ('firstName','lastName')
      * @return bool
      */
     public function setNameClient(array $name, int $id) : bool
@@ -192,7 +194,10 @@ class Users extends Database{
     
 
     /**
-     * 
+     * Méthode permettant de vérifier le password d'un client enregistré afin de le modifier par la suite
+     * @param int (identifiant du client)
+     * @param string (mot de passe actuel du client)
+     * @return bool
      */
     public function verifyPasswordClient(int $id, string $pwd) : bool
     {
@@ -209,6 +214,11 @@ class Users extends Database{
 
 
 
+    /**
+     * Méthode permettant d'enregistré le nouveau password d'un client
+     * @param int (identifiant du client)
+     * @param string (hash du nouveau mot de passe)
+     */
     public function setNewPassword(int $id, string $pwd) : bool
     {
         $db = $this->connectDB();
@@ -222,6 +232,14 @@ class Users extends Database{
         return $statment->execute();
     }
 
+
+
+    /**
+     * Méthode permettant d'enregistrer l'adresse du client
+     * @param array ('address', 'zipCode', 'city', 'country')
+     * @param int (identifiant du client)
+     * @return bool
+     */
     public function setAddress(array $addr, int $id) : bool
     {
         $db = $this->connectDB();
@@ -241,8 +259,11 @@ class Users extends Database{
     }
 
 
+
     /**
-     * 
+     * Méthode permettant au client d'activé son inscription à la Newsletter
+     * @param int (identifiant du client)
+     * @return bool
      */
     public function setActivateNewsletters(int $id) : bool
     {
@@ -259,7 +280,9 @@ class Users extends Database{
 
 
     /**
-     * 
+     * Méthode permettant à un client d'effacer son adresse postale de la base de données
+     * @param int (identifiant du client)
+     * @return bool
      */
     public function deleteAddrClient(int $id) : bool
     {
@@ -276,7 +299,8 @@ class Users extends Database{
 
 
     /**
-     *
+     * Méthode permettant de récupérer le nombre total de personnes inscrites (aide à la pagination)
+     * @return int (nombre total de clients)
      */
     public function getCount_AllClients() : int
     {
@@ -287,7 +311,11 @@ class Users extends Database{
 
 
     /**
-     * 
+     * Méthode permettant de récuperer les données de toutes les personnes inscrites
+     * @param string (option = null, non utilisée pour cette méthode)
+     * @param int (nombre d'élements à récuperer)
+     * @param int (offset de départ)
+     * @return array (liste de tous les inscrits)
      */
     public function get_AllClients(string $optional = null, int $nbElt, int $offset) : array
     {
@@ -306,7 +334,8 @@ class Users extends Database{
 
 
     /**
-     * 
+     * Méthode permettant de récupérer le nombre des personnes inscrites selon un champ de recherche par nom (aide à la pagination)
+     * @return int (nombre total d'inscrits selon la recherche par nom)
      */
     public function getCount_NameClient(string $lastname) : int
     {
@@ -324,7 +353,11 @@ class Users extends Database{
 
 
     /**
-     * 
+     * Méthode permettant de récuperer les données des personnes inscrites selon une recherche par nom
+     * @param string (nom de la personne inscrite à rechercher)
+     * @param int (nombre d'élements à récuperer)
+     * @param int (offset de départ)
+     * @return array (liste des inscrits selon le champ de recherche par nom)
      */
     public function get_NameClient(string $lastname, int $nbElt, int $offset) : array
     {
@@ -343,7 +376,8 @@ class Users extends Database{
 
 
     /**
-     * 
+     * Méthode permettant de récupérer le nombre total de personnes inscrites ayant un compte non activé  (aide à la pagination)
+     * @return int (nombre total d'inscrits ayant un compte non activé)
      */
     public function getCount_AccountNotActivated() : int
     {
@@ -354,7 +388,11 @@ class Users extends Database{
 
 
     /**
-     * 
+     * Méthode permettant de récuperer les données des personnes inscrites ayant un compte non activé
+     * @param string (option = null, non utilisée pour cette méthode)
+     * @param int (nombre d'élements à récuperer)
+     * @param int (offset de départ)
+     * @return array (liste des inscrits ayant un compte non activé)
      */
     public function get_AccountNotActivated(string $optional = null, int $nbElt, int $offset) : array
     {
@@ -373,7 +411,9 @@ class Users extends Database{
 
 
     /**
-     * 
+     * Méthode utilisée avec Ajax permettant de rechercher les noms des inscrits en fonction de la saisie de l'administrateur
+     * @param string (suite de lettres saisie par l'administrateur)
+     * @return array (tableau contenant au maximum 10 noms correspondant à la recherche)
      */
     public function getName(string $stringName) : array
     {
@@ -393,7 +433,9 @@ class Users extends Database{
 
 
     /**
-     * 
+     * Méthode permettant de supprimer une personne inscrite
+     * @param string (identifiant du compte a supprimer)
+     * @return bool
      */
     public function deleteUser(string $id) : bool
     {
