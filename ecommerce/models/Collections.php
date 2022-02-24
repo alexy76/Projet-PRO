@@ -66,15 +66,19 @@ class Collections extends Database{
             $collections[$key]['category']['id'] = $category->idCat;
             $collections[$key]['category']['name'] = $category->nameCategory;
             $collections[$key]['category']['position'] = $category->positionCat;
-        
-        
+
+            $keyCol = explode(',', $category->positionCol);
+            $idCol = explode(',', $category->idCol);
+            $nameCol = explode(',', $category->nameCol);
+            $slugCol  = explode(',', $category->slugCol);
+
             for($i = 0; $i < count(explode(',', $category->idCol)); $i++)
             {
-                $collections[$key]['collections'][explode(',', $category->positionCol)[$i]]['id'] = explode(',', $category->idCol)[$i];
-                $collections[$key]['collections'][explode(',', $category->positionCol)[$i]]['name'] = explode(',', $category->nameCol)[$i];
-                $collections[$key]['collections'][explode(',', $category->positionCol)[$i]]['slug'] = explode(',', $category->slugCol)[$i];
+                $collections[$key]['collections'][$keyCol[$i]]['id'] = $idCol[$i];
+                $collections[$key]['collections'][$keyCol[$i]]['name'] = $nameCol[$i];
+                $collections[$key]['collections'][$keyCol[$i]]['slug'] = $slugCol[$i];
             }
-        
+
             ksort($collections[$key]['collections']);
         }
 

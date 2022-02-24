@@ -156,20 +156,20 @@ require_once '../../controllers/admin/ctrProducts.php';
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a class="dropdown-item" href="#">Modifier la fiche produit</a>
+                                                            <a class="dropdown-item" href="#">Editer la fiche produit</a>
                                                         </li>
                                                         <li>
                                                             <form class="m-0" method="POST" action="">
                                                                 <input type="hidden" value="<?= $product->pdt_title ?>" name="nameProduct">
                                                                 <input type="hidden" value="<?= $product->pdt_id ?>" name="idProduct">
-                                                                <input class="d-inline-block w-100 linkBtnDeleteProduct" type="submit" value="Mettre le produit en ligne" name="activateProduct">
+                                                                <input class="d-inline-block w-100 linkBtnDeleteProduct px-2" type="submit" value="<?= $product->pdt_activated == 1 ? 'Désactiver la mise en ligne' : 'Mettre en ligne le produit' ?>" name="activateProduct">
                                                             </form>
                                                         </li>
                                                         <li>
                                                             <form class="m-0" method="POST" action="">
                                                                 <input type="hidden" value="<?= $product->pdt_title ?>" name="nameProduct">
                                                                 <input type="hidden" value="<?= $product->pdt_id ?>" name="idProduct">
-                                                                <input class="d-inline-block w-100 linkBtnDelete" type="submit" value="Supprimer le produit" name="deleteProduct">
+                                                                <input class="d-inline-block w-100 linkBtnDelete px-2" type="submit" value="Supprimer le produit" name="deleteProduct">
                                                             </form>
                                                         </li>
                                                     </ul>
@@ -187,6 +187,14 @@ require_once '../../controllers/admin/ctrProducts.php';
                             </div>
                             <div class="text-end mb-3">
                                 <input type="submit" value="Supprimer" name="deleteAll" class="btn btn-sm btn-danger d-inline-block text-end">
+                            </div>
+                        </form>
+
+                        <form id="formInputsApplyDiscount" method="POST" action="" class="d-none">
+                            <div id="inputGenerateDiscount">
+                            </div>
+                            <div class="text-end mb-3">
+                                <input type="submit" value="Appliquer une remise" name="applyDiscountAll" class="btn btn-sm btn-dark d-inline-block text-end">
                             </div>
                         </form>
 
