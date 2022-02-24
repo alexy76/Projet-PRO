@@ -49,6 +49,19 @@
     cursor: pointer; 
 }
 
+.linkBtnDeleteProduct{
+    background-color : rgba(201, 201, 201, 0.774);
+    border: none;
+    padding: 5px 0;
+    color: #181818;
+    text-decoration: none;
+    cursor: pointer; 
+}
+
+.linkBtnDeleteProduct:hover{
+    background-color : rgba(77, 126, 182, 0.774);
+}
+
 .linkBtnDelete:hover{
     background-color : rgba(255, 0, 0, 0.774);
 }

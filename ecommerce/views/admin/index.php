@@ -159,15 +159,15 @@ require_once '../../controllers/admin/ctrIndex.php';
                         <nav class="text-center d-inline-block" aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item <?= $pageActual == 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual - 1 ?>">Previous</a>
+                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual - 1 ?>">Previous</a>
                                 </li>
                                 <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
                                     <li class="page-item">
-                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $i ?>"><?= $i ?></a>
+                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $i ?>"><?= $i ?></a>
                                     </li>
                                 <?php endfor; ?>
                                 <li class="page-item <?= $pageActual == $nbPages || ($pageActual == 1 && $nbPages == 0) ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual + 1 ?>">Next</a>
+                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual + 1 ?>">Next</a>
                                 </li>
                             </ul>
                         </nav>

@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteAll']) && isset(
 
 /** Contrôleur de suppression d'un utilisateur */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteUser'])) {
-    if ($Users->deleteUser((int)$_POST['idUser'])) {
+    if ($Users->deleteUser(intval($_POST['idUser']))) {
         $flashToast = true;
         $flashMsg = ['success', 'Le compte de ' . $_POST['nameUser'] . ' a été supprimé'];
     } else {

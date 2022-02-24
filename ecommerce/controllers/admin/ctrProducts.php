@@ -24,6 +24,7 @@ $listCollections = $Collections->getListCollections();
 
 
 /** TEMPORAIRE */
+//var_dump($_POST);
 
 
 
@@ -57,8 +58,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
 
 
 
-/** Pagination des produits en fonction de la méthode de tri sélectionnée */
+/** Contrôleur permettant un Delete groupé des produits */
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteAll'])) {
 
+    $errors = [];
+    foreach ($_POST['deleteProducts'] as $key => $productID) {
+
+        if (!$Products->deleteProduct($productID))
+            $errors[$key] = $productID;
+    }
+
+    if (empty($errors)) {
+        $flashToast = true;
+        $flashMsg = ['success', 'Les produits ont été supprimés'];
+    } else {
+        $flashToast = true;
+        $flashMsg = ['error', 'Une erreur est survenue'];
+    }
+}
+
+
+
+/** Contrôleur de suppression d'un produit */
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteProduct'])) {
+    if ($Products->deleteProduct(intval($_POST['idProduct']))) {
+        $flashToast = true;
+        $flashMsg = ['success', 'Le produit " ' . $_POST['nameProduct'] . ' " a été supprimé'];
+    } else {
+        $flashToast = true;
+        $flashMsg = ['error', 'Une erreur est survenue'];
+    }
+}
+
+
+
+/** Contrôleur permettant l'activation de mise en ligne d'un produit */
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['activateProduct'])) {
+
+    if ($Products->activateProduct(intval($_POST['idProduct']))) {
+        $flashToast = true;
+        $flashMsg = ['success', 'Le status du produit ' . $_POST['nameProduct'] . ' a changé'];
+    } else {
+        $flashToast = true;
+        $flashMsg = ['error', 'Une erreur est survenue'];
+    }
+}
+
+
+
+/** Pagination des produits en fonction de la méthode de tri sélectionnée */
 $nameMethod = 'allProducts';
 
 if (isset($_GET['req']))       $req = !empty($_GET['req']) ? $_GET['req'] : ' ';

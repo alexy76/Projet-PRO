@@ -40,7 +40,7 @@ class Products extends Database
     /**
      * Méthode permettant de récupérer les données de tous les produits (limité avec un offset)
      * @param string (optionnel, pas utilisé pour cette méthode)
-     * @param int (nombre d'élement à récuperer)
+     * @param int (nombre d'élements à récuperer)
      * @param int (offset pour la pagination)
      * @return array 
      */
@@ -57,6 +57,60 @@ class Products extends Database
 
         return $statment->fetchAll();
     }
+
+
+
+    /**
+     * Méthode permettant la suppression d'un ou plusieurs produits
+     * @param int (identifiant produit)
+     * @return bool
+     */
+    public function deleteProduct(int $id) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "DELETE FROM `ec_products` WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
+
+
+    /**
+     * Méthode permettant d'activer la mise en ligne d'un ou plusieurs produit(s)
+     * @param int (identifiant produit)
+     * @return bool
+     */
+    public function activateProduct(int $id) : bool
+    {
+        $db = $this->connectDB();
+
+        $status = $this->getStatusProduct($id) == 1 ? 0 : 1;
+
+        $query = "UPDATE `ec_products` SET `pdt_activated` = $status WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
+
+
+    /** 
+     * Méthode permettant de récuperer le statut d'activation de mise en ligne du produit 
+     * @param int (identifiant produit)
+     * @return int
+     * */
+    private function getStatusProduct(int $id) : int
+    {
+        $db = $this->connectDB();
+        return intval($db->query("SELECT `pdt_activated` as 'status' FROM `ec_products` WHERE `pdt_id` = $id")->fetch()->status);
+    }
+
 
 
 

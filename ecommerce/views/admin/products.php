@@ -155,14 +155,22 @@ require_once '../../controllers/admin/ctrProducts.php';
                                                         <i class="bi bi-person-x-fill"></i> Action
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Consulter la fiche client</a></li>
                                                         <li>
-                                                            <form method="POST" action="">
+                                                            <a class="dropdown-item" href="#">Modifier la fiche produit</a>
+                                                        </li>
+                                                        <li>
+                                                            <form class="m-0" method="POST" action="">
+                                                                <input type="hidden" value="<?= $product->pdt_title ?>" name="nameProduct">
+                                                                <input type="hidden" value="<?= $product->pdt_id ?>" name="idProduct">
+                                                                <input class="d-inline-block w-100 linkBtnDeleteProduct" type="submit" value="Mettre le produit en ligne" name="activateProduct">
+                                                            </form>
+                                                        </li>
+                                                        <li>
+                                                            <form class="m-0" method="POST" action="">
                                                                 <input type="hidden" value="<?= $product->pdt_title ?>" name="nameProduct">
                                                                 <input type="hidden" value="<?= $product->pdt_id ?>" name="idProduct">
                                                                 <input class="d-inline-block w-100 linkBtnDelete" type="submit" value="Supprimer le produit" name="deleteProduct">
                                                             </form>
-
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -185,15 +193,15 @@ require_once '../../controllers/admin/ctrProducts.php';
                         <nav class="text-center d-inline-block" aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item <?= $pageActual == 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual - 1 ?>">Précédent</a>
+                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual - 1 ?>">Précédent</a>
                                 </li>
                                 <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
                                     <li class="page-item">
-                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $i ?>"><?= $i ?></a>
+                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $i ?>"><?= $i ?></a>
                                     </li>
                                 <?php endfor; ?>
                                 <li class="page-item <?= $pageActual == $nbPages || ($pageActual == 1 && $nbPages == 0) ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual + 1 ?>">Suivant</a>
+                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual + 1 ?>">Suivant</a>
                                 </li>
                             </ul>
                         </nav>
@@ -212,7 +220,7 @@ require_once '../../controllers/admin/ctrProducts.php';
 
             const Toast = Swal.mixin({
                 toast: true,
-                position: 'middle-middle',
+                position: 'center',
                 background: "#2e3c50",
                 color: "#fff",
                 showConfirmButton: false,
@@ -230,152 +238,7 @@ require_once '../../controllers/admin/ctrProducts.php';
             })
         }
     </script>
-    <script src="../../assets/js/sortable.js"></script>
-    <script>
-        new Sortable(document.getElementById('wrapperCategory'), {
-            animation: 300
-        })
-        document.getElementById('positionSaveCategory').addEventListener('click', () => {
-
-            let arraySetPositionCategoryAjax = [];
-
-            document.getElementById('wrapperCategory').childNodes.forEach(elt => {
-
-                if (elt.nodeName == 'DIV') {
-
-                    arraySetPositionCategoryAjax.push(elt.dataset.idcategory)
-                }
-            })
-
-            if (arraySetPositionCategoryAjax.length > 1) {
-                $.ajax({
-                    type: 'post',
-                    url: '../../controllers/ctrAjax.php',
-                    data: {
-                        positionCategory: arraySetPositionCategoryAjax,
-                    },
-                    success: function(response) {
-
-                        if (response == 'ok') {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'center',
-                                background: "#2e3c50",
-                                color: "#fff",
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            })
-
-                            Toast.fire({
-                                icon: 'success',
-                                title: 'Les changements ont été effectués !'
-                            })
-                        } else {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'center',
-                                background: "#2e3c50",
-                                color: "#fff",
-                                showConfirmButton: false,
-                                timer: 10000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            })
-
-                            Toast.fire({
-                                icon: 'error',
-                                title: `La position des IDs ${response} n'ont pas étés modifiés !`
-                            })
-                        }
-                    }
-                });
-            } else {
-                console.log('pas ok');
-            }
-        })
-    </script>
-    <script>
-        <?php for ($i = 0; $i < count($listCollections); $i++) : ?>
-
-            new Sortable(document.getElementById('wrapper<?= $i ?>'), {
-                animation: 300
-            })
-
-            document.getElementById('positionSave<?= $i ?>').addEventListener('click', () => {
-
-                let arraySetAjax = [];
-
-                document.getElementById('wrapper<?= $i ?>').childNodes.forEach(index => {
-
-                    arraySetAjax.push(index.dataset.idcollection)
-                })
-
-                if (arraySetAjax.length > 1) {
-                    $.ajax({
-                        type: 'post',
-                        url: '../../controllers/ctrAjax.php',
-                        data: {
-                            position: arraySetAjax,
-                        },
-                        success: function(response) {
-
-                            if (response == 'ok') {
-                                const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'center',
-                                    background: "#2e3c50",
-                                    color: "#fff",
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                    didOpen: (toast) => {
-                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                    }
-                                })
-
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: 'Les changements ont été effectués !'
-                                })
-                            } else {
-                                const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'center',
-                                    background: "#2e3c50",
-                                    color: "#fff",
-                                    showConfirmButton: false,
-                                    timer: 10000,
-                                    timerProgressBar: true,
-                                    didOpen: (toast) => {
-                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                    }
-                                })
-
-                                Toast.fire({
-                                    icon: 'error',
-                                    title: `La position des IDs ${response} n'ont pas étés modifiés !`
-                                })
-                            }
-                        }
-                    });
-                } else {
-                    console.log('pas ok');
-                }
-            })
-
-        <?php endfor; ?>
-    </script>
-    <script src="../../assets/js/appAdmin.js"></script>
+    <script src="../../assets/js/deleteProducts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
