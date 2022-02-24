@@ -73,7 +73,7 @@ class Category extends Database {
 
 
     /**
-     * Méthode utilisée avec AJAX permettant d'enregistrée la nouvelle position d'une catégorie
+     * Méthode utilisée avec AJAX permettant d'enregistrer la nouvelle position d'une catégorie
      * @param int (identifiant catégorie)
      * @param int (nouvelle position)
      * @return bool

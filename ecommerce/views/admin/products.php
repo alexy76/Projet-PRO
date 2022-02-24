@@ -1,5 +1,5 @@
 <?php
-require_once '../../controllers/admin/ctrCollections.php';
+require_once '../../controllers/admin/ctrProducts.php';
 ?>
 
 <!doctype html>
@@ -49,19 +49,18 @@ require_once '../../controllers/admin/ctrCollections.php';
                         </a>
 
 
-                        <span class="list-group-item list-group-item-action btnBlueDark text-white d-inline-block text-start" aria-current="true">
 
+                        <a href="./collections.php" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                             <i class="bi bi-folder-plus"></i></i><span class="ms-3 d-inline-block m-auto">Ajouter une collection</span>
-                        </span>
-
-
-
-
-                        <a href="./products.php" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
-                            <i class="bi bi-bag-plus-fill"></i><span class="ms-3 d-inline-block m-auto">Ajouter un produit</span>
                         </a>
 
-                        
+
+
+
+                        <span class="list-group-item list-group-item-action btnBlueDark text-white d-inline-block text-start" aria-current="true">
+                            <i class="bi bi-bag-plus-fill"></i><span class="ms-3 d-inline-block m-auto">Ajouter un produit</span>
+                        </span>
+
                         <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                             <i class="bi bi-pencil-square"></i><span class="ms-3 d-inline-block m-auto">Modifier un produit</span>
                         </a>
@@ -71,73 +70,36 @@ require_once '../../controllers/admin/ctrCollections.php';
 
 
                 <div class="col-lg-8 col-12 rounded-2 text-dark shadow bg-white pb-5">
-                    <h1 class="mt-3 h6 fw-normal btnBlue text-white py-3 radius-bottom-left radius-top-right">Gestionnaire des catégories</h1>
+                    <h1 class="mt-3 h6 fw-normal btnBlue text-white py-3 radius-bottom-left radius-top-right">Gestionnaire des produits</h1>
 
-                    <h2 class="h5 mt-3 mb-3">Ajoutez une catégorie</h2>
+                    <h2 class="h5 mt-3 mb-3">Ajoutez un produit</h2>
 
 
                     <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
-                        <input id="exampleFormControlInput1" autocomplete="off" name="nameCategory" type="text" class="form-control form-control-sm" placeholder="Nom de la catégorie" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btnBlueDark btn-sm" type="submit" id="button-addon2" name="addCategory">Ajouter une catégorie</button>
-                    </form>
+                        <div class="input-group mb-3">
+                            <input autocomplete="off" name="nameProduct" type="text" class="form-control form-control-sm" placeholder="Nom du produit" aria-label="Recipient's username" aria-describedby="button-addon2">
 
-                    <?php if (!empty($listCategory)) : ?>
+                            <select class="form-select form-select-sm" id="inputGroupSelect02" name="idColProduct">
+                                <option selected disabled>Sélectionnez une collection</option>
 
-                        <h2 class="h5 mt-3 mb-3">Ajoutez une collection</h2>
+                                <?php foreach ($listCollections as $collections) : ?>
 
+                                    <optgroup label="<?= $collections['category'] ?>">
 
-                        <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
-                            <div class="input-group mb-3">
-                                <input autocomplete="off" name="nameCollection" type="text" class="form-control form-control-sm" placeholder="Nom de la collection" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <?php foreach($collections['collections'] as $collection) : ?>
+                                        
+                                        <option value="<?= $collection['id'] ?>"><?= $collection['name'] ?></option>
 
-                                <select class="form-select form-select-sm" id="inputGroupSelect02" name="catCollection">
-                                    <option selected disabled>Sélectionner une catégorie</option>
+                                        <?php endforeach; ?>
 
-                                    <?php foreach ($listCategory as $category) : ?>
+                                    </optgroup>
 
-                                        <option value="<?= $category->cat_id ?>"><?= $category->cat_name ?></option>
+                                <?php endforeach; ?>
+                            </select>
 
-                                    <?php endforeach; ?>
-                                </select>
-
-                                <button type="submit" name="addCollection" class="btn btnBlueDark btn-sm" for="inputGroupSelect02">Ajouter une collection</button>
-                            </div>
-                        </form>
-
-                        <h2 class="mt-4">Personnalisation de la Navbar</h2>
-                        <button id="positionSaveCategory" type="button" class="link-button mb-3" title="Sauvegarder la position">Sauvegarder la position des catégories</button>
-
-                        <div id="wrapperCategory" class="row justify-content-evenly">
-                            <?php foreach ($listCollections as $key => $catcol) : ?>
-
-                                <div class="col-lg-3 col-6 px-2 mt-5" data-idCategory="<?= $catcol['category']['id'] ?>">
-
-
-
-
-                                    <div class="border border-light border-2 bg-grey" style="height: 100%">
-                                        <h3 class="m-0 h6 btnBlueDark py-2 rounded"><?= $catcol['category']['name'] ?></h2>
-                                            <div class="text-end">
-                                                <button id="positionSave<?= $key ?>" type="button" class="link-button mb-3" title="Sauvegarder la position"><i class="colorlink bi bi-save-fill"></i></button>
-                                            </div>
-                                            <div id="wrapper<?= $key ?>" ?><?php foreach ($catcol['collections'] as $collections) : ?><div data-idCollection="<?= $collections['id'] ?>" class="list btnBlueDarkOutline rounded py-1 mx-3 mb-2" style="cursor: grab;"><span class=""><?= $collections['name'] ?></span></div><?php endforeach; ?></div>
-
-                                    </div>
-                                </div>
-
-                            <?php endforeach; ?>
+                            <button type="submit" name="addProduct" class="btn btnBlueDark btn-sm" for="inputGroupSelect02">Ajouter un produit</button>
                         </div>
-
-                    <?php else : ?>
-
-                        <div class="alert alert-info mt-3">Une catégorie doit être créée avant d'ajouter une collection</div>
-
-                    <?php endif; ?>
-
-
-
-
-
+                    </form>
 
                 </div>
             </div>

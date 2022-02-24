@@ -84,7 +84,7 @@ class Collections extends Database{
 
 
     /**
-     * Méthode utilisée avec AJAX permettant d'enregistrée la nouvelle position d'une collection
+     * Méthode utilisée avec AJAX permettant d'enregistrer la nouvelle position d'une collection
      * @param int (identifiant collection)
      * @param int (nouvelle position)
      * @return bool
@@ -100,5 +100,35 @@ class Collections extends Database{
         $statment->bindValue(':id', $id, PDO::PARAM_INT);
 
         return $statment->execute();
+    }
+
+
+
+    /**
+     * 
+     */
+    public function getListCollections() : array
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT `cat_name` AS 'nameCat', group_concat(col_name) AS 'nameCol', group_concat(col_id) AS 'idCol' FROM `ec_collection`
+        NATURAL JOIN `ec_category`
+        GROUP BY `cat_position`
+        ORDER BY `cat_position`";
+
+        foreach($db->query($query)->fetchAll() as $key => $value)
+        {
+            $collections[$key]['category'] = $value->nameCat;
+
+            for($i = 0; $i < count(explode(',', $value->nameCol)); $i++)
+            {
+                $collections[$key]['collections'][$i] = [
+                    'id' => explode(',', $value->idCol)[$i],
+                    'name' => explode(',', $value->nameCol)[$i]
+                ];
+            }
+        }
+
+        return $collections;
     }
 }

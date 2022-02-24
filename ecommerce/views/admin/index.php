@@ -59,10 +59,10 @@ require_once '../../controllers/admin/ctrIndex.php';
 
 
 
-                        <a href="collections.php" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
+                        <a href="./collections.php" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                             <i class="bi bi-folder-plus"></i></i><span class="ms-3 d-inline-block m-auto">Ajouter une collection</span>
                         </a>
-                        <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
+                        <a href="./products.php" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                             <i class="bi bi-bag-plus-fill"></i><span class="ms-3 d-inline-block m-auto">Ajouter un produit</span>
                         </a>
                         <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
