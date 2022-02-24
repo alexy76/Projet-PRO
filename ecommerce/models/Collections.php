@@ -105,7 +105,8 @@ class Collections extends Database{
 
 
     /**
-     * 
+     * Méthode permettant de retourner la liste des collections avec leurs ID
+     * @return array
      */
     public function getListCollections() : array
     {

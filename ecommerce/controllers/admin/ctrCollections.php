@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCollection'])) {
         }
     } else {
         $flashToast = true;
-        $flashMsg = ['warning', 'Entrez un nom de collection'];
+        $flashMsg = ['warning', 'Veuillez saisir un nom de collection'];
     }
 }
 

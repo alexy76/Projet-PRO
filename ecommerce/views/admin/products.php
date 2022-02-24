@@ -86,9 +86,9 @@ require_once '../../controllers/admin/ctrProducts.php';
 
                                     <optgroup label="<?= $collections['category'] ?>">
 
-                                        <?php foreach($collections['collections'] as $collection) : ?>
-                                        
-                                        <option value="<?= $collection['id'] ?>"><?= $collection['name'] ?></option>
+                                        <?php foreach ($collections['collections'] as $collection) : ?>
+
+                                            <option value="<?= $collection['id'] ?>"><?= $collection['name'] ?></option>
 
                                         <?php endforeach; ?>
 
@@ -100,6 +100,106 @@ require_once '../../controllers/admin/ctrProducts.php';
                             <button type="submit" name="addProduct" class="btn btnBlueDark btn-sm" for="inputGroupSelect02">Ajouter un produit</button>
                         </div>
                     </form>
+
+
+                    <!-- <div class="input-group mt-4"> -->
+                    <form action="" method="GET" class="w-100 input-group mt-4">
+                        <input type="hidden" name="search" value="NameClient">
+                        <input id="name" type="text" list="res" value="<?= $req ?? '' ?>" class="form-control form-control-sm" placeholder="Nom du client" name="req" autocomplete="off" onkeyup="getdata();">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btnBlueDark" type="submit">Rechercher</button>
+                        </div>
+                        <datalist id="res" style="width: 1000px;">
+                        </datalist>
+                    </form>
+
+                    <!-- </div> -->
+
+                    <div class="table-responsive rounded-3">
+                        <table class="table table-light table-striped table-hover mt-4">
+                            <thead class="">
+                                <tr>
+                                    <th class="btnBlue text-white text-start" scope="col">
+                                        <input id="allCheckbox" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    </th>
+                                    <th class="btnBlue text-white text-start" scope="col">Nom du produit</th>
+                                    <th class="btnBlue text-white text-start" scope="col">Prix</th>
+                                    <th class="btnBlue text-white" scope="col">Mis en ligne</th>
+                                    <th class="btnBlue text-white radius-top-right" scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php if (!$getAllProducts) : ?>
+                                    <tr>
+                                        <th class="text-start" scope="row">Aucunes données trouvées</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                <?php else : ?>
+
+                                    <?php foreach ($getAllProducts as $product) : ?>
+                                        <tr>
+                                            <td class="text-start">
+                                                <input class="form-check-input inputDelete" type="checkbox" value="<?= $product->pdt_id ?>">
+                                            </td>
+                                            <th class="text-start" scope="row"><?= $product->pdt_title ?></th>
+                                            <td class="text-start"><?= $product->pdt_price ?></td>
+                                            <td><input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" <?= $product->pdt_activated == 1 ? 'checked' : '' ?> disabled></td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btnBlueDark btn-sm dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-person-x-fill"></i> Action
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Consulter la fiche client</a></li>
+                                                        <li>
+                                                            <form method="POST" action="">
+                                                                <input type="hidden" value="<?= $product->pdt_title ?>" name="nameProduct">
+                                                                <input type="hidden" value="<?= $product->pdt_id ?>" name="idProduct">
+                                                                <input class="d-inline-block w-100 linkBtnDelete" type="submit" value="Supprimer le produit" name="deleteProduct">
+                                                            </form>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+
+                            </tbody>
+                        </table>
+
+                        <form id="formInputsDelete" method="POST" action="" class="d-none">
+                            <div id="inputGenerate">
+                            </div>
+                            <div class="text-end mb-3">
+                                <input type="submit" value="Supprimer" name="deleteAll" class="btn btn-sm btn-danger d-inline-block text-end">
+                            </div>
+                        </form>
+
+                        <nav class="text-center d-inline-block" aria-label="...">
+                            <ul class="pagination">
+                                <li class="page-item <?= $pageActual == 1 ? 'disabled' : '' ?>">
+                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual - 1 ?>">Précédent</a>
+                                </li>
+                                <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
+                                    <li class="page-item">
+                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $i ?>"><?= $i ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                                <li class="page-item <?= $pageActual == $nbPages || ($pageActual == 1 && $nbPages == 0) ? 'disabled' : '' ?>">
+                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?>&req=<?= $req ?? '' ?>&page=<?= $pageActual + 1 ?>">Suivant</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+
+                    </div>
 
                 </div>
             </div>
