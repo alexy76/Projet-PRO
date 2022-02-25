@@ -5,12 +5,14 @@ require_once '../models/Database.php';
 require_once '../models/Users.php';
 require_once '../models/Category.php';
 require_once '../models/Collections.php';
+require_once '../models/Products.php';
 require_once '../tools/tools.php';
 
 
 $Users = new Users;
 $Collections = new Collections;
 $Category = new Category;
+$Products = new Products;
 
 
 if (isset($_POST['name'])) 
@@ -59,4 +61,12 @@ if(isset($_POST['positionCategory'])){
         echo "ok";
     else
         echo json_encode($errors);
+}
+
+
+if(isset($_POST['statusProduct'])){
+
+    if($Products->changeStatusProduct(intval($_POST['idProduct']), intval($_POST['statusProduct']))){
+        echo "ok";
+    }
 }

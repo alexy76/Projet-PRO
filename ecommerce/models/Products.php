@@ -113,6 +113,42 @@ class Products extends Database
 
 
 
+    /**
+     * Méthode utilisée avec AJAX pour changer le statut de l'activation d'un produit
+     * @param int (identifiant du produit)
+     * @return bool
+     */
+    public function changeStatusProduct(int $id, int $status) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_products` SET `pdt_activated` = $status WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
+
+
+    /**
+     * Méthode permettant de récuperer les données d'un produit
+     * @param int (identifiant du produit)
+     * @return array
+     */
+    public function getProduct(int $id) : array
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT * FROM `ec_products` WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetch(PDO::FETCH_ASSOC);
+    }
 
 }
 

@@ -123,4 +123,3 @@ $offset = isset($_GET['page']) && ctype_digit($_GET['page']) && $_GET['page'] <=
 $pageActual = ($offset / $nbElt) + 1;
 
 $getAllProducts = $Products->{'get_' . $nameMethod}(isset($req) ? $req . '%' : '', intval($nbElt), intval($offset));
-

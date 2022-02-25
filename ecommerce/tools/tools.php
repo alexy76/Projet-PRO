@@ -47,7 +47,6 @@ function emptyArray(array $tab, int $nb) : bool
 
 function formatSlug(string $str) : string
 {
-    //$str = preg_replace('#,|;|:|!|.|?|/|(|)|[|]|"|&|~|{|}|=|-|*|+|²|\|_|-|°|^|¨|$|£|¤|%|µ|§|<|>#', ' ', $str);
     $str = preg_replace('#Ç#', 'C', $str);
     $str = preg_replace('#ç#', 'c', $str);
     $str = preg_replace('#è|é|ê|ë#', 'e', $str);

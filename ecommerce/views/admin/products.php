@@ -156,7 +156,7 @@ require_once '../../controllers/admin/ctrProducts.php';
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a class="dropdown-item" href="#">Editer la fiche produit</a>
+                                                            <a class="dropdown-item" href="./editProduct.php?id=<?= $product->pdt_id ?>">Editer la fiche produit</a>
                                                         </li>
                                                         <li>
                                                             <form class="m-0" method="POST" action="">
