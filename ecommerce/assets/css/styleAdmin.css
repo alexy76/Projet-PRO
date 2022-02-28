@@ -94,3 +94,20 @@
 .radius-bottom-right{
     border-bottom-right-radius: 30px;
 }
+
+
+.arial{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.underline{
+    text-decoration: none;
+}
+
+.underline:hover{
+    text-decoration: underline;
+}
+
+.greyGoogle{
+    color:rgb(107, 107, 107)
+}

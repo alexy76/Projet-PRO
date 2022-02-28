@@ -70,9 +70,9 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
 
                 <div class="col-lg-8 col-12 rounded-2 text-dark shadow bg-white pb-5">
-                    <h1 class="mt-3 h6 fw-normal btnBlue text-white py-3 radius-bottom-left radius-top-right">Edition du produit</h1>
+                    <h1 class="mt-3 h6 fw-normal btnBlue text-white py-2 radius-bottom-left radius-top-right"><i class="bi bi-pencil-square"></i> Modification du produit</h1>
 
-                    <div class="row my-3">
+                    <div class="row my-2">
                         <div class="col-lg-6 col-12 text-start">
                             <a href="<?= $_SERVER['HTTP_REFERER'] ?? './products.php' ?>" class="btn btn-sm btnBlueDark">Retour</a>
                         </div>
@@ -81,6 +81,132 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                 <input class="form-check-input d-inline-block me-2" type="checkbox" role="switch" data-id="<?= $product['pdt_id'] ?>" id="flexSwitchCheckDefault" <?= $product['pdt_activated'] == 1 ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="flexSwitchCheckDefault"><?= $product['pdt_activated'] == 1 ? 'Désactiver la mise en ligne du produit' : 'Mettre en ligne le produit' ?></label>
                             </div>
+                        </div>
+                    </div>
+
+
+
+                    <h3 class="mb-5"><?= $product['pdt_title'] ?></h3>
+
+
+                    <div class="row my-3 text-start g-0">
+
+
+
+                        <div class="col-lg-6 col-12 px-4 bg-grey">
+                            <h4 class="text-center my-3">Informations générales du produit</h4>
+                            <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
+
+                                <label for="exampleFormControlInput1" class="form-label form-label-sm">Nom du produit</label>
+
+                                <div class="input-group mb-3">
+
+                                    <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="Nom du produit" value="<?= $product['pdt_title'] ?>" name="nameProduct">
+
+                                    <button type="submit" name="changeName" class="btn btnBlueDark btn-sm">Enregistrer</button>
+                                </div>
+                            </form>
+
+                            <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
+
+                                <label for="inputGroupSelect02" class="form-label form-label-sm">Choisir une collection</label>
+
+                                <div class="input-group mb-3">
+
+                                    <select class="form-select form-select-sm" id="inputGroupSelect02" name="idColProduct">
+                                        <option disabled>Sélectionnez une collection</option>
+
+                                        <?php foreach ($listCollections as $collections) : ?>
+
+                                            <optgroup label="<?= $collections['category'] ?>">
+
+                                                <?php foreach ($collections['collections'] as $collection) : ?>
+
+                                                    <option value="<?= $collection['id'] ?>" <?= $collection['id'] == $product['col_id'] ? 'selected' : '' ?>><?= $collection['name'] ?></option>
+
+                                                <?php endforeach; ?>
+
+                                            </optgroup>
+
+                                        <?php endforeach; ?>
+                                    </select>
+
+                                    <button type="submit" name="changeCollection" class="btn btnBlueDark btn-sm" for="inputGroupSelect02">Enregistrer</button>
+                                </div>
+                            </form>
+
+
+                            <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
+
+                                <label for="" class="form-label form-label-sm">Prix de vente</label>
+
+                                <div class="input-group input-group-sm mb-3">
+
+                                    <span class="input-group-text btnBlue">Prix €</span>
+                                    <input type="text" value="<?= $product['pdt_price'] ?>" class="form-control" aria-label="Amount (to the nearest dollar)" name="price">
+                                    <span class="input-group-text btnBlue">Remise %</span>
+                                    <input type="text" value="<?= $product['pdt_discount'] ?>" class="form-control" aria-label="Amount (to the nearest dollar)" name="discount" placeholder="Saisir une remise">
+                                    <button type="submit" name="changePrice" class="btn btnBlueDark btn-sm">Enregistrer</button>
+
+                                </div>
+
+                            </form>
+
+
+                            <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
+
+                                <label for="exampleFormControlInput2" class="form-label form-label-sm">Options</label>
+
+                                <div class="input-group mb-3">
+
+                                    <input type="text" class="form-control form-control-sm" id="exampleFormControlInput2" placeholder="ex : XS,S,L,XL,XXL" value="<?= $product['pdt_option'] ?>" name="optionProduct">
+
+                                    <button type="submit" name="changeOption" class="btn btnBlueDark btn-sm">Enregistrer</button>
+                                </div>
+                            </form>
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="col-lg-6 col-12 px-4 bg-grey">
+                            <h4 class="text-center my-3">Améliorer son référencement</h4>
+
+                            <div class="arial shadow p-2 rounded mt-3 bg-white">
+                                <?php //var_dump($_SERVER); 
+                                ?>
+                                <p class="arial m-0">https://www.<?= $_SERVER['HTTP_HOST'] ?> › <span class="greyGoogle">collection...</a></p>
+                                <p class="arial m-0 h5 fw-bold"><a id="displayTitleGoogle" class="underline" href=""><?= !is_null($product['pdt_meta_title']) ? $product['pdt_meta_title'] : 'Bague Tête de Mort | Crâne Faction' ?></a></p>
+                                <p id="displayDescriptionGoogle" class="arial m-0 greyGoogle"><?= !is_null($product['pdt_meta_description']) ? $product['pdt_meta_description'] : 'Nos Bagues Têtes de Mort forgées dans les entrailles de l\'enfer vont te faire craquer. Biker dissident, punk, métalleux énervé ou gothique : bienvenue !' ?></p>
+
+                            </div>
+
+
+                            <form method="POST" action="" class="mb-3">
+                                <div class="my-3">
+                                    <label for="metaTitle" class="form-label">Méta Titre (<span id="nbCharsTitle">0</span>/60)</label>
+                                    <input type="text" class="form-control form-control-sm" id="metaTitle" value="<?= !is_null($product['pdt_meta_title']) ? $product['pdt_meta_title'] : '' ?>" placeholder="Ex: Mon produit | Ecommerce.net">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="metaDescription" class="form-label">Méta Description (<span id="nbCharsDescription">0</span>/150)</label><br>
+                                    <textarea class="form-control" placeholder="Décrivez votre produit en quelques mots" id="metaDescription" style="height: 100px"><?= !is_null($product['pdt_meta_description']) ? $product['pdt_meta_description'] : '' ?></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="slugProduct" class="form-label">Slug URL de la page du produit</label>
+                                    <input id="slugProduct" value="<?= !is_null($product['pdt_slug']) ? $product['pdt_slug'] : '' ?>" class="form-control form-control-sm" type="text" placeholder="Le slug URL est généré automatiquement avec le nom du produit" aria-label="Disabled input example" disabled>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" name="changeOption" class="btn btnBlueDark btn-sm">Enregistrer</button>
+                                </div>
+
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -120,14 +246,14 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                 url: '../../controllers/ctrAjax.php',
                 data: {
                     statusProduct: flexSwitchCheckDefault.checked ? 1 : 0,
-                    idProduct : flexSwitchCheckDefault.dataset.id
+                    idProduct: flexSwitchCheckDefault.dataset.id
                 },
-                success: function(response) {
-                }
+                success: function(response) {}
             });
 
         })
     </script>
+    <script src="../../assets/js/appAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>

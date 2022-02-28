@@ -16,9 +16,15 @@ require_once '../../config.php';
 require_once '../../tools/tools.php';
 require_once '../../models/Database.php';
 require_once '../../models/Products.php';
+require_once '../../models/Collections.php';
 
 
 $Products = new Products;
+//$Category = new Category;
+$Collections = new Collections;
+
+
+$listCollections = $Collections->getListCollections();
 
 $product = $Products->getProduct($_GET['id']);
 
