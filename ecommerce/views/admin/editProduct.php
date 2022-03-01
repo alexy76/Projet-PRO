@@ -178,8 +178,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                             <h4 class="text-center my-3">Améliorer son référencement</h4>
 
                             <div class="arial shadow p-2 rounded mt-3 bg-white">
-                                <?php //var_dump($_SERVER); 
-                                ?>
+
                                 <p class="arial m-0">https://www.<?= $_SERVER['HTTP_HOST'] ?> › <span class="greyGoogle">collection...</a></p>
                                 <p class="arial m-0 h5 fw-bold"><a id="displayTitleGoogle" class="underline" href=""><?= !is_null($product['pdt_meta_title']) ? $product['pdt_meta_title'] : 'Bague Tête de Mort | Crâne Faction' ?></a></p>
                                 <p id="displayDescriptionGoogle" class="arial m-0 greyGoogle"><?= !is_null($product['pdt_meta_description']) ? $product['pdt_meta_description'] : 'Nos Bagues Têtes de Mort forgées dans les entrailles de l\'enfer vont te faire craquer. Biker dissident, punk, métalleux énervé ou gothique : bienvenue !' ?></p>
@@ -241,7 +240,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                             <img class='img-fluid' src='../../assets/img/produit21-1.jpg'>
                                         </a>
                                     </div>
-                                    <p class="text-end text-none"><a class="colorBlueDark" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil"></i> Editer</a></p>
+                                    <p class="text-end text-none"><a class="colorBlueDark editModal" data-bs-toggle="modal" data-bs-target="#editImage" data-srcImg="../../assets/img/produit21-1.jpg" data-idImage="1" data-positionImage="1" alt="Plage ensoleillés aux Maldives"><i class="bi bi-pencil"></i> Editer</a></p>
                                 </div>
 
                                 <div class='col-lg-6 col-12 mb-3'>
@@ -249,7 +248,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                         <a data-lightbox='roadtrip' href='../../assets/img/produit21-2.jpg'>
                                             <img class='img-fluid' src='../../assets/img/produit21-2.jpg'>
                                         </a>
-                                        <p class="text-end text-none"><a class="colorBlueDark" href=""><i class="bi bi-pencil"></i> Editer</a></p>
+                                        <p class="text-end text-none"><a class="colorBlueDark editModal" href="" data-bs-toggle="modal" data-bs-target="#editImage" data-srcImg="../../assets/img/produit21-2.jpg" data-idImage="2" data-positionImage="3" alt="Ile paradisiaque des Maldives"><i class="bi bi-pencil"></i> Editer</a></p>
                                     </div>
                                 </div>
 
@@ -258,7 +257,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                         <a data-lightbox='roadtrip' href='../../assets/img/produit21-3.jpg'>
                                             <img class='img-fluid' src='../../assets/img/produit21-3.jpg'>
                                         </a>
-                                        <p class="text-end text-none"><a class="colorBlueDark" href=""><i class="bi bi-pencil"></i> Editer</a></p>
+                                        <p class="text-end text-none"><a class="colorBlueDark editModal" href="" data-bs-toggle="modal" data-bs-target="#editImage" data-srcImg="../../assets/img/produit21-3.jpg" data-idImage="3" data-positionImage="2" alt="Couché du soleil"><i class="bi bi-pencil"></i> Editer</a></p>
                                     </div>
                                 </div>
 
@@ -267,7 +266,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                         <a data-lightbox='roadtrip' href='../../assets/img/produit21-4.jpg'>
                                             <img class='img-fluid' src='../../assets/img/produit21-4.jpg'>
                                         </a>
-                                        <p class="text-end text-none"><a class="colorBlueDark" href=""><i class="bi bi-pencil"></i> Editer</a></p>
+                                        <p class="text-end text-none"><a class="colorBlueDark editModal" href="" data-bs-toggle="modal" data-bs-target="#editImage" data-srcImg="../../assets/img/produit21-4.jpg" data-idImage="4" data-positionImage="4" alt="Couché du soleil n2"><i class="bi bi-pencil"></i> Editer</a></p>
                                     </div>
                                 </div>
 
@@ -275,36 +274,44 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                         </div>
                     </div>
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button> -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header btnBlue">
-        <h5 class="modal-title" id="exampleModalLabel">Editeur d'images</h5>
-        <button type="button" class="btnBlueDark" data-bs-dismiss="modal" aria-label="Close">X</button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btnBlueDark">Sauvegarder</button>
-        <button type="button" class="btn btn-danger">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
+                    <!-- Modal -->
+                    <div class="modal fade" id="editImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header btnBlue">
+                                    <h5 class="modal-title" id="exampleModalLabel">Editeur d'images</h5>
+                                    <button type="button" class="btnBlueDark" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                </div>
+                                <div class="modal-body">
+                                    <img id="imgModalSrc" class='img-fluid' src=''>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                                    <button type="button" class="btn btnBlueDark">Sauvegarder</button>
+                                    <button type="button" class="btn btn-danger">Supprimer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        Array.from(document.getElementsByClassName('editModal')).forEach(elt => {
+
+            elt.addEventListener('click', (e) => {
+
+                if (e.target.nodeName == 'A') {
+
+                    imgModalSrc.src = e.target.dataset.srcimg;
+                    //console.log(e.target.dataset);
+                }
+            });
+        });
+    </script>
 
     <script>
         fileToUpload.addEventListener("change", function() {
