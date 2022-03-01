@@ -16,6 +16,16 @@
     color: white;
 }
 
+.btnBlueDark:hover{
+    background-color: #567196!important;
+    color: white;
+}
+
+.colorBlueDark{
+    color: #2e3c50;
+    text-decoration: none;
+}
+
 .btnBlueDarkOutline{
     border: 1px #2e3c50 solid;
     background-color: white;
@@ -72,6 +82,10 @@
 
 .bg-grey{
     background-color: #e4e4e4c7;
+}
+
+.border-grey{
+    border: 2px solid #e4e4e4c7;
 }
 
 .bg-greyblue{

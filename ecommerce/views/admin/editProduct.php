@@ -16,6 +16,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="../../assets/css/lightbox.css" rel="stylesheet" />
 
 </head>
 
@@ -89,11 +90,11 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                     <h3 class="mb-5"><?= $product['pdt_title'] ?></h3>
 
 
-                    <div class="row my-3 text-start g-0">
+                    <div class="row mt-3 text-start g-0">
 
 
 
-                        <div class="col-lg-6 col-12 px-4 bg-grey">
+                        <div class="col-lg-6 col-12 px-4 border-grey">
                             <h4 class="text-center my-3">Informations générales du produit</h4>
                             <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
 
@@ -142,9 +143,9 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
                                 <div class="input-group input-group-sm mb-3">
 
-                                    <span class="input-group-text btnBlue">Prix €</span>
+                                    <span class="input-group-text">Prix €</span>
                                     <input type="text" value="<?= $product['pdt_price'] ?>" class="form-control" aria-label="Amount (to the nearest dollar)" name="price">
-                                    <span class="input-group-text btnBlue">Remise %</span>
+                                    <span class="input-group-text">Remise %</span>
                                     <input type="text" value="<?= $product['pdt_discount'] ?>" class="form-control" aria-label="Amount (to the nearest dollar)" name="discount" placeholder="Saisir une remise">
                                     <button type="submit" name="changePrice" class="btn btnBlueDark btn-sm">Enregistrer</button>
 
@@ -209,10 +210,116 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
                         </div>
                     </div>
+
+
+                    <div class="row text-start g-0">
+                        <div class="col-lg-6 col-12 px-4 bg-grey">
+
+                            <h4 class="text-center my-3">Joindre une image au produit</h4>
+
+                            <div class="input-group input-group-sm">
+                                <input type="file" class="form-control" id="fileToUpload" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                <button class="btn btnBlueDark" type="button" id="inputGroupFileAddon04">Uploader l'image</button>
+                            </div>
+                            <div class="my-3">
+                                <a id="previewLightbox" data-lightbox='roadtrip' href='../../assets/img/admin/noimage.jpg'>
+                                    <img id="preview" class="img-fluid border border-secondary" src="../../assets/img/admin/noimage.jpg">
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6 col-12 px-4 border-grey">
+                            <h4 class="text-center my-3">Gérer les images du produit</h4>
+
+                            <div class="row">
+
+
+
+                                <div class='col-lg-6 col-12 mb-3'>
+                                    <div>
+                                        <a data-lightbox='roadtrip' href='../../assets/img/produit21-1.jpg'>
+                                            <img class='img-fluid' src='../../assets/img/produit21-1.jpg'>
+                                        </a>
+                                    </div>
+                                    <p class="text-end text-none"><a class="colorBlueDark" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil"></i> Editer</a></p>
+                                </div>
+
+                                <div class='col-lg-6 col-12 mb-3'>
+                                    <div>
+                                        <a data-lightbox='roadtrip' href='../../assets/img/produit21-2.jpg'>
+                                            <img class='img-fluid' src='../../assets/img/produit21-2.jpg'>
+                                        </a>
+                                        <p class="text-end text-none"><a class="colorBlueDark" href=""><i class="bi bi-pencil"></i> Editer</a></p>
+                                    </div>
+                                </div>
+
+                                <div class='col-lg-6 col-12 mb-3'>
+                                    <div>
+                                        <a data-lightbox='roadtrip' href='../../assets/img/produit21-3.jpg'>
+                                            <img class='img-fluid' src='../../assets/img/produit21-3.jpg'>
+                                        </a>
+                                        <p class="text-end text-none"><a class="colorBlueDark" href=""><i class="bi bi-pencil"></i> Editer</a></p>
+                                    </div>
+                                </div>
+
+                                <div class='col-lg-6 col-12 mb-3'>
+                                    <div>
+                                        <a data-lightbox='roadtrip' href='../../assets/img/produit21-4.jpg'>
+                                            <img class='img-fluid' src='../../assets/img/produit21-4.jpg'>
+                                        </a>
+                                        <p class="text-end text-none"><a class="colorBlueDark" href=""><i class="bi bi-pencil"></i> Editer</a></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header btnBlue">
+        <h5 class="modal-title" id="exampleModalLabel">Editeur d'images</h5>
+        <button type="button" class="btnBlueDark" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btnBlueDark">Sauvegarder</button>
+        <button type="button" class="btn btn-danger">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        fileToUpload.addEventListener("change", function() {
+
+            let imageSend = new FileReader();
+
+            imageSend.readAsDataURL(this.files[0]);
+
+            imageSend.onload = () => {
+                preview.src = imageSend.result;
+                previewLightbox.href = imageSend.result;
+            };
+
+        });
+    </script>
 
 
     <script type="text/javascript">
@@ -253,6 +360,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
         })
     </script>
+    <script src="../../assets/js/lightbox-plus-jquery.js"></script>
     <script src="../../assets/js/appAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
