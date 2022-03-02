@@ -75,7 +75,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
                     <div class="row my-2">
                         <div class="col-lg-6 col-12 text-start">
-                            <a href="<?= $_SERVER['HTTP_REFERER'] ?? './products.php' ?>" class="btn btn-sm btnBlueDark">Retour</a>
+                            <a href="./products.php" class="btn btn-sm btnBlueDark">Retour</a>
                         </div>
                         <div class="col-lg-6 col-12 text-lg-end pt-lg-0 pt-3">
                             <div class="form-switch">
@@ -98,6 +98,8 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                             <h4 class="text-center my-3">Informations générales du produit</h4>
                             <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
 
+                                <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">
+
                                 <label for="exampleFormControlInput1" class="form-label form-label-sm">Nom du produit</label>
 
                                 <div class="input-group mb-3">
@@ -113,6 +115,8 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                 <label for="inputGroupSelect02" class="form-label form-label-sm">Choisir une collection</label>
 
                                 <div class="input-group mb-3">
+
+                                    <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">
 
                                     <select class="form-select form-select-sm" id="inputGroupSelect02" name="idColProduct">
                                         <option disabled>Sélectionnez une collection</option>
@@ -141,6 +145,8 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
                                 <label for="" class="form-label form-label-sm">Prix de vente</label>
 
+                                <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">
+
                                 <div class="input-group input-group-sm mb-3">
 
                                     <span class="input-group-text">Prix €</span>
@@ -157,6 +163,8 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                             <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
 
                                 <label for="exampleFormControlInput2" class="form-label form-label-sm">Options</label>
+
+                                <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">
 
                                 <div class="input-group mb-3">
 
@@ -187,14 +195,16 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
 
                             <form method="POST" action="" class="mb-3">
+
+                                <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">
                                 <div class="my-3">
                                     <label for="metaTitle" class="form-label">Méta Titre (<span id="nbCharsTitle">0</span>/60)</label>
-                                    <input type="text" class="form-control form-control-sm" id="metaTitle" value="<?= !is_null($product['pdt_meta_title']) ? $product['pdt_meta_title'] : '' ?>" placeholder="Ex: Mon produit | Ecommerce.net">
+                                    <input type="text" name="metaTitlePost" class="form-control form-control-sm" id="metaTitle" value="<?= !is_null($product['pdt_meta_title']) ? $product['pdt_meta_title'] : '' ?>" placeholder="Ex: Mon produit | Ecommerce.net">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="metaDescription" class="form-label">Méta Description (<span id="nbCharsDescription">0</span>/150)</label><br>
-                                    <textarea class="form-control" placeholder="Décrivez votre produit en quelques mots" id="metaDescription" style="height: 100px"><?= !is_null($product['pdt_meta_description']) ? $product['pdt_meta_description'] : '' ?></textarea>
+                                    <textarea class="form-control" name="metaDescriptionPost" placeholder="Décrivez votre produit en quelques mots" id="metaDescription" style="height: 100px"><?= !is_null($product['pdt_meta_description']) ? $product['pdt_meta_description'] : '' ?></textarea>
                                 </div>
 
                                 <div class="mb-3">
@@ -212,15 +222,28 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
 
                     <div class="row text-start g-0">
-                        <div class="col-lg-6 col-12 px-4 bg-grey">
+                        <div class="col-lg-6 col-12 px-4 bg-grey mt-lg-0 mt-5">
 
                             <h4 class="text-center my-3">Joindre une image au produit</h4>
 
-                            <div class="input-group input-group-sm">
-                                <input type="file" class="form-control" id="fileToUpload" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                <button class="btn btnBlueDark" type="button" id="inputGroupFileAddon04">Uploader l'image</button>
-                            </div>
-                            <div class="my-3">
+
+
+                            <form id="upfile" class="" enctype="multipart/form-data" action="" method="post">
+
+                                <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">
+
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Attribut "alt"</span>
+                                    <input type="text" name="altImg" class="form-control" placeholder="Décrivez l'image en quelques mots" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <input type="file" name="fileToUpload" class="form-control" id="fileToUpload" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                    <button name="uploadFile" class="btn btnBlueDark" type="submit" id="inputGroupFileAddon04">Uploader l'image</button>
+                                </div>
+
+                            </form>
+                            <p class="mt-2 text-end">Taille Max : 3 Mo</p>
+                            <div class="my-3 text-center">
                                 <a id="previewLightbox" data-lightbox='roadtrip' href='../../assets/img/admin/noimage.jpg'>
                                     <img id="preview" class="img-fluid border border-secondary" src="../../assets/img/admin/noimage.jpg">
                                 </a>
@@ -307,7 +330,6 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                 if (e.target.nodeName == 'A') {
 
                     imgModalSrc.src = e.target.dataset.srcimg;
-                    //console.log(e.target.dataset);
                 }
             });
         });

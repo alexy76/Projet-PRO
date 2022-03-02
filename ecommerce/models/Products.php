@@ -150,6 +150,65 @@ class Products extends Database
         return $statment->fetch(PDO::FETCH_ASSOC);
     }
 
+
+
+    /**
+     * Méthode permettant de changer le nom d'un produit
+     * @param int (identifiant du produit)
+     * @param string (nom du nouveau produit)
+     * @return bool
+     */
+    public function setNewName(int $id, string $name, string $slug) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_products` SET `pdt_title` = :name, `pdt_slug` = :slug WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+        $statment->bindValue(':name', $name, PDO::PARAM_STR);
+        $statment->bindValue(':slug', $slug, PDO::PARAM_STR);
+
+        return $statment->execute();
+    }
+
+
+
+    /**
+     * Méthode permettant de savoir si le slug produit est déjà utilisé
+     * @param string (slug produit)
+     * @return bool
+     */
+    public function getExistSlug(string $slug) : bool
+    {
+        $db = $this->connectDB();
+        $query = "SELECT count(`pdt_id`) as 'countSlug' FROM `ec_products`  WHERE `pdt_slug` = :slug";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':slug', $slug, PDO::PARAM_STR);
+        $statment->execute();
+
+        return $statment->fetch()->countSlug == 0 ? false : true;
+    }
+
+
+
+    /** Méthode permettant de migrer un produit vers une autre collection 
+     * @param int (identifiant produit)
+     * @param int (identifiant collection)
+     * @param bool
+    */
+    public function setChangeCollection(int $idProduct, int $idCol) : bool
+    {
+        $db = $this->connectDB();
+        $query = "UPDATE `ec_products` SET `col_id` = :idCol WHERE `pdt_id` = :idProduct";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':idProduct', $idProduct, PDO::PARAM_INT);
+        $statment->bindValue(':idCol', $idCol, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
 }
 
 
