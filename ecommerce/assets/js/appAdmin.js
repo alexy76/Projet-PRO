@@ -15,9 +15,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
     nbCharsTitle.innerText = metaTitle.value.length;
     nbCharsDescription.innerText = metaDescription.value.length;
+
+
+
+    if (metaTitle.value.length == 0) {
+        displayTitleGoogle.innerText = "Bague Tête de Mort | Crâne Faction";
+    }
+
+    if (metaDescription.value.length == 0) {
+        displayDescriptionGoogle.innerText = "Nos Bagues Têtes de Mort forgées dans les entrailles de l'enfer vont te faire craquer. Biker dissident, punk, métalleux énervé ou gothique : bienvenue !";
+    }
 })
 
-metaTitle.addEventListener('keyup', (e) => {
+metaTitle.addEventListener('keyup', () => {
 
     let lenghtText = metaTitle.value.length;
 
@@ -30,7 +40,7 @@ metaTitle.addEventListener('keyup', (e) => {
         nbCharsTitle.innerText = lenghtText;
 });
 
-metaDescription.addEventListener('keyup', (e) => {
+metaDescription.addEventListener('keyup', () => {
 
     let lenghtText = metaDescription.value.length;
 

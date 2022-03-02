@@ -183,6 +183,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
                         </div>
                         <div class="col-lg-6 col-12 px-4 bg-grey">
+
                             <h4 class="text-center my-3">Améliorer son référencement</h4>
 
                             <div class="arial shadow p-2 rounded mt-3 bg-white">
@@ -212,7 +213,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                     <input id="slugProduct" value="<?= !is_null($product['pdt_slug']) ? $product['pdt_slug'] : '' ?>" class="form-control form-control-sm" type="text" placeholder="Le slug URL est généré automatiquement avec le nom du produit" aria-label="Disabled input example" disabled>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" name="changeOption" class="btn btnBlueDark btn-sm">Enregistrer</button>
+                                    <button type="submit" name="changeMeta" class="btn btnBlueDark btn-sm">Enregistrer</button>
                                 </div>
 
                             </form>
@@ -384,7 +385,9 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                     statusProduct: flexSwitchCheckDefault.checked ? 1 : 0,
                     idProduct: flexSwitchCheckDefault.dataset.id
                 },
-                success: function(response) {}
+                success: function(response) {
+
+                }
             });
 
         })

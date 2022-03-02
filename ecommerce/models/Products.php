@@ -209,6 +209,71 @@ class Products extends Database
 
         return $statment->execute();
     }
+
+
+
+    /**
+     * Méthode permettant de modifier le prix et la remise d'un produit
+     * @param int (identifiant produit)
+     * @param float (prix du produit)
+     * @param int (remise sur le produit en %)
+     * @return bool
+     */
+    public function setNewPrice(int $id, float $price, int $discount) : bool
+    {
+        $db = $this->connectDB();
+        $query = "UPDATE `ec_products` SET `pdt_price` = :price , `pdt_discount` = :discount  WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':price', $price, PDO::PARAM_STR);
+        $statment->bindValue(':discount', $discount, PDO::PARAM_INT);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
+
+
+    /**
+     * Méthode permettant de modifier le prix et la remise d'un produit
+     * @param int (identifiant produit)
+     * @param string (options pour le produit | séparateur ",")
+     * @return bool
+     */
+    public function setOptionsProduct(int $id, string $options) : bool
+    {
+        $db = $this->connectDB();
+        $query = "UPDATE `ec_products` SET `pdt_option` = :options WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':options', $options, PDO::PARAM_STR);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
+
+
+    /**
+     * Méthode permettant de modifier le prix et la remise d'un produit
+     * @param string (meta title de la fiche produit)
+     * @param string (meta description de la fiche produit)
+     * @param int (identifiant produit)
+     * @return bool
+     */
+    public function setMetaProduct(string $metaTitle, string $metaDescription, int $id) : bool
+    {
+        $db = $this->connectDB();
+        $query = "UPDATE `ec_products` SET `pdt_meta_title` = :metaTitle, `pdt_meta_description` = :metaDescription WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':metaTitle', $metaTitle, PDO::PARAM_STR);
+        $statment->bindValue(':metaDescription', $metaDescription, PDO::PARAM_STR);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
 }
 
 
