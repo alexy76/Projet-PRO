@@ -123,6 +123,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeMeta'])) {
 }
 
 
+/** Contrôleur permettant de modifier la collection d'un produit */
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
+
+    extract($_FILES["fileToUpload"]);
+
+    if ($error > 0) {
+        $flashToast = true;
+        $flashMsg = ['warning', 'Veuillez choisir un fichier'];
+    } elseif (!@getimagesize($tmp_name)) {
+        $flashToast = true;
+        $flashMsg = ['warning', 'Le fichier n\'est pas une image'];
+    } elseif ($size > 3 * 1024 ** 2) {
+        $flashToast = true;
+        $flashMsg = ['warning', 'L\'image est trop volumineuse'];
+    } elseif (!in_array(getimagesize($tmp_name)['mime'], ['image/png', 'image/jpeg', 'image/tiff', 'image/gif', 'image/bmp'])) {
+        $flashToast = true;
+        $flashMsg = ['warning', 'Le format de l\'image n\'est pas autorisé'];
+    } else {
+
+        $explodeNameFile = explode('/', getimagesize($tmp_name)['mime']);
+
+        $extension = end($explodeNameFile);
+        $newNameFile = uniqid() . '.' . $extension;
+
+        if (move_uploaded_file($tmp_name, "../../assets/img/products/pdt_". $_POST['idProduct'] . "_" . $newNameFile)) {
+            echo "upload ok";
+            var_dump($extension);
+            var_dump($newNameFile);
+            $flashToast = true;
+            $flashMsg = ['success', "L'image a été uploadée."];
+        } else {
+            $flashToast = true;
+            $flashMsg = ['error', "Une erreur s'est produite lors de l'upload."];
+        }
+    }
+}
+
 
 $listCollections = $Collections->getListCollections();
 $product = $Products->getProduct(intval($_GET['id']));

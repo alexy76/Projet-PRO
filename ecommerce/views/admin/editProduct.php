@@ -370,8 +370,8 @@ require_once '../../controllers/admin/ctrEditProduct.php';
             })
 
             Toast.fire({
-                icon: '<?= $flashMsg[0] ?? '' ?>',
-                title: '<?= $flashMsg[1] ?? '' ?>'
+                icon: "<?= $flashMsg[0] ?? '' ?>",
+                title: "<?= $flashMsg[1] ?? '' ?>"
             })
         }
     </script>
