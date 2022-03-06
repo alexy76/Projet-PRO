@@ -17,12 +17,17 @@ require_once '../../tools/tools.php';
 require_once '../../models/Database.php';
 require_once '../../models/Products.php';
 require_once '../../models/Collections.php';
+require_once '../../models/Images.php';
+require_once '../../models/GetImages.php';
 
 var_dump($_POST);
 var_dump($_FILES);
 
 $Products = new Products;
 $Collections = new Collections;
+$Images = new Images;
+$GetImages = new GetImages;
+
 
 
 /** Contrôleur permettant de modifier le nom d'un produit */
@@ -128,7 +133,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
 
     extract($_FILES["fileToUpload"]);
 
-    if ($error > 0) {
+    if (empty($_POST['altImg'])) {
+        $flashToast = true;
+        $flashMsg = ['warning', 'Le texte alternatif est obligatoire'];
+    } elseif ($error > 0) {
         $flashToast = true;
         $flashMsg = ['warning', 'Veuillez choisir un fichier'];
     } elseif (!@getimagesize($tmp_name)) {
@@ -145,14 +153,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
         $explodeNameFile = explode('/', getimagesize($tmp_name)['mime']);
 
         $extension = end($explodeNameFile);
-        $newNameFile = uniqid() . '.' . $extension;
+        $newNameFile = "pdt_" . $_POST['idProduct'] . "_" . uniqid() . '.' . $extension;
 
-        if (move_uploaded_file($tmp_name, "../../assets/img/products/pdt_". $_POST['idProduct'] . "_" . $newNameFile)) {
-            echo "upload ok";
-            var_dump($extension);
-            var_dump($newNameFile);
-            $flashToast = true;
-            $flashMsg = ['success', "L'image a été uploadée."];
+        if (move_uploaded_file($tmp_name, "../../assets/img/products/" . $newNameFile)) {
+
+            if ($idImage = $Images->insertAfterUploadImg($newNameFile, $extension, cleanData($_POST['altImg']))) {
+
+                try {
+                    $GetImages->insertIntermediateTableImage(intval($idImage), intval($_POST['idProduct']));
+
+                    $flashToast = true;
+                    $flashMsg = ['success', "L'image a été uploadée."];
+
+                } catch (PDOException $e) {
+                    $flashToast = true;
+                    $flashMsg = ['error', $e->errorInfo[2]];
+                }
+
+                var_dump($idImage);
+            } else {
+                $flashToast = true;
+                $flashMsg = ['error', "Une erreur s'est produite."];
+            }
         } else {
             $flashToast = true;
             $flashMsg = ['error', "Une erreur s'est produite lors de l'upload."];
