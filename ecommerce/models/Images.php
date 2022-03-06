@@ -30,6 +30,45 @@ class Images extends Database{
         }
     }
 
+
+
+    /**
+     * Méthode permettant de supprimer une image d'un produit (+ table intermédiaire "delete cascade")
+     * @param int (identifiant de l'image)
+     * @return bool
+     */
+    public function deleteImage(int $idImage) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "DELETE FROM `ec_images` WHERE `img_id` = :idImage";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':idImage', $idImage, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
+
+
+    /**
+     * Méthode permettant de modifier le texte alternatif d'une image
+     * @param int (identifiant de l'image)
+     * @return bool
+     */
+    public function updateAltText(int $idImage, string $altText) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_images` SET `img_label_file` = :altText WHERE `img_id` = :idImage";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':altText', $altText, PDO::PARAM_STR);
+        $statment->bindValue(':idImage', $idImage, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
 }
 
 ?>

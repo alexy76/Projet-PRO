@@ -21,7 +21,6 @@ require_once '../../models/Images.php';
 require_once '../../models/GetImages.php';
 
 var_dump($_POST);
-var_dump($_FILES);
 
 $Products = new Products;
 $Collections = new Collections;
@@ -128,6 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeMeta'])) {
 }
 
 
+
 /** Contrôleur permettant de modifier la collection d'un produit */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
 
@@ -164,7 +164,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
 
                     $flashToast = true;
                     $flashMsg = ['success', "L'image a été uploadée."];
-
                 } catch (PDOException $e) {
                     $flashToast = true;
                     $flashMsg = ['error', $e->errorInfo[2]];
@@ -181,6 +180,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
         }
     }
 }
+
+
+
+/** Contrôleur permettant de supprimer une image d'un produit */
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteImage'])) {
+
+    if (unlink($_POST['pathImg'])) {
+        if ($Images->deleteImage(intval($_POST['idImage']))) {
+            $flashToast = true;
+            $flashMsg = ['success', "L'image a été supprimée."];
+        } else {
+            $flashToast = true;
+            $flashMsg = ['error', "Une erreur s'est produite."];
+        }
+    }
+}
+
+
+
+/** Contrôleur permettant de changer le texte alternatif d'une image */
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editImage'])) {
+
+    if ($Images->updateAltText(intval($_POST['idImage']), cleanData($_POST['textAlt']))) {
+        $flashToast = true;
+        $flashMsg = ['success', "Le texte alternatif a été modifié"];
+    } else {
+        $flashToast = true;
+        $flashMsg = ['error', "Une erreur s'est produite."];
+    }
+}
+
 
 
 $listCollections = $Collections->getListCollections();

@@ -265,7 +265,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                                 <img class='img-fluid' src='../../assets/img/products/<?= $value->nameImg ?>' alt="<?= $value->txtAlt ?>">
                                             </a>
                                         </div>
-                                        <p class="text-end text-none"><a class="colorBlueDark editModal" data-bs-toggle="modal" data-bs-target="#editImage" data-id="<?= $value->id ?>" data-srcImg="../../assets/img/products/<?= $value->nameImg ?>" data-idImage="1" data-positionImage="1" alt="<?= $value->txtAlt ?>"><i class="bi bi-pencil"></i> Editer</a></p>
+                                        <p class="text-end text-none"><a class="colorBlueDark editModal" data-bs-toggle="modal" data-bs-target="#editImage" data-id="<?= $value->id ?>" data-srcImg="../../assets/img/products/<?= $value->nameImg ?>" data-idImage="1" data-positionImage="1" data-alt="<?= $value->txtAlt ?>"><i class="bi bi-pencil"></i> Editer</a></p>
                                     </div>
 
                                 <?php endforeach; ?>
@@ -285,11 +285,27 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                 </div>
                                 <div class="modal-body">
                                     <img id="imgModalSrc" class='img-fluid' src=''>
+                                    <form action="" method="POST">
+                                        <div class="my-3 text-start">
+                                            <label for="textAlt" class="form-label">Texte alternatif :</label>
+                                            <input type="text" name="textAlt" class="form-control form-control-sm" id="textAlt" value="" placeholder="Décrivez l'image en quelques mots">
+                                        </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                                    <button type="button" class="btn btnBlueDark">Sauvegarder</button>
-                                    <button type="button" class="btn btn-danger">Supprimer</button>
+
+
+                                    <input id="idChangeImg" type="hidden" value="" name="idImage">
+                                    <button name="editImage" type="submit" class="btn btnBlueDark">Sauvegarder</button>
+                                    </form>
+
+
+                                    <form action="" method="POST">
+                                        <input id="idDeleteImg" type="hidden" value="" name="idImage">
+                                        <input id="pathImage" type="hidden" name="pathImg" value="">
+                                        <button name="deleteImage" type="submit" class="btn btn-danger">Supprimer</button>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -307,6 +323,10 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                 if (e.target.nodeName == 'A') {
 
                     imgModalSrc.src = e.target.dataset.srcimg;
+                    idDeleteImg.value = e.target.dataset.id;
+                    idChangeImg.value = e.target.dataset.id;
+                    textAlt.value = e.target.dataset.alt;
+                    pathImage.value = e.target.dataset.srcimg;
                 }
             });
         });
