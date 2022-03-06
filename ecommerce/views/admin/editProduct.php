@@ -257,42 +257,18 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                             <div class="row">
 
 
+                                <?php foreach ($images as $value) : ?>
 
-                                <div class='col-lg-6 col-12 mb-3'>
-                                    <div>
-                                        <a data-lightbox='roadtrip' href='../../assets/img/produit21-1.jpg'>
-                                            <img class='img-fluid' src='../../assets/img/produit21-1.jpg'>
-                                        </a>
+                                    <div class='col-lg-6 col-12 mb-3'>
+                                        <div>
+                                            <a data-lightbox='roadtrip' href='../../assets/img/products/<?= $value->nameImg ?>'>
+                                                <img class='img-fluid' src='../../assets/img/products/<?= $value->nameImg ?>' alt="<?= $value->txtAlt ?>">
+                                            </a>
+                                        </div>
+                                        <p class="text-end text-none"><a class="colorBlueDark editModal" data-bs-toggle="modal" data-bs-target="#editImage" data-id="<?= $value->id ?>" data-srcImg="../../assets/img/products/<?= $value->nameImg ?>" data-idImage="1" data-positionImage="1" alt="<?= $value->txtAlt ?>"><i class="bi bi-pencil"></i> Editer</a></p>
                                     </div>
-                                    <p class="text-end text-none"><a class="colorBlueDark editModal" data-bs-toggle="modal" data-bs-target="#editImage" data-srcImg="../../assets/img/produit21-1.jpg" data-idImage="1" data-positionImage="1" alt="Plage ensoleillés aux Maldives"><i class="bi bi-pencil"></i> Editer</a></p>
-                                </div>
 
-                                <div class='col-lg-6 col-12 mb-3'>
-                                    <div>
-                                        <a data-lightbox='roadtrip' href='../../assets/img/produit21-2.jpg'>
-                                            <img class='img-fluid' src='../../assets/img/produit21-2.jpg'>
-                                        </a>
-                                        <p class="text-end text-none"><a class="colorBlueDark editModal" href="" data-bs-toggle="modal" data-bs-target="#editImage" data-srcImg="../../assets/img/produit21-2.jpg" data-idImage="2" data-positionImage="3" alt="Ile paradisiaque des Maldives"><i class="bi bi-pencil"></i> Editer</a></p>
-                                    </div>
-                                </div>
-
-                                <div class='col-lg-6 col-12 mb-3'>
-                                    <div>
-                                        <a data-lightbox='roadtrip' href='../../assets/img/produit21-3.jpg'>
-                                            <img class='img-fluid' src='../../assets/img/produit21-3.jpg'>
-                                        </a>
-                                        <p class="text-end text-none"><a class="colorBlueDark editModal" href="" data-bs-toggle="modal" data-bs-target="#editImage" data-srcImg="../../assets/img/produit21-3.jpg" data-idImage="3" data-positionImage="2" alt="Couché du soleil"><i class="bi bi-pencil"></i> Editer</a></p>
-                                    </div>
-                                </div>
-
-                                <div class='col-lg-6 col-12 mb-3'>
-                                    <div>
-                                        <a data-lightbox='roadtrip' href='../../assets/img/produit21-4.jpg'>
-                                            <img class='img-fluid' src='../../assets/img/produit21-4.jpg'>
-                                        </a>
-                                        <p class="text-end text-none"><a class="colorBlueDark editModal" href="" data-bs-toggle="modal" data-bs-target="#editImage" data-srcImg="../../assets/img/produit21-4.jpg" data-idImage="4" data-positionImage="4" alt="Couché du soleil n2"><i class="bi bi-pencil"></i> Editer</a></p>
-                                    </div>
-                                </div>
+                                <?php endforeach; ?>
 
                             </div>
                         </div>

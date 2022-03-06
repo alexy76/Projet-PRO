@@ -185,3 +185,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
 
 $listCollections = $Collections->getListCollections();
 $product = $Products->getProduct(intval($_GET['id']));
+$images = $GetImages->getImagesProduct(intval($_GET['id']));

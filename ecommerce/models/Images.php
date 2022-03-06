@@ -5,7 +5,7 @@ class Images extends Database{
 
 
     /**
-     * Méthode permettant d'enregistrer une nouvelle collection
+     * Méthode permettant d'insérer une nouvelle image produit en bdd
      * @param string (nom du fichier)
      * @param string (extension du fichier)
      * @param string (Texte alternatif de l'image)
