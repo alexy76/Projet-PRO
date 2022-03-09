@@ -136,4 +136,23 @@ class Collections extends Database{
 
         return $collections;
     }
+
+
+
+    /**
+     * Méthode permettant de savoir si la collection existe
+     * @param string (nom de la collection)
+     * @return bool
+     */
+    public function getExistCollection(string $nameCollection) : bool
+    {
+        $db = $this->connectDB();
+        $query = "SELECT count(`col_id`) as 'countCollection' FROM `ec_collection`  WHERE `col_name` = :nameCollection";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':nameCollection', $nameCollection, PDO::PARAM_STR);
+        $statment->execute();
+
+        return $statment->fetch()->countCollection == 0 ? false : true;
+    }
 }

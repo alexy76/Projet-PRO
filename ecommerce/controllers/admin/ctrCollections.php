@@ -26,12 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCategory'], $_POST[
 
         $nameCategory = cleanData($_POST['nameCategory']);
 
-        if ($Category->setCategory($nameCategory, formatSlug($nameCategory))) {
-            $flashToast = true;
-            $flashMsg = ['success', 'La catégorie "' . $nameCategory . '" a été ajoutée'];
+        if (!$Category->getExistCategory($nameCategory)) {
+            if ($Category->setCategory($nameCategory, formatSlug($nameCategory))) {
+                $flashToast = true;
+                $flashMsg = ['success', 'La catégorie "' . $nameCategory . '" a été ajoutée'];
+            } else {
+                $flashToast = true;
+                $flashMsg = ['error', 'Une erreur s\'est produite'];
+            }
         } else {
             $flashToast = true;
-            $flashMsg = ['error', 'Une erreur s\'est produite'];
+            $flashMsg = ['warning', 'Le nom de catégorie existe déjà'];
         }
     } else {
         $flashToast = true;
@@ -55,11 +60,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCollection'])) {
 
                     $nameCollection = cleanData($_POST['nameCollection']);
 
-                    if ($Collections->setNameCollection($nameCollection, formatSlug($nameCollection), intval($_POST['catCollection']))) {
-                        $flashToast = true;
-                        $flashMsg = ['success', "La collection a été ajoutée"];
-                    }
+                    if (!$Collections->getExistCollection($nameCollection)) {
 
+                        if ($Collections->setNameCollection($nameCollection, formatSlug($nameCollection), intval($_POST['catCollection']))) {
+                            $flashToast = true;
+                            $flashMsg = ['success', "La collection a été ajoutée"];
+                        }
+                    } else {
+                        $flashToast = true;
+                        $flashMsg = ['warning', "Le nom de collection existe déjà"];
+                    }
                 } else {
                     $flashToast = true;
                     $flashMsg = ['error', "La catégorie n'existe pas"];

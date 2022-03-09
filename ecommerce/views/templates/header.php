@@ -32,13 +32,13 @@
                     </li> -->
                     <?php foreach ($Collections->getCollections() as $collections) : ?>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <?= $collections['category']['name'] ?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <?php foreach($collections['collections'] as $collection) : ?>
 
-                                <li><a class="dropdown-item" href="#"><?= $collection['name'] ?></a></li>
+                                <li><a class="dropdown-item" href="collection.php?<?= $collection['slug'] ?>"><?= $collection['name'] ?></a></li>
 
                                 <?php endforeach; ?>
                             </ul>

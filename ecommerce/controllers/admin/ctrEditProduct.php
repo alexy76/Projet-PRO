@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
     } elseif ($size > 3 * 1024 ** 2) {
         $flashToast = true;
         $flashMsg = ['warning', 'L\'image est trop volumineuse'];
-    } elseif (!in_array(getimagesize($tmp_name)['mime'], ['image/png', 'image/jpeg', 'image/tiff', 'image/gif', 'image/bmp'])) {
+    } elseif (!in_array(getimagesize($tmp_name)['mime'], ['image/webp', 'image/png', 'image/jpeg', 'image/tiff', 'image/gif', 'image/bmp'])) {
         $flashToast = true;
         $flashMsg = ['warning', 'Le format de l\'image n\'est pas autorisé'];
     } else {

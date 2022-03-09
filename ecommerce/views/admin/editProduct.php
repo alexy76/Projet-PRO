@@ -95,7 +95,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
 
                         <div class="col-lg-6 col-12 px-4 border-grey">
-                            <h4 class="text-center my-3">Informations générales du produit</h4>
+                            <h4 class="text-center my-3 btnBlueDark p-2">Informations générales du produit</h4>
                             <form class="input-group mb-3 w-100 mt-3" action="" method="POST">
 
                                 <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">
@@ -184,7 +184,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                         </div>
                         <div class="col-lg-6 col-12 px-4 bg-grey">
 
-                            <h4 class="text-center my-3">Améliorer son référencement</h4>
+                            <h4 class="text-center my-3 btnBlueDark p-2">Améliorer son référencement</h4>
 
                             <div class="arial shadow p-2 rounded mt-3 bg-white">
 
@@ -225,7 +225,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                     <div class="row text-start g-0">
                         <div class="col-lg-6 col-12 px-4 bg-grey mt-lg-0 mt-5">
 
-                            <h4 class="text-center my-3">Joindre une image au produit</h4>
+                            <h4 class="text-center my-3 btnBlueDark p-2">Joindre une image au produit</h4>
 
 
 
@@ -252,7 +252,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
                         </div>
                         <div class="col-lg-6 col-12 px-4 border-grey">
-                            <h4 class="text-center my-3">Gérer les images du produit</h4>
+                            <h4 class="text-center my-3 btnBlueDark p-2">Gérer les images du produit</h4>
 
                             <div class="row">
 
@@ -275,7 +275,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                     </div>
 
 
-                    <h4 class="text-center my-5">Description du produit</h4>
+                    <h4 class="text-center my-2 btnBlueDark p-2">Description du produit</h4>
 
                     <form class="mb-5 bg-grey p-3" method="POST" action="">
                         <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">

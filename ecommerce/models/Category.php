@@ -90,4 +90,23 @@ class Category extends Database {
 
         return $statment->execute();
     }
+
+
+
+        /**
+     * Méthode permettant de savoir si la catégorie existe
+     * @param string (nom de la catégorie)
+     * @return bool
+     */
+    public function getExistCategory(string $nameCategory) : bool
+    {
+        $db = $this->connectDB();
+        $query = "SELECT count(`cat_id`) as 'countCategory' FROM `ec_category`  WHERE `cat_name` = :nameCategory";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':nameCategory', $nameCategory, PDO::PARAM_STR);
+        $statment->execute();
+
+        return $statment->fetch()->countCategory == 0 ? false : true;
+    }
 }
