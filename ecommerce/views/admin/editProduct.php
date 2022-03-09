@@ -275,6 +275,21 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                     </div>
 
 
+                    <h4 class="text-center my-5">Description du produit</h4>
+
+                    <form class="mb-5 bg-grey p-3" method="POST" action="">
+                        <input type="hidden" value="<?= $product['pdt_id'] ?>" name="idProduct">
+                        <div class="form-floating">
+                            <textarea name="descriptionProduct" class="form-control" placeholder="Insérez ici le code HTML" id="floatingTextarea2" style="height: 500px"><?= !is_null($product['pdt_long_description']) ? $product['pdt_long_description'] : '' ?></textarea>
+                            <label for="floatingTextarea2">Insérez ici le code HTML de la description du produit</label>
+                        </div>
+                        <button type="submit" class="btn btn-sm btnBlueDark my-5" value="" name="saveDescription">Enregistrer la description</button>
+                    </form>
+
+
+
+
+
                     <!-- Modal -->
                     <div class="modal fade" id="editImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

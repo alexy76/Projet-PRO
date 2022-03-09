@@ -5,9 +5,6 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 if (!isset($_SESSION['id']) || $_SESSION['role'] != 2) {
     header('Location: ../login.php');
     exit();
-} elseif (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
-    header('Location: ./products.php');
-    exit();
 }
 
 
@@ -20,12 +17,19 @@ require_once '../../models/Collections.php';
 require_once '../../models/Images.php';
 require_once '../../models/GetImages.php';
 
-var_dump($_POST);
+
 
 $Products = new Products;
 $Collections = new Collections;
 $Images = new Images;
 $GetImages = new GetImages;
+
+
+
+if (!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Products->getExistProduct(intval(cleanData($_GET['id'])))) {
+    header('Location: ./products.php');
+    exit();
+}
 
 
 
@@ -169,7 +173,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
                     $flashMsg = ['error', $e->errorInfo[2]];
                 }
 
-                var_dump($idImage);
             } else {
                 $flashToast = true;
                 $flashMsg = ['error', "Une erreur s'est produite."];
@@ -212,7 +215,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editImage'])) {
 }
 
 
+/** Contrôleur permettant de changer le descriptif du produit */
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['saveDescription'])) {
+
+    if($Products->setDescriptionProduct($_POST['descriptionProduct'], $_POST['idProduct'])){
+        $flashToast = true;
+        $flashMsg = ['success', "La description produit a été modifiée"];
+    }else{
+        $flashToast = true;
+        $flashMsg = ['error', "Une erreur s'est produite."];
+    }
+}
+
+
+
 
 $listCollections = $Collections->getListCollections();
 $product = $Products->getProduct(intval($_GET['id']));
 $images = $GetImages->getImagesProduct(intval($_GET['id']));
+
+var_dump($_POST);

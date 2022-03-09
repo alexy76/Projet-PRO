@@ -25,6 +25,25 @@ class Products extends Database
 
 
 
+/**
+     * Méthode permettant de savoir si le produit existe
+     * @param int (identifiant du produit)
+     * @return bool
+     */
+    public function getExistProduct(int $id) : bool
+    {
+        $db = $this->connectDB();
+        $query = "SELECT count(`pdt_id`) as 'countProduct' FROM `ec_products`  WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetch()->countProduct == 0 ? false : true;
+    }
+
+
+
     /**
      * Méthode permettant de récupérer le nombre total de produits (aide à la pagination)
      * @return int (nombre total de produits)
@@ -269,6 +288,27 @@ class Products extends Database
         $statment = $db->prepare($query);
         $statment->bindValue(':metaTitle', $metaTitle, PDO::PARAM_STR);
         $statment->bindValue(':metaDescription', $metaDescription, PDO::PARAM_STR);
+        $statment->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $statment->execute();
+    }
+
+
+
+    /**
+     * Méthode permettant de modifier la description d'un produit
+     * @param string (Description du produit CODE HTML)
+     * @param int (Identifiant du produit)
+     * @return bool
+     */
+    public function setDescriptionProduct(string $descriptionProduct, int $id) : bool
+    {
+        $db = $this->connectDB();
+
+        $query = "UPDATE `ec_products` SET `pdt_long_description` = :descriptionProduct WHERE `pdt_id` = :id";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':descriptionProduct',$descriptionProduct, PDO::PARAM_STR);
         $statment->bindValue(':id', $id, PDO::PARAM_INT);
 
         return $statment->execute();
