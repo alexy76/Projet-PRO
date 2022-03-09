@@ -188,7 +188,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
                             <div class="arial shadow p-2 rounded mt-3 bg-white">
 
-                                <p class="arial m-0">https://www.<?= $_SERVER['HTTP_HOST'] ?> › <span class="greyGoogle">collection...</a></p>
+                                <p class="arial m-0">https://www.<?= $_SERVER['HTTP_HOST'] ?> › <span class="greyGoogle">product...</a></p>
                                 <p class="arial m-0 h5 fw-bold"><a id="displayTitleGoogle" class="underline" href=""><?= !is_null($product['pdt_meta_title']) ? $product['pdt_meta_title'] : 'Bague Tête de Mort | Crâne Faction' ?></a></p>
                                 <p id="displayDescriptionGoogle" class="arial m-0 greyGoogle"><?= !is_null($product['pdt_meta_description']) ? $product['pdt_meta_description'] : 'Nos Bagues Têtes de Mort forgées dans les entrailles de l\'enfer vont te faire craquer. Biker dissident, punk, métalleux énervé ou gothique : bienvenue !' ?></p>
 
@@ -402,6 +402,56 @@ require_once '../../controllers/admin/ctrEditProduct.php';
             });
 
         })
+    </script>
+    <script>
+        const metaTitle = document.getElementById('metaTitle');
+        const metaDescription = document.getElementById('metaDescription');
+        const nbCharsTitle = document.getElementById('nbCharsTitle');
+        const nbCharsDescription = document.getElementById('nbCharsDescription');
+        const displayTitleGoogle = document.getElementById('displayTitleGoogle');
+        const displayDescriptionGoogle = document.getElementById('displayDescriptionGoogle');
+
+        window.addEventListener('DOMContentLoaded', () => {
+
+            nbCharsTitle.innerText = metaTitle.value.length;
+            nbCharsDescription.innerText = metaDescription.value.length;
+
+
+
+            if (metaTitle.value.length == 0) {
+                displayTitleGoogle.innerText = "Nom de votre produit | NOMDUSITE.COM";
+            }
+
+            if (metaDescription.value.length == 0) {
+                displayDescriptionGoogle.innerText = "Décrivez votre produit en mettant en avant les avantages de celui-ci, adoptez une approche commerciale";
+            }
+        })
+
+        metaTitle.addEventListener('keyup', () => {
+
+            let lenghtText = metaTitle.value.length;
+
+            displayTitleGoogle.innerText = metaTitle.value
+
+            if (lenghtText == 0) {
+                displayTitleGoogle.innerText = 'Nom de votre produit | NOMDUSITE.COM';
+                nbCharsTitle.innerText = '0';
+            } else
+                nbCharsTitle.innerText = lenghtText;
+        });
+
+        metaDescription.addEventListener('keyup', () => {
+
+            let lenghtText = metaDescription.value.length;
+
+            displayDescriptionGoogle.innerText = metaDescription.value;
+
+            if (lenghtText == 0) {
+                displayDescriptionGoogle.innerText = 'Décrivez votre produit en mettant en avant les avantages de celui-ci, adoptez une approche commerciale';
+                nbCharsTitle.innerText = '0';
+            } else
+                nbCharsDescription.innerText = lenghtText;
+        });
     </script>
     <script src="../../assets/js/lightbox-plus-jquery.js"></script>
     <script src="../../assets/js/appAdmin.js"></script>

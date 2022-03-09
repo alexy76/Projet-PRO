@@ -104,8 +104,8 @@ require_once '../../controllers/admin/ctrProducts.php';
 
                     <!-- <div class="input-group mt-4"> -->
                     <form action="" method="GET" class="w-100 input-group mt-4">
-                        <input type="hidden" name="search" value="NameClient">
-                        <input id="name" type="text" list="res" value="<?= $req ?? '' ?>" class="form-control form-control-sm" placeholder="Nom du client" name="req" autocomplete="off" onkeyup="getdata();">
+                        <input type="hidden" name="search" value="NameProduct">
+                        <input id="nameProduct" type="text" list="res" value="<?= $req ?? '' ?>" class="form-control form-control-sm" placeholder="Nom du produit" name="req" autocomplete="off" onkeyup="getdata();">
                         <div class="input-group-append">
                             <button class="btn btn-sm btnBlueDark" type="submit">Rechercher</button>
                         </div>
@@ -123,8 +123,9 @@ require_once '../../controllers/admin/ctrProducts.php';
                                         <input id="allCheckbox" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                     </th>
                                     <th class="btnBlue text-white text-start" scope="col">Nom du produit</th>
+                                    <th class="btnBlue text-white text-start" scope="col">Collection</th>
                                     <th class="btnBlue text-white text-start" scope="col">Prix</th>
-                                    <th class="btnBlue text-white" scope="col">Mis en ligne</th>
+                                    <th class="btnBlue text-white" scope="col">En ligne</th>
                                     <th class="btnBlue text-white radius-top-right" scope="col"></th>
                                 </tr>
                             </thead>
@@ -133,6 +134,7 @@ require_once '../../controllers/admin/ctrProducts.php';
                                 <?php if (!$getAllProducts) : ?>
                                     <tr>
                                         <th class="text-start" scope="row">Aucunes données trouvées</th>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -147,6 +149,7 @@ require_once '../../controllers/admin/ctrProducts.php';
                                                 <input class="form-check-input inputDelete" type="checkbox" value="<?= $product->pdt_id ?>">
                                             </td>
                                             <th class="text-start" scope="row"><?= $product->pdt_title ?></th>
+                                            <td class="text-start"><?= $product->col_name ?></td>
                                             <td class="text-start"><?= $product->pdt_price ?></td>
                                             <td><input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" <?= $product->pdt_activated == 1 ? 'checked' : '' ?> disabled></td>
                                             <td>
@@ -186,30 +189,24 @@ require_once '../../controllers/admin/ctrProducts.php';
                             <div id="inputGenerate">
                             </div>
                             <div class="text-end mb-3">
+                                <!-- <input type="submit" value="Appliquer une remise" name="applyDiscountAll" class="btn btn-sm btn-light d-inline-block text-end"> -->
                                 <input type="submit" value="Supprimer" name="deleteAll" class="btn btn-sm btn-danger d-inline-block text-end">
                             </div>
                         </form>
 
-                        <form id="formInputsApplyDiscount" method="POST" action="" class="d-none">
-                            <div id="inputGenerateDiscount">
-                            </div>
-                            <div class="text-end mb-3">
-                                <input type="submit" value="Appliquer une remise" name="applyDiscountAll" class="btn btn-sm btn-dark d-inline-block text-end">
-                            </div>
-                        </form>
 
                         <nav class="text-center d-inline-block" aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item <?= $pageActual == 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual - 1 ?>">Précédent</a>
+                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req=' . $req : '' ?>&page=<?= $pageActual - 1 ?>">Précédent</a>
                                 </li>
                                 <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
                                     <li class="page-item">
-                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $i ?>"><?= $i ?></a>
+                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req=' . $req : '' ?>&page=<?= $i ?>"><?= $i ?></a>
                                     </li>
                                 <?php endfor; ?>
                                 <li class="page-item <?= $pageActual == $nbPages || ($pageActual == 1 && $nbPages == 0) ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual + 1 ?>">Suivant</a>
+                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req=' . $req : '' ?>&page=<?= $pageActual + 1 ?>">Suivant</a>
                                 </li>
                             </ul>
                         </nav>
@@ -223,6 +220,27 @@ require_once '../../controllers/admin/ctrProducts.php';
     </div>
 
 
+    <script type="text/javascript">
+        function getdata() {
+
+            var nameProduct = $('#nameProduct').val();
+
+            if (nameProduct) {
+                $.ajax({
+                    type: 'post',
+                    url: '../../controllers/ctrAjax.php',
+                    data: {
+                        nameProduct: nameProduct,
+                    },
+                    success: function(response) {
+                        $('#res').html(response);
+                    }
+                });
+            } else {
+                $('#res').html("Entrez le nom de l'utilisateur");
+            }
+        }
+    </script>
     <script type="text/javascript">
         if (<?= $flashToast ?? 'false' ?>) {
 

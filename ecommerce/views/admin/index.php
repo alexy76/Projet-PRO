@@ -159,7 +159,7 @@ require_once '../../controllers/admin/ctrIndex.php';
                         <nav class="text-center d-inline-block" aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item <?= $pageActual == 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual - 1 ?>">Previous</a>
+                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual - 1 ?>">Précédent</a>
                                 </li>
                                 <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
                                     <li class="page-item">
@@ -167,7 +167,7 @@ require_once '../../controllers/admin/ctrIndex.php';
                                     </li>
                                 <?php endfor; ?>
                                 <li class="page-item <?= $pageActual == $nbPages || ($pageActual == 1 && $nbPages == 0) ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual + 1 ?>">Next</a>
+                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual + 1 ?>">Suivant</a>
                                 </li>
                             </ul>
                         </nav>

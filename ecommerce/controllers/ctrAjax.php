@@ -26,6 +26,17 @@ if (isset($_POST['name']))
 }
 
 
+if (isset($_POST['nameProduct'])) 
+{
+    $products = cleanData($_POST['nameProduct']);
+
+    foreach ($Products->getNamesProducts($products) as $product) {
+
+        echo "<option>" . $product->pdt_title . "</option>";
+    }
+}
+
+
 if(isset($_POST['position'])){
 
 

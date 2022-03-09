@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeMeta'])) {
 
     if ($Products->setMetaProduct($metaTitle, $metaDescription, intval($_POST['idProduct']))) {
         $flashToast = true;
-        $flashMsg = ['success', 'Les options ont été modifiées'];
+        $flashMsg = ['success', 'Google vous remercie :D'];
     } else {
         $flashToast = true;
         $flashMsg = ['error', 'Une erreur s\'est produite'];

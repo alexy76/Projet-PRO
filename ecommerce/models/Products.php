@@ -25,7 +25,7 @@ class Products extends Database
 
 
 
-/**
+    /**
      * Méthode permettant de savoir si le produit existe
      * @param int (identifiant du produit)
      * @return bool
@@ -40,6 +40,28 @@ class Products extends Database
         $statment->execute();
 
         return $statment->fetch()->countProduct == 0 ? false : true;
+    }
+
+
+
+    /**
+     * Méthode utilisée avec Ajax permettant de rechercher les noms des produits en autocomplétion
+     * @param string (suite de lettres saisie par l'administrateur)
+     * @return array (tableau contenant au maximum 10 noms de produits correspondant à la recherche)
+     */
+    public function getNamesProducts(string $stringNameProduct) : array
+    {
+        $db = $this->connectDB();
+
+        $search = $stringNameProduct.'%';
+
+        $query = "SELECT `pdt_title` FROM `ec_products` WHERE `pdt_title` LIKE :search ORDER BY `pdt_title` LIMIT 10 OFFSET 0";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':search', $search, PDO::PARAM_STR);
+        $statment->execute();
+
+        return $statment->fetchAll();
     }
 
 
@@ -67,9 +89,52 @@ class Products extends Database
     {
         $db = $this->connectDB();
 
-        $query = "SELECT * FROM `ec_products` ORDER BY `pdt_id` DESC LIMIT :nbElt OFFSET :offset";
+        $query = "SELECT * FROM `ec_products` NATURAL JOIN `ec_collection` ORDER BY `pdt_id` DESC LIMIT :nbElt OFFSET :offset";
 
         $statment = $db->prepare($query);
+        $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
+        $statment->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetchAll();
+    }
+
+
+
+    /**
+     * Méthode permettant de récupérer le nombre des personnes inscrites selon un champ de recherche par nom (aide à la pagination)
+     * @return int (nombre total d'inscrits selon la recherche par nom)
+     */
+    public function getCount_NameProduct(string $titleProduct) : int
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT count(`pdt_id`) as 'nbProducts' FROM `ec_products` WHERE `pdt_title` LIKE :titleProduct";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':titleProduct', $titleProduct, PDO::PARAM_STR);
+        $statment->execute();
+
+        return $statment->fetch()->nbProducts;
+    }
+
+
+
+    /**
+     * Méthode permettant de récuperer les données des personnes inscrites selon une recherche par nom
+     * @param string (nom de la personne inscrite à rechercher)
+     * @param int (nombre d'élements à récuperer)
+     * @param int (offset de départ)
+     * @return array (liste des inscrits selon le champ de recherche par nom)
+     */
+    public function get_NameProduct(string $titleProduct, int $nbElt, int $offset) : array
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT * FROM `ec_products` NATURAL JOIN `ec_collection` WHERE `pdt_title` LIKE :titleProduct ORDER BY `pdt_title` LIMIT :nbElt OFFSET :offset";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':titleProduct', $titleProduct, PDO::PARAM_STR);
         $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
         $statment->bindValue(':offset', $offset, PDO::PARAM_INT);
         $statment->execute();
@@ -315,6 +380,3 @@ class Products extends Database
     }
 
 }
-
-
-?>
