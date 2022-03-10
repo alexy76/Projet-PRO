@@ -9,16 +9,17 @@ class Products extends Database
      * @param int (identifiant de la collection)
      * @return bool
      */
-    public function setNewProduct(string $title, int $idCol): bool
+    public function setNewProduct(string $title, int $idCol, string $slug): bool
     {
         $db = $this->connectDB();
 
-        $query = "INSERT INTO `ec_products` (`pdt_title`,`pdt_price`,`pdt_activated`,`col_id`) 
-                VALUES (:title, 0, 0, :idCol)";
+        $query = "INSERT INTO `ec_products` (`pdt_title`,`pdt_price`,`pdt_activated`, `pdt_slug`, `col_id`) 
+                VALUES (:title, 0, 0, :slug, :idCol)";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':title', $title, PDO::PARAM_STR);
         $statment->bindValue(':idCol', $idCol, PDO::PARAM_INT);
+        $statment->bindValue(':slug', $slug, PDO::PARAM_STR);
         
         return $statment->execute();
     }

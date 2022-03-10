@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
 
         if (isset($_POST['idColProduct']) && ctype_digit($_POST['idColProduct'])) {
 
-            if ($Products->setNewProduct(cleanData($_POST['nameProduct']), intval($_POST['idColProduct']))) {
+            if ($Products->setNewProduct(cleanData($_POST['nameProduct']), intval($_POST['idColProduct']), formatSlug(cleanData($_POST['nameProduct'])))) {
 
                 $flashToast = true;
                 $flashMsg = ['success', "Le produit a été créé"];

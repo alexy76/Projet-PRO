@@ -61,6 +61,8 @@ function formatSlug(string $str) : string
     $str = preg_replace('#Ù|Ú|Û|Ü#', 'U', $str);
     $str = preg_replace('#ý|ÿ#', 'y', $str);
     $str = preg_replace('#Ý#', 'Y', $str);
+    $str = preg_replace('#-#', '', $str);
+    $str = preg_replace('#  #', ' ', $str);
     $str = preg_replace('# #', '-', $str);
 
     return strtolower($str);

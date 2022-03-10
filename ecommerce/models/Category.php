@@ -93,7 +93,7 @@ class Category extends Database {
 
 
 
-        /**
+    /**
      * Méthode permettant de savoir si la catégorie existe
      * @param string (nom de la catégorie)
      * @return bool

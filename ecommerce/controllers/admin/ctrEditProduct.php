@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
     } elseif ($size > 3 * 1024 ** 2) {
         $flashToast = true;
         $flashMsg = ['warning', 'L\'image est trop volumineuse'];
-    } elseif (!in_array(getimagesize($tmp_name)['mime'], ['image/webp', 'image/png', 'image/jpeg', 'image/tiff', 'image/gif', 'image/bmp'])) {
+    } elseif (!in_array(getimagesize($tmp_name)['mime'], ['image/avif', 'image/webp', 'image/png', 'image/jpeg', 'image/tiff', 'image/gif', 'image/bmp'])) {
         $flashToast = true;
         $flashMsg = ['warning', 'Le format de l\'image n\'est pas autorisé'];
     } else {
@@ -233,5 +233,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['saveDescription'])) {
 $listCollections = $Collections->getListCollections();
 $product = $Products->getProduct(intval($_GET['id']));
 $images = $GetImages->getImagesProduct(intval($_GET['id']));
-
-var_dump($_POST);
