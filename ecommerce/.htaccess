@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^views/collection/([a-z0-9-]+)$ views/collection.php?slug=$1 [R,L]

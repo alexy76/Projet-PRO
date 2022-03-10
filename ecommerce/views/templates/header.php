@@ -38,7 +38,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <?php foreach($collections['collections'] as $collection) : ?>
 
-                                <li><a class="dropdown-item" href="collection.php?<?= $collection['slug'] ?>"><?= $collection['name'] ?></a></li>
+                                <li><a class="dropdown-item" href="collection.php?id=<?= $collection['id'] ?>&slug=<?= $collection['slug'] ?>"><?= $collection['name'] ?></a></li>
 
                                 <?php endforeach; ?>
                             </ul>

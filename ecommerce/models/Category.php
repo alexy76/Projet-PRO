@@ -109,4 +109,5 @@ class Category extends Database {
 
         return $statment->fetch()->countCategory == 0 ? false : true;
     }
+
 }

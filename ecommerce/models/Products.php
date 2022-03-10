@@ -380,4 +380,30 @@ class Products extends Database
         return $statment->execute();
     }
 
+
+
+        /**
+     * Méthode permettant de savoir si la catégorie existe
+     * @param int (identifiant de la catégorie)
+     * @return array
+     */
+    public function get_displayByCollection(int $idCollection) : array
+    {
+        $db = $this->connectDB();
+        $query = "SELECT `pdt_id` AS 'idProduct', `pdt_title` AS 'titleProduct', `pdt_price` AS 'priceProduct', 
+                `pdt_discount` AS 'discountPrice', `img_name_file` AS 'imageProduct', 
+                `img_label_file` AS 'labelImage', `pdt_slug` AS 'slugProduct' 
+                FROM `ec_products`
+                NATURAL JOIN `ec_get_images`
+                NATURAL JOIN `ec_images`
+                WHERE `col_id` = :idCollection AND `pdt_activated` = 1
+                GROUP BY `pdt_id`";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':idCollection', $idCollection, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetchAll();
+    }
+
 }

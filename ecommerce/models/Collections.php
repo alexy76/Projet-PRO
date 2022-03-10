@@ -155,4 +155,23 @@ class Collections extends Database{
 
         return $statment->fetch()->countCollection == 0 ? false : true;
     }
+
+
+
+    /**
+     * Méthode permettant de savoir si l'identifiant de la collection existe en base de données
+     * @param int (identifiant de la collection)
+     * @return bool
+     */
+    public function getExistIdCollection(int $idCollection) : bool
+    {
+        $db = $this->connectDB();
+        $query = "SELECT count(`col_id`) as 'countId' FROM `ec_collection`  WHERE `col_id` = :idCollection";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':idCollection', $idCollection, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetch()->countId == 1 ? true : false;
+    }
 }
