@@ -7,7 +7,7 @@ include '../views/templates/header.php';
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../../views/home.php">SportXtrem</a></li>
-            <li class="breadcrumb-item active">Collection</li>
+            <li class="breadcrumb-item active"><?= ucfirst(strtolower($collectionName['cat_name'])) ?></li>
             <li class="breadcrumb-item active" aria-current="page"><?= $collectionName['col_name'] ?></li>
         </ol>
     </nav>
@@ -33,7 +33,7 @@ include '../views/templates/header.php';
                             <img src="../../assets/img/products/<?= $product->imageProduct ?>" class="card-img-top img-fluid" alt="<?= $product->labelImage ?>">
                             <div class="card-body">
                                 <h2 class="card-title h6"><?= ucfirst(strtolower($product->titleProduct)) ?></h2>
-                                <p class="card-text"></p>
+                                <p class="card-text">kjhykujghkugf</p>
                             </div>
                             <div class="card__overlay">
                                 <div class="overlay__text">

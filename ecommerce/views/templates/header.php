@@ -22,30 +22,32 @@
 
     <header>
         <div class="" style="background: #267691;">
-            <img class="img-fluid" src="../../assets/img/logosportxtrem.png" alt="Enseigne SportXtrem">
+            <a href="../../views/home.php"><img class="img-fluid" src="../../assets/img/logosportxtrem.png" alt="Enseigne SportXtrem"></a>
         </div>
 
 
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
             <div class="container-fluid">
-                <a class="navbar-brand text-bluelight" href="../../views/home.php"><i class="bi bi-house-fill fs-3"></i></a>
+                <a class="navbar-brand text-bluelight ms-lg-5 ms-0 d-lg-none d-block fs-1" href="../../views/home.php"><i class="bi bi-house-fill"></i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li> -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 h6">
+                        <li class="nav-item dropdown text-bluedark ms-lg-5 ms-0">
+                            <a class="nav-link text-bluedark" href="../../views/home.php">
+                                <i class="bi bi-house-fill text-bluelight "> ACCUEIL</i>
+                            </a>
+                        </li>
                         <?php foreach ($Collections->getCollections() as $collections) : ?>
-                            <li class="nav-item dropdown text-bluedark">
+                            <li class="nav-item dropdown text-bluedark ms-lg-5 ms-0">
                                 <a class="nav-link dropdown-toggle text-bluedark" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?= $collections['category']['name'] ?>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <?php foreach ($collections['collections'] as $collection) : ?>
 
-                                        <li><a class="dropdown-item" href="../../collection/<?= $collection['id'] ?>/<?= $collection['slug'] ?>"><?= $collection['name'] ?></a></li>
+                                        <li class=""><a class="dropdown-item" href="../../collection/<?= $collection['id'] ?>/<?= $collection['slug'] ?>"><?= $collection['name'] ?></a></li>
 
                                     <?php endforeach; ?>
                                 </ul>
@@ -53,7 +55,44 @@
 
                         <?php endforeach; ?>
                     </ul>
-                    <form class="d-flex">
+                    <div class="d-flex me-lg-5 me-0">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 h6">
+                            <?php if (!isset($_SESSION['id'])) : ?>
+                                <li class="nav-item dropdown text-bluedark me-lg-5 me-0">
+                                    <a class="nav-link text-bluedark" href="../../views/login.php?action=connection">CONNEXION</a>
+                                </li>
+                            <?php else : ?>
+                                <li class="nav-item dropdown text-bluedark me-lg-5 me-0">
+                                    <a class="nav-link dropdown-toggle text-bluedark" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        MON COMPTE
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <?php if ($_SESSION['role'] == 2) : ?>
+                                            <li>
+                                                <a class="dropdown-item" href="../../views/admin/index.php">Administration</a>
+                                            </li>
+                                        <?php endif; ?>
+                                        <li>
+                                            <a class="dropdown-item" href="../../views/account.php">Votre compte</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="../../views/orders.php">Vos commandes</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="../../views/bills.php">Vos factures</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="../../views/logout.php">Se déconnecter</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-cart-check-fill"></i> MON PANIER</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <form class="d-flex">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -61,7 +100,7 @@
                         </ul>
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </nav>

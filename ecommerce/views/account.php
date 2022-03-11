@@ -10,19 +10,8 @@ include '../views/templates/header.php';
 
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="true" href="login.php">Debug session</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="true" href="logout.php">Déconnexion</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" aria-current="true" href="">Mon compte</a>
                 </li>
-                <?php if ($_SESSION['role'] == 2) : ?>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="true" href="admin/index.php">Panel Admin</a>
-                    </li>
-                <?php endif; ?>
             </ul>
         </div>
         <div class="card-body">
