@@ -3,11 +3,7 @@ require_once '../controllers/ctrAccount.php';
 include '../views/templates/header.php';
 ?>
 
-<a href="/" class="linklogin">
-    <h1 class="text-center mt-5 text-white">Compte client</h1>
-</a>
-
-<div class="container mt-5">
+<div class="container mt-3">
 
     <div class="card text-center">
         <div class="card-header">

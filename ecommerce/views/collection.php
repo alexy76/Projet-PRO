@@ -3,12 +3,14 @@ require_once '../controllers/ctrCollection.php';
 include '../views/templates/header.php';
 ?>
 
-<a href="/" class="linklogin">
-    <h1 class="text-center mt-5 text-white">Collections</h1>
-</a>
-
-<div class="container mt-5">
-
+<div class="container mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Library</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav>
     <div class="card text-center">
 
         <div class="card-body">
@@ -35,7 +37,12 @@ include '../views/templates/header.php';
                             </div>
                             <div class="card__overlay">
                                 <div class="overlay__text">
-                                    <a href="./product.php?id=<?= $product->idProduct ?>&slug=<?= $product->slugProduct ?>" class="btn btn-primary px-5 py-2 fs-5 border border-2 border-white">Voir</a>
+                                    <!-- <a href="./product.php?id=<?= $product->idProduct ?>&slug=<?= $product->slugProduct ?>" class="btn btn-primary px-5 py-2 fs-5 border border-2 border-white">Voir</a> -->
+                                    <div class="buttons">
+                                        <div class="containerglass">
+                                            <a href="https://twitter.com/masuwa1018" class="btnglass effect01" target="_blank"><span>VOIR</span></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -17,6 +17,7 @@ if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Collections->getExistId
     exit();
 }
 
+//var_dump($_GET);
 
 $Products = new Products;
 
