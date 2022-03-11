@@ -169,7 +169,7 @@ require_once '../../controllers/admin/ctrProducts.php';
                                                             </form>
                                                         </li>
                                                         <li>
-                                                            <form class="m-0" method="POST" action="">
+                                                            <form id="deleteProductForm" class="m-0" method="POST" action="">
                                                                 <input type="hidden" value="<?= $product->pdt_title ?>" name="nameProduct">
                                                                 <input type="hidden" value="<?= $product->pdt_id ?>" name="idProduct">
                                                                 <input class="d-inline-block w-100 linkBtnDelete px-2" type="submit" value="Supprimer le produit" name="deleteProduct">
@@ -220,6 +220,20 @@ require_once '../../controllers/admin/ctrProducts.php';
     </div>
 
 
+    <script type="text/javascript">
+        document.getElementById('deleteProductForm').addEventListener('submit', (e) => {
+            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+                e.preventDefault();
+            }
+        })
+    </script>
+    <script type="text/javascript">
+        document.getElementById('formInputsDelete').addEventListener('submit', (e) => {
+            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+                e.preventDefault();
+            }
+        })
+    </script>
     <script type="text/javascript">
         function getdata() {
 

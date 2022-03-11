@@ -17,13 +17,14 @@ if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Collections->getExistId
     exit();
 }
 
-//var_dump($_GET);
+//
 
 $Products = new Products;
 
 $productsByCollection = $Products->get_displayByCollection(intval($_GET['id']));
+$collectionName = $Collections->getCollectionByID(intval($_GET['id']));
 
-
+//var_dump($productsByCollection);
 
 /** Valeur des metas (A VOIR PLUS TARD POUR LA RECHERCHER PAR COLLECTION) */
 $meta_title = 'En cours de construction';

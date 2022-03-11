@@ -5,7 +5,7 @@ include '../views/templates/header.php';
 
 <div class="container mt-3">
 
-    <div class="card text-center">
+    <div class="card text-center" style="min-height: 70vh;">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">

@@ -315,7 +315,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
                                     </form>
 
 
-                                    <form action="" method="POST">
+                                    <form id="deleteImageForm" action="" method="POST">
                                         <input id="idDeleteImg" type="hidden" value="" name="idImage">
                                         <input id="pathImage" type="hidden" name="pathImg" value="">
                                         <button name="deleteImage" type="submit" class="btn btn-danger">Supprimer</button>
@@ -330,6 +330,14 @@ require_once '../../controllers/admin/ctrEditProduct.php';
         </div>
     </div>
 
+
+    <script type="text/javascript">
+        document.getElementById('deleteImageForm').addEventListener('submit', (e) => {
+            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+                e.preventDefault();
+            }
+        })
+    </script>
     <script>
         Array.from(document.getElementsByClassName('editModal')).forEach(elt => {
 

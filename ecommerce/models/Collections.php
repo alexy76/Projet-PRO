@@ -1,6 +1,7 @@
 <?php
 
-class Collections extends Database{
+class Collections extends Database
+{
 
 
 
@@ -11,7 +12,7 @@ class Collections extends Database{
      * @param int (identifiant de la catégorie associée à la collection)
      * @return bool
      */
-    public function setNameCollection(string $nameCollection, string $slugCollection, int $idCat) : bool
+    public function setNameCollection(string $nameCollection, string $slugCollection, int $idCat): bool
     {
         $db = $this->connectDB();
 
@@ -31,11 +32,11 @@ class Collections extends Database{
      * Méthode permettant d'obtenir le nombre de collections enregistrées pour une catégorie (utilisée notamment pour les positions)
      * @return int (nombre de collections)
      */
-    private function getCountCollectionPerCategory(int $id) : int
+    private function getCountCollectionPerCategory(int $id): int
     {
         $db = $this->connectDB();
 
-        $query = "SELECT count(`col_id`) as 'count' FROM `ec_collection` WHERE `cat_id` = :id"; 
+        $query = "SELECT count(`col_id`) as 'count' FROM `ec_collection` WHERE `cat_id` = :id";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':id', $id, PDO::PARAM_INT);
@@ -50,7 +51,7 @@ class Collections extends Database{
      * triée par position des catégories et ensuite par la position des collections
      * @return array 
      */
-    public function getCollections() : array
+    public function getCollections(): array
     {
         $db = $this->connectDB();
         $req = $db->query("SELECT `cat_name` as 'nameCategory', `cat_position` as 'positionCat', `cat_id` as 'idCat', 
@@ -60,8 +61,8 @@ class Collections extends Database{
                         NATURAL JOIN `ec_category`
                         GROUP BY `cat_id`
                         order by `cat_position`, `col_position`")->fetchAll();
-                        
-        foreach($req as $key => $category){
+
+        foreach ($req as $key => $category) {
 
             $collections[$key]['category']['id'] = $category->idCat;
             $collections[$key]['category']['name'] = $category->nameCategory;
@@ -72,8 +73,7 @@ class Collections extends Database{
             $nameCol = explode(',', $category->nameCol);
             $slugCol  = explode(',', $category->slugCol);
 
-            for($i = 0; $i < count(explode(',', $category->idCol)); $i++)
-            {
+            for ($i = 0; $i < count(explode(',', $category->idCol)); $i++) {
                 $collections[$key]['collections'][$keyCol[$i]]['id'] = $idCol[$i];
                 $collections[$key]['collections'][$keyCol[$i]]['name'] = $nameCol[$i];
                 $collections[$key]['collections'][$keyCol[$i]]['slug'] = $slugCol[$i];
@@ -93,7 +93,7 @@ class Collections extends Database{
      * @param int (nouvelle position)
      * @return bool
      */
-    public function setNewPositionCollection(int $id, int $position) : bool
+    public function setNewPositionCollection(int $id, int $position): bool
     {
         $db = $this->connectDB();
 
@@ -112,7 +112,7 @@ class Collections extends Database{
      * Méthode permettant de retourner la liste des collections avec leurs ID
      * @return array
      */
-    public function getListCollections() : array
+    public function getListCollections(): array
     {
         $db = $this->connectDB();
 
@@ -121,12 +121,10 @@ class Collections extends Database{
         GROUP BY `cat_position`
         ORDER BY `cat_position`";
 
-        foreach($db->query($query)->fetchAll() as $key => $value)
-        {
+        foreach ($db->query($query)->fetchAll() as $key => $value) {
             $collections[$key]['category'] = $value->nameCat;
 
-            for($i = 0; $i < count(explode(',', $value->nameCol)); $i++)
-            {
+            for ($i = 0; $i < count(explode(',', $value->nameCol)); $i++) {
                 $collections[$key]['collections'][$i] = [
                     'id' => explode(',', $value->idCol)[$i],
                     'name' => explode(',', $value->nameCol)[$i]
@@ -144,7 +142,7 @@ class Collections extends Database{
      * @param string (nom de la collection)
      * @return bool
      */
-    public function getExistCollection(string $nameCollection) : bool
+    public function getExistCollection(string $nameCollection): bool
     {
         $db = $this->connectDB();
         $query = "SELECT count(`col_id`) as 'countCollection' FROM `ec_collection`  WHERE `col_name` = :nameCollection";
@@ -163,7 +161,7 @@ class Collections extends Database{
      * @param int (identifiant de la collection)
      * @return bool
      */
-    public function getExistIdCollection(int $idCollection) : bool
+    public function getExistIdCollection(int $idCollection): bool
     {
         $db = $this->connectDB();
         $query = "SELECT count(`col_id`) as 'countId' FROM `ec_collection`  WHERE `col_id` = :idCollection";
@@ -173,5 +171,25 @@ class Collections extends Database{
         $statment->execute();
 
         return $statment->fetch()->countId == 1 ? true : false;
+    }
+
+
+    /**
+     * Méthode permettant de récupérer des information d'une collection par son ID
+     * @param int (identifiant de la collection)
+     * @return object
+     */
+    public function getCollectionByID(int $idCollection)
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT `col_name`, `cat_name` FROM ec_collection
+            NATURAL JOIN `ec_category` WHERE `col_id` = :idCollection";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':idCollection', $idCollection, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetch(PDO::FETCH_ASSOC);
     }
 }

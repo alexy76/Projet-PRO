@@ -181,6 +181,14 @@ require_once '../../controllers/admin/ctrIndex.php';
     </div>
 
     <script type="text/javascript">
+        document.getElementById('formInputsDelete').addEventListener('submit', (e) => {
+            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+                e.preventDefault();
+            }
+        })
+    </script>
+
+    <script type="text/javascript">
         function getdata() {
 
             var name = $('#name').val();
@@ -206,7 +214,7 @@ require_once '../../controllers/admin/ctrIndex.php';
 
             const Toast = Swal.mixin({
                 toast: true,
-                position: 'middle-middle',
+                position: 'center',
                 background: "#2e3c50",
                 color: "#fff",
                 showConfirmButton: false,
