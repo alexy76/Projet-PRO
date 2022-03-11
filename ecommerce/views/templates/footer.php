@@ -1,3 +1,5 @@
+</main>
+<footer>
     <?php if (isset($messageFlash)) : ?>
         <span id="messageFlash"></span>
     <?php endif; ?>
@@ -25,7 +27,10 @@
         }
     </script>
     <script src="../assets/js/app.js"></script>
+</footer>
 
-    </body>
 
-    </html>
+
+</body>
+
+</html>

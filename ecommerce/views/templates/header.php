@@ -19,42 +19,51 @@
 
 <body class="bg-light" style="color: #141d37;">
 
-    <div class="" style="background: #267691;">
-        <img class="img-fluid" src="../../assets/img/logosportxtrem.png" alt="Enseigne SportXtrem">
-    </div>
+    <header>
+        <div class="" style="background: #267691;">
+            <img class="img-fluid" src="../../assets/img/logosportxtrem.png" alt="Enseigne SportXtrem">
+        </div>
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container-fluid">
-            <a class="navbar-brand text-bluelight" href="home.php"><i class="bi bi-house-fill fs-3"></i></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container-fluid">
+                <a class="navbar-brand text-bluelight" href="home.php"><i class="bi bi-house-fill fs-3"></i></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li> -->
-                    <?php foreach ($Collections->getCollections() as $collections) : ?>
-                        <li class="nav-item dropdown text-bluedark">
-                            <a class="nav-link dropdown-toggle text-bluedark" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?= $collections['category']['name'] ?>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php foreach ($collections['collections'] as $collection) : ?>
+                        <?php foreach ($Collections->getCollections() as $collections) : ?>
+                            <li class="nav-item dropdown text-bluedark">
+                                <a class="nav-link dropdown-toggle text-bluedark" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?= $collections['category']['name'] ?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <?php foreach ($collections['collections'] as $collection) : ?>
 
-                                    <li><a class="dropdown-item" href="collection.php?id=<?= $collection['id'] ?>&slug=<?= $collection['slug'] ?>"><?= $collection['name'] ?></a></li>
+                                        <li><a class="dropdown-item" href="collection.php?id=<?= $collection['id'] ?>&slug=<?= $collection['slug'] ?>"><?= $collection['name'] ?></a></li>
 
-                                <?php endforeach; ?>
-                            </ul>
-                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
 
-                    <?php endforeach; ?>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                        <?php endforeach; ?>
+                    </ul>
+                    <form class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                        </ul>
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
+
+    <main>

@@ -3,11 +3,11 @@ require_once '../controllers/ctrCollection.php';
 include '../views/templates/header.php';
 ?>
 
-<div class="container mt-3">
+<div class="container mt-3 text-bluedark">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
+            <li class="breadcrumb-item"><a href="home.php">SportXtrem</a></li>
+            <li class="breadcrumb-item active">Collection</li>
             <li class="breadcrumb-item active" aria-current="page">Data</li>
         </ol>
     </nav>
@@ -56,7 +56,7 @@ include '../views/templates/header.php';
         </div>
     </div>
 
-</div>
+            </div>
 
 <?php
 include '../views/templates/footer.php';
