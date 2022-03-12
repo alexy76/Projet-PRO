@@ -17,4 +17,4 @@ RewriteEngine on
 RewriteRule ^collection/([0-9]+)/([a-zA-Z-]+)$ /views/collection.php?id=$1&slug=$2 [L]
 
 
-#ErrorDocument 404 https://www.google.fr
+ErrorDocument 404 https://www.google.fr

@@ -28,18 +28,20 @@ include '../views/templates/header.php';
                                 opacity: 1;
                             }
                         </style>
-
-                        <div class="card card<?= $key ?> cardRelative col-lg-3 col-12 mb-5" style="border: 0px;">
-                            <img src="../../assets/img/products/<?= $product->imageProduct ?>" class="card-img-top img-fluid" alt="<?= $product->labelImage ?>">
+                        <div class="card card<?= $key ?> cardRelative col-lg-3 col-6 mb-5" style="border: 0px;">
+                        <?php if($product->discountPrice > 0) : ?>
+                        <span class="d-inline-block text-dark px-3 py-1" style="position: absolute; top: 0px; right: 12px; font-size: 0.9rem; font-weight: bold; background-color: #ffea28;">Promo -<?= $product->discountPrice ?>%</span>
+                        <?php endif; ?>
+                            <img src="../../assets/img/products/<?= $product->imageProduct ?>" class="card-img-top img-fluid" style="" alt="<?= $product->labelImage ?>">
                             <div class="card-body">
-                                <h2 class="card-title h6"><?= ucfirst(strtolower($product->titleProduct)) ?></h2>
-                                <p class="card-text">kjhykujghkugf</p>
+                                <h2 class="card-title h6 mb-4"><?= ucfirst(strtolower($product->titleProduct)) ?></h2>
+                                <p class="card-text fixed-bottom position-absolute mb-2"><?= $product->discountPrice > 0 ? '<span class="text-secondary"><del>'.number_format($product->priceProduct, 2, ',', ' ').'€</del> '.number_format($product->priceProduct - ($product->priceProduct * ($product->discountPrice/100)), 2, ',', ' ').' €</span>' : '<span class="text-secondary">'.number_format($product->priceProduct, 2, ',', ' ').' €</span>' ?></p>
                             </div>
                             <div class="card__overlay">
                                 <div class="overlay__text">
                                     <div class="buttons">
                                         <div class="containerglass">
-                                            <a href="../../product/<?= $product->idProduct ?>/<?= $product->slugProduct ?>" class="btnglass effect01" target="_blank"><span>VOIR</span></a>
+                                            <a href="../../product/<?= $product->idProduct ?>/<?= $product->slugProduct ?>" class="btnglass <?= $product->discountPrice > 0 ? 'effect02' : 'effect01' ?>" target="_blank"><span><?= $product->discountPrice > 0 ? 'J\'EN PROFITE' : 'VOIR' ?></span></a>
                                         </div>
                                     </div>
                                 </div>
