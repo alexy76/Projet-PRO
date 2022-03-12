@@ -9,10 +9,10 @@ include '../views/templates/header.php';
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'connection' ? 'active' : 'colorlink') ?>" aria-current="true" href="?action=connection">Connexion</a>
+                    <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'connection' ? 'active' : 'colorlink') ?>" aria-current="true" href="login.php?action=connection">Connexion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'subscribe' ? 'active' : 'colorlink') ?>" href="?action=subscribe">Inscription</a>
+                    <a class="nav-link <?= isset($_SESSION['id']) ? 'disabled' : ($action == 'subscribe' ? 'active' : 'colorlink') ?>" href="login.php?action=subscribe">Inscription</a>
                 </li>
                 <?php if (isset($_SESSION['id'])) : ?>
                     <li class="nav-item active">
@@ -34,7 +34,7 @@ include '../views/templates/header.php';
 
                         <h2 class="card-title mb-5">Créer un compte</h2>
 
-                        <form class="text-start" method="POST" action="?action=subscribe">
+                        <form class="text-start" method="POST" action="login.php?action=subscribe">
 
                             <?php if (isset($messageAlert)) : ?>
 
@@ -112,7 +112,7 @@ include '../views/templates/header.php';
 
                         <?php endif; ?>
 
-                        <form class="text-start" method="POST" action="?action=connection">
+                        <form class="text-start" method="POST" action="login.php?action=connection">
                             <div class="mb-3">
                                 <span class="text-danger"></span>
                                 <input type="mail" class="form-control" id="exampleFormControlInput1" placeholder="mail@example.com" name="mail" value="<?= $mail ?? '' ?>">

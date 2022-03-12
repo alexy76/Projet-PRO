@@ -387,7 +387,7 @@ class Products extends Database
      * @param int (identifiant de la catégorie)
      * @return array
      */
-    public function get_displayByCollection(int $idCollection) : array
+    public function get_displayByCollectionAll(int $idCollection) : array
     {
         $db = $this->connectDB();
         $query = "SELECT `pdt_id` AS 'idProduct', `pdt_title` AS 'titleProduct', `pdt_price` AS 'priceProduct', 
@@ -397,7 +397,7 @@ class Products extends Database
                 NATURAL JOIN `ec_get_images`
                 NATURAL JOIN `ec_images`
                 WHERE `col_id` = :idCollection AND `pdt_activated` = 1
-                GROUP BY `pdt_id`";
+                GROUP BY `pdt_id` LIMIT 8 OFFSET 0";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':idCollection', $idCollection, PDO::PARAM_INT);

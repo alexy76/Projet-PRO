@@ -6,6 +6,7 @@
     <meta name="description" content="<?= $meta_description ?? '' ?>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/views/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -26,7 +27,7 @@
 
     <header>
         <div class="" style="background: #267691;">
-            <a href="../../views/home.php"><img class="img-fluid" src="../../assets/img/logosportxtrem.png" alt="Enseigne SportXtrem"></a>
+            <a href="home.php"><img class="img-fluid" src="../../assets/img/logosportxtrem.png" alt="Enseigne SportXtrem"></a>
         </div>
 
         <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white shadow">
@@ -62,7 +63,7 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 h6">
                             <?php if (!isset($_SESSION['id'])) : ?>
                                 <li class="nav-item dropdown text-bluedark me-lg-5 me-0">
-                                    <a class="nav-link text-bluedark" href="../../views/login.php?action=connection">CONNEXION</a>
+                                    <a class="nav-link text-bluedark" href="login.php?action=connection">CONNEXION</a>
                                 </li>
                             <?php else : ?>
                                 <li class="nav-item dropdown text-bluedark me-lg-5 me-0">

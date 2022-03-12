@@ -21,14 +21,38 @@ if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Collections->getExistId
 
 $Products = new Products;
 
-$productsByCollection = $Products->get_displayByCollection(intval($_GET['id']));
+$productsByCollection = $Products->get_displayByCollectionAll(intval($_GET['id']));
 $collectionName = $Collections->getCollectionByID(intval($_GET['id']));
 
-//var_dump($productsByCollection);
+
+
+
+
+// $nameMethod = 'allProducts';
+
+// if (isset($_GET['req']))       $req = !empty($_GET['req']) ? $_GET['req'] : ' ';
+
+// if (isset($_GET['search']) && method_exists($Products, 'getCount_' . $_GET['search']))
+//     $nameMethod = $_GET['search'];
+
+
+// $nbProducts = $Products->{'getCount_' . $nameMethod}(isset($req) ? $req . '%' : '');
+
+// $nbElt = 8;
+// $nbPages = ceil($nbProducts / $nbElt);
+// $offset = isset($_GET['page']) && ctype_digit($_GET['page']) && $_GET['page'] <= $nbPages ? ($_GET['page'] * $nbElt) - $nbElt : 0;
+// $pageActual = ($offset / $nbElt) + 1;
+
+// $getAllProducts = $Products->{'get_' . $nameMethod}(isset($req) ? $req . '%' : '', intval($nbElt), intval($offset));
+
+
+
+
+
+var_dump($_GET);
 
 /** Valeur des metas (A VOIR PLUS TARD POUR LA RECHERCHER PAR COLLECTION) */
 $meta_title = 'En cours de construction';
 $meta_description = "En cours de construction";
-
 
 ?>
