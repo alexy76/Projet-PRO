@@ -385,7 +385,7 @@ class Products extends Database
      * Méthode permettant de récupérer le nombre de produits selon la collection (aide à la pagination)
      * @return int (nombre total de produits)
      */
-    public function getCount_displayByCollection(int $idCollection) : int
+    public function getCount_displayByCollection(int $idCollection): int
     {
         $db = $this->connectDB();
 
@@ -449,5 +449,47 @@ class Products extends Database
         } else {
             return null;
         }
+    }
+
+    /**
+     * Méthode permettant de savoir si la catégorie existe
+     * @param int (identifiant de la catégorie)
+     */
+    public function get_displayByIdProduct(int $idProduct)
+    {
+        $db = $this->connectDB();
+        $query = "SELECT `pdt_id` as 'id', `col_id` as 'idCol', `pdt_title` as 'title', `pdt_price` as 'price', `pdt_discount` as 'discount', 
+                    `pdt_option` as 'option', `pdt_activated` as 'activated', `pdt_slug` as 'slug', `col_slug` as 'slugCol',
+                    `pdt_long_description` as 'longDescription', `pdt_meta_title` as 'metaTitle', 
+                    `pdt_meta_description` as 'metaDescription', `col_name` as 'colName', `cat_name` as 'catName',
+                    `col_slug` as 'colSlug', group_concat(`img_name_file`) as 'nameImages', group_concat(`img_label_file`) as 'altImages' 
+                    FROM `ec_products` 
+                    NATURAL JOIN `ec_collection`
+                    NATURAL JOIN `ec_category`
+                    NATURAL JOIN `ec_get_images`
+                    NATURAL JOIN `ec_images`
+                    WHERE `pdt_id` = :idProduct
+                    GROUP BY `pdt_id` = :idProduct";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':idProduct', $idProduct, PDO::PARAM_INT);
+        $statment->execute();
+
+        $product = $statment->fetch(PDO::FETCH_ASSOC);
+
+        $images = explode(',', $product['nameImages']);
+        $altImages = explode(',', $product['altImages']);
+
+        unset($product['nameImages']);
+        unset($product['altImages']);
+
+        for($i = 0; $i < count($images); $i++){
+            $product['images'][] = [
+                'image' => $images[$i],
+                'alt' => $altImages[$i]
+            ];
+        }
+
+        return $product;
     }
 }

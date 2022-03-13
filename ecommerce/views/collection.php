@@ -52,7 +52,7 @@ include '../views/templates/header.php';
                                 <div class="overlay__text">
                                     <div class="buttons">
                                         <div class="containerglass">
-                                            <a href="../../product/<?= $product->idProduct ?>/<?= $product->slugProduct ?>" class="btnglass <?= $product->discountPrice > 0 ? 'effect02' : 'effect01' ?>" target="_blank"><span><?= $product->discountPrice > 0 ? 'J\'EN PROFITE' : 'VOIR' ?></span></a>
+                                            <a href="../../product/<?= $product->idProduct ?>/<?= $product->slugProduct ?>" class="btnglass <?= $product->discountPrice > 0 ? 'effect02' : 'effect01' ?>"><span><?= $product->discountPrice > 0 ? 'J\'EN PROFITE' : 'VOIR' ?></span></a>
                                         </div>
                                     </div>
                                 </div>
