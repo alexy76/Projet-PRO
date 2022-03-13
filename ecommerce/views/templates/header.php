@@ -92,7 +92,9 @@
                                 </li>
                             <?php endif; ?>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-cart-check-fill"></i> MON PANIER</a>
+<button class="nav-link active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>
+
+                                <!-- <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-cart-check-fill"></i> </a> -->
                             </li>
                         </ul>
                     </div>

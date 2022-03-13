@@ -381,15 +381,34 @@ class Products extends Database
     }
 
 
+    /**
+     * Méthode permettant de récupérer le nombre de produits selon la collection (aide à la pagination)
+     * @return int (nombre total de produits)
+     */
+    public function getCount_displayByCollection(int $idCollection) : int
+    {
+        $db = $this->connectDB();
+
+        $query = "SELECT count(`pdt_id`) as 'nbProducts' 
+                    FROM `ec_products` 
+                    WHERE `col_id` = :idCollection AND `pdt_activated` = 1";
+
+        $statment = $db->prepare($query);
+        $statment->bindValue(':idCollection', $idCollection, PDO::PARAM_INT);
+        $statment->execute();
+
+        return $statment->fetch()->nbProducts;
+    }
+
 
     /**
      * Méthode permettant de savoir si la catégorie existe
      * @param int (identifiant de la catégorie)
      * @return array
      */
-    public function get_displayByCollection(int $idCollection, string $query)
+    public function get_displayByCollection(int $idCollection, string $query, int $nbElt, int $offset)
     {
-        $queryAccept = ['all', 'pricedesc', 'priceasc', 'alpha', ''];
+        $queryAccept = ['all', 'pricedesc', 'priceasc'];
 
         if (in_array($query, $queryAccept)) {
 
@@ -397,19 +416,19 @@ class Products extends Database
 
             switch ($queryAccept) {
                 case $query == 'all':
-                    $queryReq = "WHERE `col_id` = :idCollection AND `pdt_activated` = 1 GROUP BY `pdt_id` LIMIT 8 OFFSET 0";
+                    $queryReq = "WHERE `col_id` = :idCollection AND `pdt_activated` = 1 GROUP BY `pdt_id` LIMIT :nbElt OFFSET :offset";
                     break;
                 case $query == 'pricedesc':
                     $queryReq = "WHERE `col_id` = :idCollection AND `pdt_activated` = 1
                                 GROUP BY `pdt_id` 
                                 ORDER BY `pdt_price` DESC
-                                LIMIT 8 OFFSET 0;";
+                                LIMIT :nbElt OFFSET :offset;";
                     break;
                 case $query == 'priceasc':
                     $queryReq = "WHERE `col_id` = :idCollection AND `pdt_activated` = 1
                                 GROUP BY `pdt_id` 
                                 ORDER BY `pdt_price` ASC
-                                LIMIT 8 OFFSET 0;";
+                                LIMIT :nbElt OFFSET :offset;";
                     break;
             }
 
@@ -422,6 +441,8 @@ class Products extends Database
 
             $statment = $db->prepare($query);
             $statment->bindValue(':idCollection', $idCollection, PDO::PARAM_INT);
+            $statment->bindValue(':nbElt', $nbElt, PDO::PARAM_INT);
+            $statment->bindValue(':offset', $offset, PDO::PARAM_INT);
             $statment->execute();
 
             return $statment->fetchAll();
