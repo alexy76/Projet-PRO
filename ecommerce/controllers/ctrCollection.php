@@ -12,23 +12,19 @@ if(session_status() === PHP_SESSION_NONE) session_start();
 
 $Collections = new Collections;
 
+
 if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Collections->getExistIdCollection(intval($_GET['id']))){
-    header('Location: ../../views/home.php');
+    header('Location: 404');
     exit();
 }
 
-//
 
 $Products = new Products;
 
-$productsByCollection = $Products->get_displayByCollectionAll(intval($_GET['id']));
+$productsByCollection = $Products->get_displayByCollection(intval($_GET['id']), strtolower($_GET['query']));
 $collectionName = $Collections->getCollectionByID(intval($_GET['id']));
 
-
-
-
-
-// $nameMethod = 'allProducts';
+var_dump($_GET['page']);
 
 // if (isset($_GET['req']))       $req = !empty($_GET['req']) ? $_GET['req'] : ' ';
 

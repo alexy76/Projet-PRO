@@ -20,7 +20,7 @@ class Products extends Database
         $statment->bindValue(':title', $title, PDO::PARAM_STR);
         $statment->bindValue(':idCol', $idCol, PDO::PARAM_INT);
         $statment->bindValue(':slug', $slug, PDO::PARAM_STR);
-        
+
         return $statment->execute();
     }
 
@@ -31,7 +31,7 @@ class Products extends Database
      * @param int (identifiant du produit)
      * @return bool
      */
-    public function getExistProduct(int $id) : bool
+    public function getExistProduct(int $id): bool
     {
         $db = $this->connectDB();
         $query = "SELECT count(`pdt_id`) as 'countProduct' FROM `ec_products`  WHERE `pdt_id` = :id";
@@ -50,11 +50,11 @@ class Products extends Database
      * @param string (suite de lettres saisie par l'administrateur)
      * @return array (tableau contenant au maximum 10 noms de produits correspondant à la recherche)
      */
-    public function getNamesProducts(string $stringNameProduct) : array
+    public function getNamesProducts(string $stringNameProduct): array
     {
         $db = $this->connectDB();
 
-        $search = $stringNameProduct.'%';
+        $search = $stringNameProduct . '%';
 
         $query = "SELECT `pdt_title` FROM `ec_products` WHERE `pdt_title` LIKE :search ORDER BY `pdt_title` LIMIT 10 OFFSET 0";
 
@@ -71,7 +71,7 @@ class Products extends Database
      * Méthode permettant de récupérer le nombre total de produits (aide à la pagination)
      * @return int (nombre total de produits)
      */
-    public function getCount_allProducts() : int
+    public function getCount_allProducts(): int
     {
         $db = $this->connectDB();
         return $db->query("SELECT count(`pdt_id`) AS 'nbAllProducts' FROM `ec_products`")->fetch()->nbAllProducts;
@@ -86,7 +86,7 @@ class Products extends Database
      * @param int (offset pour la pagination)
      * @return array 
      */
-    public function get_allProducts(string $opt = null, int $nbElt, int $offset) : array
+    public function get_allProducts(string $opt = null, int $nbElt, int $offset): array
     {
         $db = $this->connectDB();
 
@@ -106,7 +106,7 @@ class Products extends Database
      * Méthode permettant de récupérer le nombre des personnes inscrites selon un champ de recherche par nom (aide à la pagination)
      * @return int (nombre total d'inscrits selon la recherche par nom)
      */
-    public function getCount_NameProduct(string $titleProduct) : int
+    public function getCount_NameProduct(string $titleProduct): int
     {
         $db = $this->connectDB();
 
@@ -128,7 +128,7 @@ class Products extends Database
      * @param int (offset de départ)
      * @return array (liste des inscrits selon le champ de recherche par nom)
      */
-    public function get_NameProduct(string $titleProduct, int $nbElt, int $offset) : array
+    public function get_NameProduct(string $titleProduct, int $nbElt, int $offset): array
     {
         $db = $this->connectDB();
 
@@ -150,7 +150,7 @@ class Products extends Database
      * @param int (identifiant produit)
      * @return bool
      */
-    public function deleteProduct(int $id) : bool
+    public function deleteProduct(int $id): bool
     {
         $db = $this->connectDB();
 
@@ -169,7 +169,7 @@ class Products extends Database
      * @param int (identifiant produit)
      * @return bool
      */
-    public function activateProduct(int $id) : bool
+    public function activateProduct(int $id): bool
     {
         $db = $this->connectDB();
 
@@ -190,7 +190,7 @@ class Products extends Database
      * @param int (identifiant produit)
      * @return int
      * */
-    private function getStatusProduct(int $id) : int
+    private function getStatusProduct(int $id): int
     {
         $db = $this->connectDB();
         return intval($db->query("SELECT `pdt_activated` as 'status' FROM `ec_products` WHERE `pdt_id` = $id")->fetch()->status);
@@ -203,7 +203,7 @@ class Products extends Database
      * @param int (identifiant du produit)
      * @return bool
      */
-    public function changeStatusProduct(int $id, int $status) : bool
+    public function changeStatusProduct(int $id, int $status): bool
     {
         $db = $this->connectDB();
 
@@ -222,7 +222,7 @@ class Products extends Database
      * @param int (identifiant du produit)
      * @return array
      */
-    public function getProduct(int $id) : array
+    public function getProduct(int $id): array
     {
         $db = $this->connectDB();
 
@@ -243,7 +243,7 @@ class Products extends Database
      * @param string (nom du nouveau produit)
      * @return bool
      */
-    public function setNewName(int $id, string $name, string $slug) : bool
+    public function setNewName(int $id, string $name, string $slug): bool
     {
         $db = $this->connectDB();
 
@@ -264,7 +264,7 @@ class Products extends Database
      * @param string (slug produit)
      * @return bool
      */
-    public function getExistSlug(string $slug) : bool
+    public function getExistSlug(string $slug): bool
     {
         $db = $this->connectDB();
         $query = "SELECT count(`pdt_id`) as 'countSlug' FROM `ec_products`  WHERE `pdt_slug` = :slug";
@@ -282,8 +282,8 @@ class Products extends Database
      * @param int (identifiant produit)
      * @param int (identifiant collection)
      * @param bool
-    */
-    public function setChangeCollection(int $idProduct, int $idCol) : bool
+     */
+    public function setChangeCollection(int $idProduct, int $idCol): bool
     {
         $db = $this->connectDB();
         $query = "UPDATE `ec_products` SET `col_id` = :idCol WHERE `pdt_id` = :idProduct";
@@ -304,7 +304,7 @@ class Products extends Database
      * @param int (remise sur le produit en %)
      * @return bool
      */
-    public function setNewPrice(int $id, float $price, int $discount) : bool
+    public function setNewPrice(int $id, float $price, int $discount): bool
     {
         $db = $this->connectDB();
         $query = "UPDATE `ec_products` SET `pdt_price` = :price , `pdt_discount` = :discount  WHERE `pdt_id` = :id";
@@ -325,7 +325,7 @@ class Products extends Database
      * @param string (options pour le produit | séparateur ",")
      * @return bool
      */
-    public function setOptionsProduct(int $id, string $options) : bool
+    public function setOptionsProduct(int $id, string $options): bool
     {
         $db = $this->connectDB();
         $query = "UPDATE `ec_products` SET `pdt_option` = :options WHERE `pdt_id` = :id";
@@ -346,7 +346,7 @@ class Products extends Database
      * @param int (identifiant produit)
      * @return bool
      */
-    public function setMetaProduct(string $metaTitle, string $metaDescription, int $id) : bool
+    public function setMetaProduct(string $metaTitle, string $metaDescription, int $id): bool
     {
         $db = $this->connectDB();
         $query = "UPDATE `ec_products` SET `pdt_meta_title` = :metaTitle, `pdt_meta_description` = :metaDescription WHERE `pdt_id` = :id";
@@ -367,14 +367,14 @@ class Products extends Database
      * @param int (Identifiant du produit)
      * @return bool
      */
-    public function setDescriptionProduct(string $descriptionProduct, int $id) : bool
+    public function setDescriptionProduct(string $descriptionProduct, int $id): bool
     {
         $db = $this->connectDB();
 
         $query = "UPDATE `ec_products` SET `pdt_long_description` = :descriptionProduct WHERE `pdt_id` = :id";
 
         $statment = $db->prepare($query);
-        $statment->bindValue(':descriptionProduct',$descriptionProduct, PDO::PARAM_STR);
+        $statment->bindValue(':descriptionProduct', $descriptionProduct, PDO::PARAM_STR);
         $statment->bindValue(':id', $id, PDO::PARAM_INT);
 
         return $statment->execute();
@@ -382,28 +382,51 @@ class Products extends Database
 
 
 
-        /**
+    /**
      * Méthode permettant de savoir si la catégorie existe
      * @param int (identifiant de la catégorie)
      * @return array
      */
-    public function get_displayByCollectionAll(int $idCollection) : array
+    public function get_displayByCollection(int $idCollection, string $query)
     {
-        $db = $this->connectDB();
-        $query = "SELECT `pdt_id` AS 'idProduct', `pdt_title` AS 'titleProduct', `pdt_price` AS 'priceProduct', 
-                `pdt_discount` AS 'discountPrice', `img_name_file` AS 'imageProduct', 
-                `img_label_file` AS 'labelImage', `pdt_slug` AS 'slugProduct' 
-                FROM `ec_products`
-                NATURAL JOIN `ec_get_images`
-                NATURAL JOIN `ec_images`
-                WHERE `col_id` = :idCollection AND `pdt_activated` = 1
-                GROUP BY `pdt_id` LIMIT 8 OFFSET 0";
+        $queryAccept = ['all', 'pricedesc', 'priceasc', 'alpha', ''];
 
-        $statment = $db->prepare($query);
-        $statment->bindValue(':idCollection', $idCollection, PDO::PARAM_INT);
-        $statment->execute();
+        if (in_array($query, $queryAccept)) {
 
-        return $statment->fetchAll();
+            $db = $this->connectDB();
+
+            switch ($queryAccept) {
+                case $query == 'all':
+                    $queryReq = "WHERE `col_id` = :idCollection AND `pdt_activated` = 1 GROUP BY `pdt_id` LIMIT 8 OFFSET 0";
+                    break;
+                case $query == 'pricedesc':
+                    $queryReq = "WHERE `col_id` = :idCollection AND `pdt_activated` = 1
+                                GROUP BY `pdt_id` 
+                                ORDER BY `pdt_price` DESC
+                                LIMIT 8 OFFSET 0;";
+                    break;
+                case $query == 'priceasc':
+                    $queryReq = "WHERE `col_id` = :idCollection AND `pdt_activated` = 1
+                                GROUP BY `pdt_id` 
+                                ORDER BY `pdt_price` ASC
+                                LIMIT 8 OFFSET 0;";
+                    break;
+            }
+
+            $query = "SELECT `pdt_id` AS 'idProduct', `pdt_title` AS 'titleProduct', `pdt_price` AS 'priceProduct', 
+                        `pdt_discount` AS 'discountPrice', `img_name_file` AS 'imageProduct', 
+                        `img_label_file` AS 'labelImage', `pdt_slug` AS 'slugProduct' 
+                        FROM `ec_products`
+                        NATURAL JOIN `ec_get_images`
+                        NATURAL JOIN `ec_images`" . $queryReq;
+
+            $statment = $db->prepare($query);
+            $statment->bindValue(':idCollection', $idCollection, PDO::PARAM_INT);
+            $statment->execute();
+
+            return $statment->fetchAll();
+        } else {
+            return null;
+        }
     }
-
 }
