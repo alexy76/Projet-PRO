@@ -20,6 +20,8 @@ if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Product->getExistProduc
 
 $product = $Product->get_displayByIdProduct(intval($_GET['id']));
 
+//var_dump($product);
+
 /** Valeur des metas */
 $meta_title = $product['metaTitle'];
 $meta_description = $product['metaDescription'];

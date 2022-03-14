@@ -37,4 +37,5 @@ $productsByCollection = $Products->get_displayByCollection(intval($_GET['id']), 
 $meta_title = 'En cours de construction';
 $meta_description = "En cours de construction";
 
+
 ?>

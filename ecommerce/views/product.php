@@ -40,7 +40,25 @@ include '../views/templates/header.php';
                 <div class="col-lg-6">
                     <h1 class="h3"><?= $product['title'] ?></h1>
                     <div class="px-5 mt-5">
-                        <p class="text-start">Quantité</p>
+                        <p class="text-start">
+                            <?=
+                            $product['discount'] > 0 ?
+                                '<span class="text-dark h3">' . number_format($product['price'] - ($product['price'] * ($product['discount'] / 100)), 2, ',', ' ') . '€ </span> <span class="text-secondary fs-4 ms-2"><del>' . number_format($product['price'], 2, ',', ' ') . '€</del></span>' :
+                                '<span class="text-dark fs-3">' . number_format($product['price'], 2, ',', ' ') . '€</span>'
+                            ?>
+                        </p>
+                        <?php if ($product['discount'] > 0) : ?>
+                            <p class="text-start mt-4 mb-5"><span class="btnYellow fw-bold px-3 py-2 rounded"><?= $product['discount'] ?>% de réduction</span></p>
+                        <?php endif; ?>
+                        <?php if ($product['option'] != null) : ?>
+                            <p class="text-start mt-4">Taille</p>
+                            <select class="form-select" aria-label="Default select example">
+                                <?php foreach (explode(',', $product['option']) as $key => $option) : ?>
+                                    <option value="<?= $key ?>" <?= $key == 0 ? 'selected' : '' ?>><?= $option ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        <?php endif; ?>
+                        <p class="text-start mt-4">Quantité</p>
                         <div class="row">
                             <div class="col-lg-3">
                                 <input type="number" class="form-control" id="validationTooltip01" value="1" required>

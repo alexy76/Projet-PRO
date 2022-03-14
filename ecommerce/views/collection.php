@@ -16,7 +16,7 @@ include '../views/templates/header.php';
         <div class="card-body">
 
             <div class="row mb-5">
-                <h1 class="col-lg-6 col-12 text-lg-start text-center ps-lg-5 ps-0 h2"><?= $collectionName['col_name'] ?> <?= ucfirst(strtolower($collectionName['cat_name'])) ?> SportXtrem</h1>
+                <h1 class="col-lg-6 col-12 text-lg-start text-center ps-lg-5 ps-0 h3"><?= $collectionName['col_name'] ?> <?= ucfirst(strtolower($collectionName['cat_name'])) ?> SportXtrem</h1>
                 <div class="d-flex col-lg-6 col-12 text-end pe-lg-5 pe-1 justify-content-end">
                     <select id="sortsProducts" class="form-select form-select-sm w-lg-25 w-50 h-75 mt-lg-0 mt-3" aria-label=".form-select-sm example">
                         <option <?= strtolower($_GET['query']) == 'all' ? 'selected' : '' ?> disabled>Trier par</option>
@@ -52,7 +52,7 @@ include '../views/templates/header.php';
                                 <div class="overlay__text">
                                     <div class="buttons">
                                         <div class="containerglass">
-                                            <a href="../../product/<?= $product->idProduct ?>/<?= $product->slugProduct ?>" class="btnglass <?= $product->discountPrice > 0 ? 'effect02' : 'effect01' ?>"><span><?= $product->discountPrice > 0 ? 'J\'EN PROFITE' : 'VOIR' ?></span></a>
+                                            <a href="../../product/<?= $product->idProduct ?>/<?= $product->slugProduct ?>" class="rounded btnglass <?= $product->discountPrice > 0 ? 'effect02' : 'effect01' ?>"><span><?= $product->discountPrice > 0 ? 'J\'EN PROFITE' : 'VOIR' ?></span></a>
                                         </div>
                                     </div>
                                 </div>
