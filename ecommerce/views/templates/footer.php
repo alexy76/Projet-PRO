@@ -43,6 +43,7 @@
         })
     }
 </script>
+<script src="../../assets/js/lightbox-plus-jquery.js"></script>
 <script src="../assets/js/app.js"></script>
 
 </body>

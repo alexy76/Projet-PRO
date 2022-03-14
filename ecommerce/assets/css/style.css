@@ -1,6 +1,9 @@
 /*body{
     background-color: rgb(179, 179, 179);
 }*/
+.activeImg{
+  border : 3px solid #267691;
+}
 
 .colorlink{
     color: #267691!important;
@@ -8,6 +11,17 @@
 
 .btnBlueDark{
   background-color: #267691!important;
+  color: #ffffff!important;
+}
+
+
+.btnBlueDark2{
+  background-color: #267691!important;
+  color: #ffffff!important;
+}
+
+.btnBlueDark2:hover{
+  background-color: #34a0c4!important;
   color: #ffffff!important;
 }
 

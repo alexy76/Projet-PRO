@@ -1,21 +1,13 @@
-#RewriteEngine On
-
-#RewriteCond %{SCRIPT_FILENAME} !-d  
-#RewriteCond %{SCRIPT_FILENAME} !-f
-#RewriteRule ^/views/collection/([a-z]+)$ /views/collection.php?slug=$1 [L]
-
-#ErrorDocument 404 https://www.google.fr
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f
 
 Options +FollowSymlinks
+Options All -Indexes
 
 RewriteEngine on
 
-#--------------------------------------------------
-# Règles de réécriture d'URL :
-#--------------------------------------------------
-
+RewriteRule ^views/$   /views/home.php [L]
 RewriteRule ^collection/([a-zA-Z-]+)/([0-9]+)/([0-9]+)/([a-zA-Z-]+)$ /views/collection.php?query=$1&page=$2&id=$3&slug=$4 [L]
 RewriteRule ^product/([0-9]+)/([a-zA-Z0-9-]+)$ /views/product.php?id=$1&slug=$2 [L]
-
 
 ErrorDocument 404 /views/404.php
