@@ -19,6 +19,6 @@ if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Product->getExistProduc
 }
 
 
-var_dump($Product->get_displayByIdProduct(intval($_GET['id'])));
+//var_dump($Product->get_displayByIdProduct(intval($_GET['id'])));
 
 $product = $Product->get_displayByIdProduct(intval($_GET['id']));
