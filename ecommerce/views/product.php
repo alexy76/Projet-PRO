@@ -79,11 +79,12 @@ include '../views/templates/header.php';
                             <script>
                                 document.getElementById('addToCart').addEventListener('click', (e) => {
 
-                                    console.log(e.target.dataset);
-                                    console.log(document.getElementById('quantityProduct').value)
-                                    console.log(document.getElementById('optionProduct').value)
+                                    //console.log(e.target.dataset);
+                                    //console.log(document.getElementById('quantityProduct').value)
+                                    //console.log(document.getElementById('optionProduct').value)
 
-
+                                    // Permet de récupérer les infos du produit en fonction de l'ID
+                                    // Retourne "false" si l'ID n'éxiste pas
                                     $.ajax({
                                         type: 'post',
                                         url: '../controllers/ctrCartAjax.php',
@@ -92,7 +93,63 @@ include '../views/templates/header.php';
                                         },
                                         success: function(response) {
                                             //$('#res').html(response);
-                                            console.log(response);
+                                            //console.log(response);
+                                            if (response == 'false') {
+
+                                                console.log("id existe pas");
+
+                                            } else {
+
+                                                if (localStorage.getItem('cart') === null) {
+                                                    localStorage.setItem('cart', 'empty');
+                                                }
+
+                                                responseArray = JSON.parse(response);
+                                                let cart = {
+                                                    id: responseArray.id,
+                                                    image: responseArray.images[0],
+                                                    title: responseArray.title,
+                                                    option: document.getElementById('optionProduct').value,
+                                                    quantity: parseInt(document.getElementById('quantityProduct').value)
+                                                }
+
+                                                if (localStorage.getItem('cart') === 'empty') {
+
+                                                    localStorage.setItem('cart', JSON.stringify([cart]))
+                                                } else {
+
+                                                    let doublon = false
+
+                                                    arrayCart = JSON.parse(localStorage.getItem('cart'))
+
+                                                    arrayCart.forEach(elt => {
+
+                                                        if (elt.id == responseArray.id && document.getElementById('optionProduct').value != elt.option) {
+
+                                                            doublon = true
+
+                                                            arrayCart.push(cart);
+                                                            localStorage.setItem('cart', JSON.stringify(arrayCart))
+                                                            console.log(JSON.parse(localStorage.getItem('cart')))
+                                                            return
+
+                                                        } else if (elt.id == responseArray.id && document.getElementById('optionProduct').value == elt.option) {
+                                                            elt.quantity = parseInt(elt.quantity) + parseInt(document.getElementById('quantityProduct').value)
+                                                            localStorage.setItem('cart', JSON.stringify(arrayCart))
+                                                            console.log(JSON.parse(localStorage.getItem('cart')))
+                                                            return
+                                                        }
+                                                    })
+
+                                                    console.log(doublon)
+                                                    if (!doublon) {
+                                                        arrayCart.push(cart);
+                                                        localStorage.setItem('cart', JSON.stringify(arrayCart))
+                                                        console.log(JSON.parse(localStorage.getItem('cart')))
+                                                    }
+                                                }
+
+                                            }
                                         }
                                     });
 

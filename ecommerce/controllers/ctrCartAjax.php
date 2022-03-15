@@ -9,12 +9,19 @@ require_once '../models/Products.php';
 require_once '../tools/tools.php';
 
 
-$Product = new Products;
+$Products = new Products;
 
 
+/* Controleur permettant de vérifier si un produit existe et retourne des informations du produit */
 if(isset($_POST['idProduct']) && ctype_digit($_POST['idProduct'])){
-    //var_dump("test");
-    echo $_POST['idProduct'];
+
+    if($Products->getExistProduct(intval($_POST['idProduct']))){
+
+        echo json_encode($Products->get_displayByIdProduct(intval($_POST['idProduct'])));
+
+    }else{
+        echo 'false';
+    }
 }
 
 
