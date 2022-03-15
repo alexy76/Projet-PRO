@@ -15,6 +15,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://kit.fontawesome.com/cce27d2628.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
@@ -91,7 +92,7 @@
                                 </li>
                             <?php endif; ?>
                             <li class="nav-item">
-                                <button class="nav-link active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>
+                                <button class="btn btnBlueDark2 nav-link active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>
 
                                 <!-- <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-cart-check-fill"></i> </a> -->
                             </li>
