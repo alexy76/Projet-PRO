@@ -70,91 +70,12 @@ include '../views/templates/header.php';
                         <p class="text-start mt-4">Quantité</p>
                         <div class="row">
                             <div class="col-lg-3">
-                                <input id="quantityProduct" type="number" class="form-control" id="validationTooltip01" value="1" required>
+                                <input id="quantityProduct" type="number" class="form-control" id="validationTooltip01" value="1" min="1" max="10" required>
                             </div>
                             <div class="col-lg-9">
                                 <button id="addToCart" type="button" class="btn btnBlueDark2 w-100" data-id="<?= $product['id'] ?>" data-title="<?= $product['title'] ?>" data-price="<?= $product['price'] ?>" data-discount="<?= $product['discount'] ?>">Ajouter au panier</button>
                             </div>
 
-                            <script>
-                                document.getElementById('addToCart').addEventListener('click', (e) => {
-
-                                    //console.log(e.target.dataset);
-                                    //console.log(document.getElementById('quantityProduct').value)
-                                    //console.log(document.getElementById('optionProduct').value)
-
-                                    // Permet de récupérer les infos du produit en fonction de l'ID
-                                    // Retourne "false" si l'ID n'éxiste pas
-                                    $.ajax({
-                                        type: 'post',
-                                        url: '../controllers/ctrCartAjax.php',
-                                        data: {
-                                            idProduct: e.target.dataset.id
-                                        },
-                                        success: function(response) {
-                                            //$('#res').html(response);
-                                            //console.log(response);
-                                            if (response == 'false') {
-
-                                                console.log("id existe pas");
-
-                                            } else {
-
-                                                if (localStorage.getItem('cart') === null) {
-                                                    localStorage.setItem('cart', 'empty');
-                                                }
-
-                                                responseArray = JSON.parse(response);
-                                                let cart = {
-                                                    id: responseArray.id,
-                                                    image: responseArray.images[0],
-                                                    title: responseArray.title,
-                                                    option: document.getElementById('optionProduct').value,
-                                                    quantity: parseInt(document.getElementById('quantityProduct').value)
-                                                }
-
-                                                if (localStorage.getItem('cart') === 'empty') {
-
-                                                    localStorage.setItem('cart', JSON.stringify([cart]))
-                                                } else {
-
-                                                    let doublon = false
-
-                                                    arrayCart = JSON.parse(localStorage.getItem('cart'))
-
-                                                    arrayCart.forEach(elt => {
-
-                                                        if (elt.id == responseArray.id && document.getElementById('optionProduct').value != elt.option) {
-
-                                                            doublon = true
-
-                                                            arrayCart.push(cart);
-                                                            localStorage.setItem('cart', JSON.stringify(arrayCart))
-                                                            console.log(JSON.parse(localStorage.getItem('cart')))
-                                                            return
-
-                                                        } else if (elt.id == responseArray.id && document.getElementById('optionProduct').value == elt.option) {
-                                                            elt.quantity = parseInt(elt.quantity) + parseInt(document.getElementById('quantityProduct').value)
-                                                            localStorage.setItem('cart', JSON.stringify(arrayCart))
-                                                            console.log(JSON.parse(localStorage.getItem('cart')))
-                                                            return
-                                                        }
-                                                    })
-
-                                                    console.log(doublon)
-                                                    if (!doublon) {
-                                                        arrayCart.push(cart);
-                                                        localStorage.setItem('cart', JSON.stringify(arrayCart))
-                                                        console.log(JSON.parse(localStorage.getItem('cart')))
-                                                    }
-                                                }
-
-                                            }
-                                        }
-                                    });
-
-                                })
-                            </script>
 
                         </div>
                         <div class="text-start mt-5">
