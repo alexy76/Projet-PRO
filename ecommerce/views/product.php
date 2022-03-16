@@ -98,7 +98,7 @@ include '../views/templates/header.php';
             </div>
             <div class="col-12 mt-5">
                 <p>
-                    <button class="btn btnBlueDark2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btnBlueDark4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         Voir la description du produit <i class="bi bi-chevron-down"></i>
                     </button>
                 </p>

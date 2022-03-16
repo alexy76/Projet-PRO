@@ -1,7 +1,7 @@
 <div class="offcanvas offcanvas-end btnBlueDark3" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
         <h3 id="offcanvasRightLabel">Mon panier SportXtrem</h3>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="h1 text-white btn btnDarkBlue buthover" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
     </div>
     <div class="offcanvas-body position-relative">
         <div id="displayCart" class="col px-2">

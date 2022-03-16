@@ -52,7 +52,7 @@ include '../views/templates/header.php';
                                 <span class="text-danger"><?= $errors['reCaptcha'] ?? '' ?></span>
                                 <div class="g-recaptcha col-6" data-sitekey="6LdB5HAeAAAAAFSg6xSD0ZUXvFLUt2kSQB6cp5Zp"></div>
                                 <div class="text-center mt-3 col-6">
-                                    <input type="submit" name="sendMail" class="btn btn-dark" value="Envoyer">
+                                    <input type="submit" name="sendMail" class="btn btnBlueDark4" value="Envoyer">
                                 </div>
                             </div>
 
