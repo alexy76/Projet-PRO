@@ -14,9 +14,16 @@
   color: #ffffff!important;
 }
 
+.btnBlueDark3{
+  background: linear-gradient(135deg, rgb(34, 34, 34), #267691);
+  /*background-color: #267691!important;*/
+  color: white;
+}
+
 
 .btnBlueDark2{
-  background-color: #267691!important;
+  background: linear-gradient(135deg, rgb(34, 34, 34), #267691);
+  /*background-color: #267691!important;*/
   color: #ffffff!important;
 }
 
@@ -134,7 +141,7 @@
     color: #FFF;
     border: 2px solid #267691;
     box-shadow:0px 0px 0px 1px #267691 inset;
-    background-color: #267691;
+    background: linear-gradient(135deg, rgb(34, 34, 34), #267691);
     overflow: hidden;
     position: relative;
     transition: all 0.3s ease-in-out;
@@ -152,7 +159,7 @@
   }
   .effect01:hover span{
     letter-spacing: 0.13em;
-    color: #333;
+    color: rgb(255, 255, 255);
   }
   
   /*highlight*/
