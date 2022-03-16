@@ -20,17 +20,17 @@ include '../views/templates/header.php';
                 <div class="col-lg-4 col-12">
                     <div class="list-group">
 
-                        <a href="account.php" class="list-group-item list-group-item-action bg-dark text-white disabled" aria-current="true">
+                        <a href="account.php" class="list-group-item list-group-item-action btnBlueDark disabled" aria-current="true">
                             Mon compte client
                         </a>
-                        <a href="orders.php" class="list-group-item list-group-item-action">Mes commandes</a>
-                        <a href="bills.php" class="list-group-item list-group-item-action">Mes factures</a>
+                        <a href="orders.php" class="list-group-item list-group-item-action buthover">Mes commandes</a>
+                        <a href="bills.php" class="list-group-item list-group-item-action buthover">Mes factures</a>
                     </div>
 
                     <p class="mt-3 fw-light">Inscrit(e) depuis le <span class=""><?= date('d/m/Y', strtotime($_SESSION['registered'])) ?></span></p>
 
                     <div class="list-group mb-4">
-                        <a href="contact.php" class="btn btn-outline-dark" aria-current="true">
+                        <a href="contact.php" class="btn btnBlueDarkOutline" aria-current="true">
                             Nous contacter
                         </a>
                     </div>
@@ -42,7 +42,7 @@ include '../views/templates/header.php';
                             <div class="card-body">
                                 <h5 class="card-title">Profitez-en maintenant</h5>
                                 <p class="card-text">En s'inscrivant à notre Newsletter, vous bénéficierez d'offres exceptionnelles</p>
-                                <a href="?action=subscribeNewsletters" class="btn btn-outline-info">Je profite des offres privées</a>
+                                <a href="?action=subscribeNewsletters" class="btn btnBlueDarkOutline">Je profite des offres privées</a>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -77,7 +77,7 @@ include '../views/templates/header.php';
                                             <input type="text" name="firstName" class="form-control" id="exampleFormControlInput1" placeholder="Nom de famille" value="<?= $_SESSION['firstname'] ?>">
                                         </div>
                                         <div class="mt-3">
-                                            <input type="submit" name="modifyProfilName" class="btn btn-dark" value="Modifier">
+                                            <input type="submit" name="modifyProfilName" class="btn btnBlueDark4" value="Modifier">
                                         </div>
                                     </form>
 
@@ -113,14 +113,14 @@ include '../views/templates/header.php';
                                             <input type="password" name="confirmNewPassword" class="form-control" placeholder="Confirmation du nouveau mot de passe">
                                         </div>
                                         <div class="mt-3">
-                                            <input type="submit" name="modifyPassword" class="btn btn-dark" value="Modifier">
+                                            <input type="submit" name="modifyPassword" class="btn btnBlueDark4" value="Modifier">
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                            <h2 class="accordion-header btnBlueDark text-dark" id="panelsStayOpen-headingThree">
                                 <button id="modifyAdress" class="accordion-button <?= isset($messageAlertAddress) ? '' : 'collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="<?= isset($messageAlertAddress) ? 'true' : 'false' ?>" aria-controls="panelsStayOpen-collapseThree">
                                     Modifier mon adresse de livraison
                                 </button>
@@ -153,8 +153,8 @@ include '../views/templates/header.php';
                                             <input type="text" name="country" class="form-control" placeholder="Pays" value="<?= isset($address['country']) ? $address['country'] : $_SESSION['country']  ?>">
                                         </div>
                                         <div class="mt-3 text-center">
-                                            <input type="submit" name="modifyAddress" class="btn btn-dark" value="Modifier">
-                                            <a href="?action=deleteAddr#modifyAdress" class="btn btn-outline-dark">Supprimer mon adresse</a>
+                                            <input type="submit" name="modifyAddress" class="btn btnBlueDark4" value="Modifier">
+                                            <a href="?action=deleteAddr#modifyAdress" class="btn btnBlueDarkOutline">Supprimer mon adresse</a>
                                         </div>
                                     </form>
                                 </div>

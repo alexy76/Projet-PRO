@@ -3,9 +3,18 @@
         <h3 id="offcanvasRightLabel">Mon panier SportXtrem</h3>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
+    <div class="offcanvas-body position-relative">
         <div id="displayCart" class="col px-2">
 
+
+        </div>
+        <div class="fixed-bottom position-absolute">
+
+            <div class="buttons px-3">
+                <p class="containerglass2">
+                    <a href="" class="rounded btnglass2 effect02"><span>Visualiser mon panier <i class="bi bi-chevron-compact-right fw-bold"></i></span></a>
+                </p>
+            </div>
 
         </div>
     </div>

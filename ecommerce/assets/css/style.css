@@ -14,6 +14,33 @@
   color: #ffffff!important;
 }
 
+.btnBlueDark4{
+  background-color: #267691!important;
+  color: #ffffff!important;
+}
+
+.btnBlueDark4:hover{
+  background-color: #1f6075!important;
+  color: #ffffff!important;
+}
+
+.btnBlueDarkOutline {
+  background-color: #ffffff!important;
+  color: #267691!important;
+  border: 1px solid #267691;
+}
+
+.btnBlueDarkOutline:hover {
+  background-color: #267691!important;
+  color: #ffffff!important;
+}
+
+.buthover:hover{
+  background-color: #ffffff!important;
+  color: #267691!important;
+  border: 1px solid #267691;
+}
+
 .btnBlueDark3{
   background: linear-gradient(135deg, rgb(34, 34, 34), #267691);
   /*background-color: #267691!important;*/
@@ -120,6 +147,16 @@
     width: 240px;
   }
 
+  .containerglass2 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding:  20px 0px;
+    width: 100%;
+  }
+
 .btnglass {
     letter-spacing: 0.1em;
     cursor: pointer;
@@ -133,6 +170,22 @@
     width: 100%;
   }
   .btnglass:hover {
+    text-decoration: none;
+  }
+
+  .btnglass2 {
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 45px;
+    max-width: 100%;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+  }
+  .btnglass2:hover {
     text-decoration: none;
   }
   

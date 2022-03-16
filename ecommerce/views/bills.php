@@ -19,17 +19,17 @@ include '../views/templates/header.php';
 
                 <div class="col-lg-4 col-12">
                     <div class="list-group">
-                        <a href="account.php" class="list-group-item list-group-item-action" aria-current="true">
+                        <a href="account.php" class="list-group-item list-group-item-action buthover" aria-current="true">
                             Mon compte client
                         </a>
-                        <a href="orders.php" class="list-group-item list-group-item-action">Mes commandes</a>
-                        <a href="bills.php" class="list-group-item list-group-item-action  bg-dark text-white disabled">Mes factures</a>
+                        <a href="orders.php" class="list-group-item list-group-item-action buthover">Mes commandes</a>
+                        <a href="bills.php" class="list-group-item list-group-item-action btnBlueDark disabled">Mes factures</a>
                     </div>
 
                     <p class="mt-3 fw-light">Inscrit(e) depuis le <span class=""><?= date('d/m/Y', strtotime($_SESSION['registered'])) ?></span></p>
 
                     <div class="list-group mb-4">
-                        <a href="contact.php" class="btn btn-outline-dark" aria-current="true">
+                        <a href="contact.php" class="btn btnBlueDarkOutline" aria-current="true">
                             Nous contacter
                         </a>
                     </div>
@@ -40,7 +40,7 @@ include '../views/templates/header.php';
                             <div class="card-body">
                                 <h5 class="card-title">Profitez-en maintenant</h5>
                                 <p class="card-text">En s'inscrivant à notre Newsletter, vous bénéficierez d'offres exceptionnelles</p>
-                                <a href="?action=subscribeNewsletters" class="btn btn-outline-info">Je profite des offres privées</a>
+                                <a href="?action=subscribeNewsletters" class="btn btnBlueDarkOutline">Je profite des offres privées</a>
                             </div>
                         </div>
                     <?php endif; ?>

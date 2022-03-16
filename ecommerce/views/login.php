@@ -73,7 +73,7 @@ include '../views/templates/header.php';
                                 <div class="g-recaptcha" data-sitekey="6LdB5HAeAAAAAFSg6xSD0ZUXvFLUt2kSQB6cp5Zp"></div>
                             </div>
                             <div class="text-center mt-3">
-                                <input type="submit" name="subscribe" class="btn btn-dark" value="S'inscrire">
+                                <input type="submit" name="subscribe" class="btn btnBlueDark4" value="S'inscrire">
                             </div>
 
                         </form>
@@ -141,7 +141,7 @@ include '../views/templates/header.php';
 
 
                             <div class="text-center mt-3">
-                                <input type="submit" name="connection" class="btn btn-dark" value="Se connecter">
+                                <input type="submit" name="connection" class="btn btnBlueDark4" value="Se connecter">
                             </div>
 
                         </form>

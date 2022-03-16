@@ -51,7 +51,7 @@ include '../views/templates/header.php';
                         </div>
 
                         <div class="text-center mt-3">
-                            <input type="submit" name="renewPwd" class="btn btn-dark" value="Renouveler mon mot de passe">
+                            <input type="submit" name="renewPwd" class="btn btnBlueDark4" value="Renouveler mon mot de passe">
                         </div>
 
                     </form>
