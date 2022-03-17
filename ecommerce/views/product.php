@@ -73,7 +73,7 @@ include '../views/templates/header.php';
                                 <input id="quantityProduct" type="number" class="form-control" id="validationTooltip01" value="1" min="1" max="10" required>
                             </div>
                             <div class="col-lg-9">
-                                <button id="addToCart" type="button" class="btn btnBlueDark2 w-100" data-id="<?= $product['id'] ?>" data-title="<?= $product['title'] ?>" data-price="<?= $product['price'] ?>" data-discount="<?= $product['discount'] ?>">Ajouter au panier</button>
+                                <button id="addToCart" type="button" class="btn btnBlueDark4 w-100" data-id="<?= $product['id'] ?>" data-title="<?= $product['title'] ?>" data-price="<?= $product['price'] ?>" data-discount="<?= $product['discount'] ?>">Ajouter au panier</button>
                             </div>
 
 

@@ -2,10 +2,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (localStorage.getItem('cart') !== null) {
 
+        let quantity = 0;
+        let totalCart = 0;
+
         JSON.parse(localStorage.getItem('cart')).forEach((value, index) => {
 
+
+            let price = parseFloat(value.price)
+            let discount = parseInt(value.discount)
+            let total = Number(((price - (price * (discount / 100)).toFixed(2)) * value.quantity).toFixed(2))
+
+            quantity = quantity + parseInt(value.quantity);
+            totalCart = totalCart + total
+
+
+
+
             document.getElementById('displayCart').innerHTML += `
-            <div class="py-2 row ${index % 2 == 0 ? 'bg-light' : 'bg-white'}">
+            <div class="py-2 row ${index % 2 == 0 ? 'bg-light' : 'bg-white'} w-100 p-0 m-0">
                 <div class="col-3">
                     <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
                 </div>
@@ -18,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             <span>Qté : ${value.quantity}</span>
                         </div>
                         <div class="col-3 text-center">
-                            <span class="badge btnBlueDark2">${value.option}</span>
+                            <span class="badge btnBlueDark">${value.option}</span>
                         </div>
                         ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
                         <div class="col-3 text-end text-dark">
@@ -29,10 +43,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 </div>`
         })
+        document.getElementById('displayNbArticles').innerHTML = quantity;
+        document.getElementById('btnCart').innerHTML += `<div class="d-inline-block badgeCart">${quantity}</div>`
+        document.getElementById('displayPrice').innerHTML = new Intl.NumberFormat("fr-FR", {
+            style: "currency",
+            currency: "EUR"
+        }).format(totalCart);
+
     } else {
         document.getElementById('displayCart').innerHTML += `
             <div class="">
-                <p class="">Vous n'avez pas de produit dans votre panier</p>
+                <p class="mt-3 text-center">Vous n'avez pas de produit dans votre panier</p>
             </div>
         `
     }
@@ -82,10 +103,24 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
 
                         document.getElementById('displayCart').innerHTML = ''
 
+                        let quantity = 0;
+                        let totalCart = 0;
+
                         JSON.parse(localStorage.getItem('cart')).forEach((value, index) => {
 
+
+                            let price = parseFloat(value.price)
+                            let discount = parseInt(value.discount)
+                            let total = Number(((price - (price * (discount / 100)).toFixed(2)) * value.quantity).toFixed(2))
+
+                            quantity = quantity + parseInt(value.quantity);
+                            totalCart = totalCart + total
+
+
+
+
                             document.getElementById('displayCart').innerHTML += `
-                            <div class="row mb-4">
+                            <div class="py-2 row ${index % 2 == 0 ? 'bg-light' : 'bg-white'} w-100 p-0 m-0">
                                 <div class="col-3">
                                     <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
                                 </div>
@@ -94,21 +129,27 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                                         <p class="mb-2" style="font-size: 0.9rem;">${value.title}</p>
                                     </a>
                                     <div class="row" style="font-size: 0.9rem;">
-                                        <div class="col-3 text-start">
+                                        <div class="col-3 text-start text-dark">
                                             <span>Qté : ${value.quantity}</span>
                                         </div>
                                         <div class="col-3 text-center">
-                                            <span class="badge btnBlueDark2">${value.option}</span>
+                                            <span class="badge btnBlueDark">${value.option}</span>
                                         </div>
                                         ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
-                                        <div class="col-3 text-end">
-                                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (value.price * value.discount / 100)) * value.quantity)}</span>
+                                        <div class="col-3 text-end text-dark">
+                                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
                                         </div>
                                     </div>
                                 </div>
 
-                            </div>`
+                                </div>`
                         })
+                        document.getElementById('displayNbArticles').innerHTML = quantity;
+                        document.getElementById('btnCart').innerHTML += `<div class="d-inline-block badgeCart">${quantity}</div>`
+                        document.getElementById('displayPrice').innerHTML = new Intl.NumberFormat("fr-FR", {
+                            style: "currency",
+                            currency: "EUR"
+                        }).format(totalCart);
 
                     } else {
 
@@ -127,10 +168,24 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
 
                                 document.getElementById('displayCart').innerHTML = ''
 
+                                let quantity = 0;
+                                let totalCart = 0;
+
                                 JSON.parse(localStorage.getItem('cart')).forEach((value, index) => {
 
+
+                                    let price = parseFloat(value.price)
+                                    let discount = parseInt(value.discount)
+                                    let total = Number(((price - (price * (discount / 100)).toFixed(2)) * value.quantity).toFixed(2))
+
+                                    quantity = quantity + parseInt(value.quantity);
+                                    totalCart = totalCart + total
+
+
+
+
                                     document.getElementById('displayCart').innerHTML += `
-                                    <div class="row mb-4">
+                                    <div class="py-2 row ${index % 2 == 0 ? 'bg-light' : 'bg-white'} w-100 p-0 m-0">
                                         <div class="col-3">
                                             <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
                                         </div>
@@ -139,21 +194,27 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                                                 <p class="mb-2" style="font-size: 0.9rem;">${value.title}</p>
                                             </a>
                                             <div class="row" style="font-size: 0.9rem;">
-                                                <div class="col-3 text-start">
+                                                <div class="col-3 text-start text-dark">
                                                     <span>Qté : ${value.quantity}</span>
                                                 </div>
                                                 <div class="col-3 text-center">
-                                                    <span class="badge btnBlueDark2">${value.option}</span>
+                                                    <span class="badge btnBlueDark">${value.option}</span>
                                                 </div>
                                                 ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
-                                                <div class="col-3 text-end">
-                                                    <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (value.price * value.discount / 100)) * value.quantity)}</span>
+                                                <div class="col-3 text-end text-dark">
+                                                    <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                    </div>`
+                                        </div>`
                                 })
+                                document.getElementById('displayNbArticles').innerHTML = quantity;
+                                document.getElementById('btnCart').innerHTML += `<div class="d-inline-block badgeCart">${quantity}</div>`
+                                document.getElementById('displayPrice').innerHTML = new Intl.NumberFormat("fr-FR", {
+                                    style: "currency",
+                                    currency: "EUR"
+                                }).format(totalCart);
 
                             }
                         })
@@ -165,10 +226,24 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
 
                             document.getElementById('displayCart').innerHTML = ''
 
+                            let quantity = 0;
+                            let totalCart = 0;
+
                             JSON.parse(localStorage.getItem('cart')).forEach((value, index) => {
 
+
+                                let price = parseFloat(value.price)
+                                let discount = parseInt(value.discount)
+                                let total = Number(((price - (price * (discount / 100)).toFixed(2)) * value.quantity).toFixed(2))
+
+                                quantity = quantity + parseInt(value.quantity);
+                                totalCart = totalCart + total
+
+
+
+
                                 document.getElementById('displayCart').innerHTML += `
-                                <div class="row mb-4">
+                                <div class="py-2 row ${index % 2 == 0 ? 'bg-light' : 'bg-white'} w-100 p-0 m-0">
                                     <div class="col-3">
                                         <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
                                     </div>
@@ -177,21 +252,27 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                                             <p class="mb-2" style="font-size: 0.9rem;">${value.title}</p>
                                         </a>
                                         <div class="row" style="font-size: 0.9rem;">
-                                            <div class="col-3 text-start">
+                                            <div class="col-3 text-start text-dark">
                                                 <span>Qté : ${value.quantity}</span>
                                             </div>
                                             <div class="col-3 text-center">
-                                                <span class="badge btnBlueDark2">${value.option}</span>
+                                                <span class="badge btnBlueDark">${value.option}</span>
                                             </div>
                                             ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
-                                            <div class="col-3 text-end">
-                                                <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (value.price * value.discount / 100)) * value.quantity)}</span>
+                                            <div class="col-3 text-end text-dark">
+                                                <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                </div>`
+                                    </div>`
                             })
+                            document.getElementById('displayNbArticles').innerHTML = quantity;
+                            document.getElementById('btnCart').innerHTML += `<div class="d-inline-block badgeCart">${quantity}</div>`
+                            document.getElementById('displayPrice').innerHTML = new Intl.NumberFormat("fr-FR", {
+                                style: "currency",
+                                currency: "EUR"
+                            }).format(totalCart);
                         }
                     }
                 } else {

@@ -1,6 +1,41 @@
 /*body{
     background-color: rgb(179, 179, 179);
 }*/
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.349) rgb(255, 255, 255);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #267691;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.349);
+  border-radius: 50px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.badgeCart{
+  position: absolute; 
+  top: -15px; 
+  right: -15px; 
+  background-color: #ffea28; 
+  color: black; 
+  height: 30px; 
+  width: 30px; 
+  border-radius: 50px; 
+  text-align: center; 
+  line-height: 30px; 
+  vertical-align: middle;
+}
+
 .activeImg{
   border : 3px solid #267691;
 }

@@ -3,14 +3,25 @@
         <h3 id="offcanvasRightLabel">Mon panier SportXtrem</h3>
         <button type="button" class="h1 text-white btn btnDarkBlue buthover" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
     </div>
-    <div class="offcanvas-body position-relative">
-        <div id="displayCart" class="col px-2">
+    <div class="offcanvas-body">
+        <div id="displayCart" class="rounded col bg-light text-dark px-3" style="max-height: 60vh; overflow: auto;">
+
+
 
 
         </div>
-        <div class="fixed-bottom position-absolute">
+        <div class="row p-0 m-0 fs-5 mt-2">
+            <div class="col-8 text-start p-0">
+                Total des articles : <span id="displayNbArticles"></span>
+            </div>
+            <div class="col-4 text-end p-0">
+                <span id="displayPrice"></span>
+            </div>
 
-            <div class="buttons px-3">
+        </div>
+        <div class="mt-4">
+
+            <div class="buttons">
                 <p class="containerglass2">
                     <a href="" class="rounded btnglass2 effect02"><span>Visualiser mon panier <i class="bi bi-chevron-compact-right fw-bold"></i></span></a>
                 </p>
