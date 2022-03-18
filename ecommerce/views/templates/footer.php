@@ -23,7 +23,7 @@
 
             <div class="buttons">
                 <p class="containerglass2">
-                    <a href="" class="rounded btnglass2 effect02"><span>Visualiser mon panier <i class="bi bi-chevron-compact-right fw-bold"></i></span></a>
+                    <a href="/collection/all/1/19/pantalons-de-jogging" class="rounded btnglass2 effect02"><span>Visualiser mon panier <i class="bi bi-chevron-compact-right fw-bold"></i></span></a>
                 </p>
             </div>
 

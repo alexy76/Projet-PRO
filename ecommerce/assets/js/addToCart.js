@@ -130,7 +130,7 @@ document.getElementById('productsCart').addEventListener('click', (e) => {
                 if (quantity > 0) {
                     document.getElementById('btnCart').innerHTML += `<div class="d-inline-block badgeCart">${quantity}</div>`
                 } else {
-                    document.getElementById('btnCart').innerHTML = `<button class="btn btnBlueDark2 nav-link active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>`
+                    document.getElementById('btnCart').innerHTML = `<button class="btn btnBlueDark2 nav-link active px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>`
                 }
                 document.getElementById('displayPrice').innerHTML = new Intl.NumberFormat("fr-FR", {
                     style: "currency",
@@ -244,7 +244,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                         if (quantity > 0) {
                             document.getElementById('btnCart').innerHTML += `<div class="d-inline-block badgeCart">${quantity}</div>`
                         } else {
-                            document.getElementById('btnCart').innerHTML = `<button class="btn btnBlueDark2 nav-link active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>`
+                            document.getElementById('btnCart').innerHTML = `<button class="btn btnBlueDark2 nav-link active px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>`
                         }
                         document.getElementById('displayPrice').innerHTML = new Intl.NumberFormat("fr-FR", {
                             style: "currency",
@@ -322,7 +322,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                                 if (quantity > 0) {
                                     document.getElementById('btnCart').innerHTML += `<div class="d-inline-block badgeCart">${quantity}</div>`
                                 } else {
-                                    document.getElementById('btnCart').innerHTML = `<button class="btn btnBlueDark2 nav-link active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>`
+                                    document.getElementById('btnCart').innerHTML = `<button class="btn btnBlueDark2 nav-link active px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>`
                                 }
                                 document.getElementById('displayPrice').innerHTML = new Intl.NumberFormat("fr-FR", {
                                     style: "currency",
@@ -393,7 +393,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                             if (quantity > 0) {
                                 document.getElementById('btnCart').innerHTML += `<div class="d-inline-block badgeCart">${quantity}</div>`
                             } else {
-                                document.getElementById('btnCart').innerHTML = `<button class="btn btnBlueDark2 nav-link active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>`
+                                document.getElementById('btnCart').innerHTML = `<button class="btn btnBlueDark2 nav-link active px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>`
                             }
                             document.getElementById('displayPrice').innerHTML = new Intl.NumberFormat("fr-FR", {
                                 style: "currency",

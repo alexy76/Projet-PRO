@@ -8,6 +8,13 @@ require_once '../tools/tools.php';
 
 /** Initialisation des paramètres de la page */
 if(session_status() === PHP_SESSION_NONE) session_start();
+
+if(isset($_SESSION['id']))
+{
+    header('Location: account.php');
+    exit();
+}
+
 $Collections = new Collections;
 
 
@@ -103,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['subscribe']))
                     $msg = 'Felicitation pour ton inscription, valide ton compte en cliquant sur : <a href="' . $lien . '">ce lien</a>';
                     
                     if(smtpmailer($to,$from, $name ,$subj, $msg)){
-                        header('Location: login?validatedSubscribe');
+                        header('Location: login.php?validatedSubscribe');
                         exit();
                     }else
                         echo "Le mail n'a pas été envoyé";
@@ -140,6 +147,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connection']))
                         if($Users->getStatusUser($userConnection['mail'])){
 
                             $_SESSION = $Users->getUser($userConnection['mail']);
+                            header('Location: /collection/all/1/19/pantalons-de-jogging');
+                            exit();
                             // Faire une redirection plus tard dans le Dev (header());
 
                         }else
@@ -217,5 +226,3 @@ if(isset($_POST['sendConfirmMail'], $_POST['confirmMail']) && filter_var($_POST[
                 $messageAlert = ['danger', "Une erreur s'est produite lors de l'envoi du mail, à l'adresse : <b>".$mailConfirm."</b>"];
         }
 }
-
-?>

@@ -42,7 +42,7 @@ include '../views/templates/header.php';
                             <div class="card-body">
                                 <h5 class="card-title">Profitez-en maintenant</h5>
                                 <p class="card-text">En s'inscrivant à notre Newsletter, vous bénéficierez d'offres exceptionnelles</p>
-                                <a href="?action=subscribeNewsletters" class="btn btnBlueDarkOutline">Je profite des offres privées</a>
+                                <a href="account.php?action=subscribeNewsletters" class="btn btnBlueDarkOutline">Je profite des offres privées</a>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -154,7 +154,7 @@ include '../views/templates/header.php';
                                         </div>
                                         <div class="mt-3 text-center">
                                             <input type="submit" name="modifyAddress" class="btn btnBlueDark4" value="Modifier">
-                                            <a href="?action=deleteAddr#modifyAdress" class="btn btnBlueDarkOutline">Supprimer mon adresse</a>
+                                            <a href="account.php?action=deleteAddr#modifyAdress" class="btn btnBlueDarkOutline">Supprimer mon adresse</a>
                                         </div>
                                     </form>
                                 </div>

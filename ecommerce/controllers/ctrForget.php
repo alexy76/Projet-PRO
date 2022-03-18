@@ -8,6 +8,13 @@ require_once '../tools/tools.php';
 
 /** Initialisation des paramètres de la page */
 if (session_status() === PHP_SESSION_NONE) session_start();
+
+if(isset($_SESSION['id']))
+{
+    header('Location: account.php');
+    exit();
+}
+
 $Collections = new Collections;
 
 

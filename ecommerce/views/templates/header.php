@@ -37,7 +37,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 h6">
-                        <li class="nav-item dropdown text-bluedark ms-lg-5 ms-0">
+                        <li class="nav-item dropdown text-bluedark ms-lg-5 ms-0 d-lg-block d-none">
                             <a class="nav-link text-bluedark" href="../../views/home.php">
                                 <i class="bi bi-house-fill text-bluelight "> ACCUEIL</i>
                             </a>
@@ -90,9 +90,9 @@
                                     </ul>
                                 </li>
                             <?php endif; ?>
-                            <li id="btnCart" class="nav-item position-relative">
+                            <li id="btnCart" class="nav-item position-relative mt-lg-0 mt-2">
 
-                                <button class="btn btnBlueDark2 nav-link active" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>
+                                <button class="btn btnBlueDark2 nav-link active px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-check-fill"></i> MON PANIER</button>
 
                             </li>
                         </ul>
