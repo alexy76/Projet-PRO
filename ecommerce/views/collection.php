@@ -66,15 +66,15 @@ include '../views/templates/header.php';
             <nav class="text-center d-inline-block m-auto" aria-label="...">
                 <ul class="pagination">
                     <li class="page-item <?= $pageActual == 1 ? 'disabled' : '' ?>">
-                        <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="/collection/<?= strtolower($_GET['query']) ?>/<?= $pageActual - 1 ?>/<?= $_GET['id'] ?>/<?= $collection['slug'] ?>">Précédent</a>
+                        <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark4' ?>" href="/collection/<?= strtolower($_GET['query']) ?>/<?= $pageActual - 1 ?>/<?= $_GET['id'] ?>/<?= $collection['slug'] ?>">Précédent</a>
                     </li>
                     <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
                         <li class="page-item">
-                            <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="/collection/<?= strtolower($_GET['query']) ?>/<?= $i ?>/<?= $_GET['id'] ?>/<?= $collection['slug'] ?>"><?= $i ?></a>
+                            <a class="page-link <?= $i == $pageActual ? 'btnBlueDark4' : 'text-dark' ?>" href="/collection/<?= strtolower($_GET['query']) ?>/<?= $i ?>/<?= $_GET['id'] ?>/<?= $collection['slug'] ?>"><?= $i ?></a>
                         </li>
                     <?php endfor; ?>
                     <li class="page-item <?= $pageActual == $nbPages || ($pageActual == 1 && $nbPages == 0) ? 'disabled' : '' ?>">
-                        <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="/collection/<?= strtolower($_GET['query']) ?>/<?= $pageActual + 1 ?>/<?= $_GET['id'] ?>/<?= $collection['slug'] ?>">Suivant</a>
+                        <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark4' ?>" href="/collection/<?= strtolower($_GET['query']) ?>/<?= $pageActual + 1 ?>/<?= $_GET['id'] ?>/<?= $collection['slug'] ?>">Suivant</a>
                     </li>
                 </ul>
             </nav>

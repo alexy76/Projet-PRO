@@ -111,6 +111,21 @@ include '../views/templates/header.php';
         </div>
     </div>
 
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header btnBlueDark3">
+                
+                <strong class="me-auto">Ajout au panier</strong>
+                <small></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <img id="imgToast" src="../assets/img/products/pdt_60_6229f2bad56d3.webp" class="rounded me-2" alt="..." width="15%" height="15%">
+                L'article a été ajouté a votre panier !
+            </div>
+        </div>
+    </div>
+
     <script>
         Array.from(document.getElementsByClassName('imagesProduct')).forEach(value => {
             value.addEventListener('click', (e) => {

@@ -334,3 +334,16 @@
 .text-bluelight{
     color: #267691!important;
 }
+
+.cart{
+  width: 35vw;
+}
+
+
+@media screen and (max-width: 480px){
+
+  .cart{
+    width: 100vw;
+  }
+  
+}
