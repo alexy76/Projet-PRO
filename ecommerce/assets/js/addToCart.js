@@ -45,7 +45,7 @@ if (localStorage.getItem('cart') !== null) {
             </div>
 
                 </div>
-                <hr>`
+                <hr class="marge">`
     })
     document.getElementById('displayNbArticles').innerHTML = quantity;
     if (quantity > 0) {
@@ -97,34 +97,34 @@ document.getElementById('productsCart').addEventListener('click', (e) => {
 
                     document.getElementById('displayCart').innerHTML += `
                     <div class="py-2 row bg-light w-100 p-0 m-0">
-                    <div class="col-3">
-                        <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
-                    </div>
-                    <div class="col-9 position-relative">
-                        <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
-                            <p  class="mb-2" style="font-size: 0.9rem;">
-                                ${value.title}
-                            </p>
-                        </a>
-                        <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
-    
-                        <div class="row" style="font-size: 0.9rem;">
-                            <div class="col-3 text-start text-dark">
-                                <span>Qté : ${value.quantity}</span>
-                            </div>
-                            <div class="col-3 text-center">
-                                <span class="badge btnBlueDark">${value.option}</span>
-                            </div>
-                            ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
-                            <div class="col-3 text-end text-dark">
-                                <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
-                            </div>
-                    </div>
-                    
+                <div class="col-3">
+                    <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
                 </div>
-    
-                    </div>
-                    <hr>`
+                <div class="col-9 position-relative">
+                    <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
+                        <p  class="mb-2" style="font-size: 0.9rem;">
+                            ${value.title}
+                        </p>
+                    </a>
+                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+
+                    <div class="row" style="font-size: 0.9rem;">
+                        <div class="col-3 text-start text-dark">
+                            <span>Qté : ${value.quantity}</span>
+                        </div>
+                        <div class="col-3 text-center">
+                            <span class="badge btnBlueDark">${value.option}</span>
+                        </div>
+                        ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
+                        <div class="col-3 text-end text-dark">
+                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
+                        </div>
+                </div>
+                
+            </div>
+
+                </div>
+                <hr class="marge">`
                 })
                 document.getElementById('displayNbArticles').innerHTML = quantity;
                 if (quantity > 0) {
@@ -211,34 +211,34 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
 
                             document.getElementById('displayCart').innerHTML += `
                             <div class="py-2 row bg-light w-100 p-0 m-0">
-                    <div class="col-3">
-                        <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
-                    </div>
-                    <div class="col-9 position-relative">
-                        <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
-                            <p  class="mb-2" style="font-size: 0.9rem;">
-                                ${value.title}
-                            </p>
-                        </a>
-                        <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
-    
-                        <div class="row" style="font-size: 0.9rem;">
-                            <div class="col-3 text-start text-dark">
-                                <span>Qté : ${value.quantity}</span>
-                            </div>
-                            <div class="col-3 text-center">
-                                <span class="badge btnBlueDark">${value.option}</span>
-                            </div>
-                            ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
-                            <div class="col-3 text-end text-dark">
-                                <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
-                            </div>
-                    </div>
-                    
+                <div class="col-3">
+                    <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
                 </div>
-    
-                    </div>
-                    <hr>`
+                <div class="col-9 position-relative">
+                    <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
+                        <p  class="mb-2" style="font-size: 0.9rem;">
+                            ${value.title}
+                        </p>
+                    </a>
+                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+
+                    <div class="row" style="font-size: 0.9rem;">
+                        <div class="col-3 text-start text-dark">
+                            <span>Qté : ${value.quantity}</span>
+                        </div>
+                        <div class="col-3 text-center">
+                            <span class="badge btnBlueDark">${value.option}</span>
+                        </div>
+                        ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
+                        <div class="col-3 text-end text-dark">
+                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
+                        </div>
+                </div>
+                
+            </div>
+
+                </div>
+                <hr class="marge">`
                         })
                         document.getElementById('displayNbArticles').innerHTML = quantity;
                         if (quantity > 0) {
@@ -250,7 +250,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                             style: "currency",
                             currency: "EUR"
                         }).format(totalCart);
-                        
+
                         var toast = new bootstrap.Toast(document.getElementById('liveToast'))
                         toast.show()
 
@@ -289,34 +289,34 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
 
                                     document.getElementById('displayCart').innerHTML += `
                                     <div class="py-2 row bg-light w-100 p-0 m-0">
-                    <div class="col-3">
-                        <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
-                    </div>
-                    <div class="col-9 position-relative">
-                        <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
-                            <p  class="mb-2" style="font-size: 0.9rem;">
-                                ${value.title}
-                            </p>
-                        </a>
-                        <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
-    
-                        <div class="row" style="font-size: 0.9rem;">
-                            <div class="col-3 text-start text-dark">
-                                <span>Qté : ${value.quantity}</span>
-                            </div>
-                            <div class="col-3 text-center">
-                                <span class="badge btnBlueDark">${value.option}</span>
-                            </div>
-                            ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
-                            <div class="col-3 text-end text-dark">
-                                <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
-                            </div>
-                    </div>
-                    
+                <div class="col-3">
+                    <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
                 </div>
-    
-                    </div>
-                    <hr>`
+                <div class="col-9 position-relative">
+                    <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
+                        <p  class="mb-2" style="font-size: 0.9rem;">
+                            ${value.title}
+                        </p>
+                    </a>
+                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+
+                    <div class="row" style="font-size: 0.9rem;">
+                        <div class="col-3 text-start text-dark">
+                            <span>Qté : ${value.quantity}</span>
+                        </div>
+                        <div class="col-3 text-center">
+                            <span class="badge btnBlueDark">${value.option}</span>
+                        </div>
+                        ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
+                        <div class="col-3 text-end text-dark">
+                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
+                        </div>
+                </div>
+                
+            </div>
+
+                </div>
+                <hr class="marge">`
                                 })
                                 document.getElementById('displayNbArticles').innerHTML = quantity;
                                 if (quantity > 0) {
@@ -330,7 +330,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                                 }).format(totalCart);
 
                                 var toast = new bootstrap.Toast(document.getElementById('liveToast'))
-                        toast.show()
+                                toast.show()
 
                             }
                         })
@@ -360,34 +360,34 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
 
                                 document.getElementById('displayCart').innerHTML += `
                                 <div class="py-2 row bg-light w-100 p-0 m-0">
-                    <div class="col-3">
-                        <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
-                    </div>
-                    <div class="col-9 position-relative">
-                        <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
-                            <p  class="mb-2" style="font-size: 0.9rem;">
-                                ${value.title}
-                            </p>
-                        </a>
-                        <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
-    
-                        <div class="row" style="font-size: 0.9rem;">
-                            <div class="col-3 text-start text-dark">
-                                <span>Qté : ${value.quantity}</span>
-                            </div>
-                            <div class="col-3 text-center">
-                                <span class="badge btnBlueDark">${value.option}</span>
-                            </div>
-                            ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
-                            <div class="col-3 text-end text-dark">
-                                <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
-                            </div>
-                    </div>
-                    
+                <div class="col-3">
+                    <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
                 </div>
-    
-                    </div>
-                    <hr>`
+                <div class="col-9 position-relative">
+                    <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
+                        <p  class="mb-2" style="font-size: 0.9rem;">
+                            ${value.title}
+                        </p>
+                    </a>
+                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+
+                    <div class="row" style="font-size: 0.9rem;">
+                        <div class="col-3 text-start text-dark">
+                            <span>Qté : ${value.quantity}</span>
+                        </div>
+                        <div class="col-3 text-center">
+                            <span class="badge btnBlueDark">${value.option}</span>
+                        </div>
+                        ${value.discount > 0 ? `<div class="col-3 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-3 text-center"></div>'}
+                        <div class="col-3 text-end text-dark">
+                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
+                        </div>
+                </div>
+                
+            </div>
+
+                </div>
+                <hr class="marge">`
                             })
                             document.getElementById('displayNbArticles').innerHTML = quantity;
                             if (quantity > 0) {
@@ -400,9 +400,9 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                                 currency: "EUR"
                             }).format(totalCart);
 
-                            
+
                             var toast = new bootstrap.Toast(document.getElementById('liveToast'))
-                        toast.show()
+                            toast.show()
                         }
                     }
                 } else {

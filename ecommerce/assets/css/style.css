@@ -339,11 +339,36 @@
   width: 35vw;
 }
 
+.footerlink{
+  text-decoration: none;
+  color: #e0e0e0;
+}
+
+.footerlink:hover{
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.footercolor{
+  font-size: 0.9rem; 
+  color: #e0e0e0;
+}
+
+.marge{
+  margin: 0px;
+}
+
 
 @media screen and (max-width: 480px){
 
   .cart{
     width: 100vw;
   }
-  
+
+  .footercolor{
+  font-size: 0.8rem; 
+  color: #e0e0e0;
 }
+}
+

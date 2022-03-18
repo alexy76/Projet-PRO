@@ -22,7 +22,7 @@
 </head>
 
 
-<body class="bg-light" style="color: #141d37; margin-bottom: 80px; position: relative;">
+<body class="bg-light" style="color: #141d37; position: relative;">
 
     <header>
         <div class="" style="background: #267691;">
