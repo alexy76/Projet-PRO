@@ -131,7 +131,7 @@ require_once '../../controllers/admin/ctrIndex.php';
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item" href="#">Consulter la fiche client</a></li>
                                                         <li>
-                                                            <form method="POST" action="">
+                                                            <form id="formDeleteUser" method="POST" action="">
                                                                 <input type="hidden" value="<?= $user->usr_firstname . ' ' . $user->usr_lastname ?>" name="nameUser">
                                                                 <input type="hidden" value="<?= $user->usr_id ?>" name="idUser">
                                                                 <input class="d-inline-block w-100 linkBtnDelete" type="submit" value="Supprimer l'utilisateur" name="deleteUser">
@@ -181,6 +181,12 @@ require_once '../../controllers/admin/ctrIndex.php';
     </div>
 
     <script type="text/javascript">
+        document.getElementById('formDeleteUser').addEventListener('submit', (e) => {
+            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+                e.preventDefault();
+            }
+        })
+
         document.getElementById('formInputsDelete').addEventListener('submit', (e) => {
             if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
                 e.preventDefault();

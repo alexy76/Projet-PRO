@@ -88,8 +88,9 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
 
                     <h3 class="mb-5"><?= $product['pdt_title'] ?></h3>
-
-
+                    <p>
+                        <a href="/product/<?= $product['pdt_id'] ?>/<?= $product['pdt_slug'] ?>"><i class="bi bi-eye"></i> Voir le produit</a>
+                    </p>
                     <div class="row mt-3 text-start g-0">
 
 
@@ -333,7 +334,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
     <script type="text/javascript">
         document.getElementById('deleteImageForm').addEventListener('submit', (e) => {
-            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+            if (!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')) {
                 e.preventDefault();
             }
         })

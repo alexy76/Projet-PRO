@@ -27,7 +27,7 @@ if (localStorage.getItem('cart') !== null) {
                             ${value.title}
                         </p>
                     </a>
-                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+                    <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
                         <div class="col-3 text-start text-dark">
@@ -106,7 +106,7 @@ document.getElementById('productsCart').addEventListener('click', (e) => {
                             ${value.title}
                         </p>
                     </a>
-                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+                    <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
                         <div class="col-3 text-start text-dark">
@@ -181,7 +181,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                         slugTitle: responseArray.slug,
                         price: parseFloat(responseArray.price).toFixed(2),
                         discount: parseFloat(responseArray.discount),
-                        option: document.getElementById('optionProduct').value,
+                        option: document.getElementById('optionProduct') ? document.getElementById('optionProduct').value : null,
                         quantity: parseInt(document.getElementById('quantityProduct').value)
                     }
 
@@ -220,7 +220,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                             ${value.title}
                         </p>
                     </a>
-                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+                    <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
                         <div class="col-3 text-start text-dark">
@@ -298,7 +298,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                             ${value.title}
                         </p>
                     </a>
-                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+                    <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
                         <div class="col-3 text-start text-dark">
@@ -369,7 +369,7 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                             ${value.title}
                         </p>
                     </a>
-                    <span data-id="${index}" class="d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+                    <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
                         <div class="col-3 text-start text-dark">

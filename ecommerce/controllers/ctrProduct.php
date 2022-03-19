@@ -21,7 +21,7 @@ if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Product->getExistProduc
 
 $product = $Product->get_displayByIdProduct(intval($_GET['id']));
 
-//var_dump($product);
+//var_dump($_SESSION);
 
 /** Valeur des metas */
 $meta_title = $product['metaTitle'];
