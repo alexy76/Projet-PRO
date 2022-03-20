@@ -30,13 +30,13 @@ if (localStorage.getItem('cart') !== null) {
                     <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
-                        <div class="col-lg-3 col-6 text-start text-dark">
-                            Qté : <br><button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
+                        <div class="col-lg-4 col-6 text-start text-dark">
+                            <button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
                         </div>
                         <div class="col-lg-3 col-6 text-center">
                             <span class="badge btnBlueDark">${value.option}</span>
                         </div>
-                        ${value.discount > 0 ? `<div class="col-lg-3 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-3 col-6 text-center"></div>'}
+                        ${value.discount > 0 ? `<div class="col-lg-2 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-2 col-6 text-center"></div>'}
                         <div class="col-lg-3 col-6 text-end text-dark">
                             <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
                         </div>
@@ -97,35 +97,35 @@ document.getElementById('productsCart').addEventListener('click', (e) => {
 
 
                             document.getElementById('displayCart').innerHTML += `
-            <div class="py-2 row bg-light w-100 p-0 m-0">
-                <div class="col-3">
-                    <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
-                </div>
-                <div class="col-9 position-relative">
-                    <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
-                        <p class="mb-2" style="font-size: 0.9rem;">
-                            ${value.title}
-                        </p>
-                    </a>
-                    <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
-
-                    <div class="row" style="font-size: 0.9rem;">
-                        <div class="col-lg-3 col-6 text-start text-dark">
-                            Qté : <br><button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
+                            <div class="py-2 row bg-light w-100 p-0 m-0">
+                            <div class="col-3">
+                                <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
+                            </div>
+                            <div class="col-9 position-relative">
+                                <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
+                                    <p class="mb-2" style="font-size: 0.9rem;">
+                                        ${value.title}
+                                    </p>
+                                </a>
+                                <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
+            
+                                <div class="row" style="font-size: 0.9rem;">
+                                    <div class="col-lg-4 col-6 text-start text-dark">
+                                        <button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
+                                    </div>
+                                    <div class="col-lg-3 col-6 text-center">
+                                        <span class="badge btnBlueDark">${value.option}</span>
+                                    </div>
+                                    ${value.discount > 0 ? `<div class="col-lg-2 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-2 col-6 text-center"></div>'}
+                                    <div class="col-lg-3 col-6 text-end text-dark">
+                                        <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
+                                    </div>
+                            </div>
+                            
                         </div>
-                        <div class="col-lg-3 col-6 text-center">
-                            <span class="badge btnBlueDark">${value.option}</span>
-                        </div>
-                        ${value.discount > 0 ? `<div class="col-lg-3 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-3 col-6 text-center"></div>'}
-                        <div class="col-lg-3 col-6 text-end text-dark">
-                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
-                        </div>
-                </div>
-                
-            </div>
-
-                </div>
-                <hr class="marge">`
+            
+                            </div>
+                            <hr class="marge">`
                         })
                         document.getElementById('displayNbArticles').innerHTML = quantity;
                         if (quantity > 0) {
@@ -162,35 +162,35 @@ document.getElementById('productsCart').addEventListener('click', (e) => {
 
 
                                 document.getElementById('displayCart').innerHTML += `
-            <div class="py-2 row bg-light w-100 p-0 m-0">
-                <div class="col-3">
-                    <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
-                </div>
-                <div class="col-9 position-relative">
-                    <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
-                        <p class="mb-2" style="font-size: 0.9rem;">
-                            ${value.title}
-                        </p>
-                    </a>
-                    <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
-
-                    <div class="row" style="font-size: 0.9rem;">
-                        <div class="col-lg-3 col-6 text-start text-dark">
-                            Qté : <br><button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
-                        </div>
-                        <div class="col-lg-3 col-6 text-center">
-                            <span class="badge btnBlueDark">${value.option}</span>
-                        </div>
-                        ${value.discount > 0 ? `<div class="col-lg-3 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-3 col-6 text-center"></div>'}
-                        <div class="col-lg-3 col-6 text-end text-dark">
-                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
-                        </div>
-                </div>
+                                <div class="py-2 row bg-light w-100 p-0 m-0">
+                                <div class="col-3">
+                                    <img class="img-fluid" src="../../assets/img/products/${value.image.image}" alt="${value.image.alt}">
+                                </div>
+                                <div class="col-9 position-relative">
+                                    <a class="text-secondary" href="../../../product/${value.id}/${value.slugTitle}" style="text-decoration: none;">
+                                        <p class="mb-2" style="font-size: 0.9rem;">
+                                            ${value.title}
+                                        </p>
+                                    </a>
+                                    <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
                 
-            </div>
-
-                </div>
-                <hr class="marge">`
+                                    <div class="row" style="font-size: 0.9rem;">
+                                        <div class="col-lg-4 col-6 text-start text-dark">
+                                            <button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
+                                        </div>
+                                        <div class="col-lg-3 col-6 text-center">
+                                            <span class="badge btnBlueDark">${value.option}</span>
+                                        </div>
+                                        ${value.discount > 0 ? `<div class="col-lg-2 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-2 col-6 text-center"></div>'}
+                                        <div class="col-lg-3 col-6 text-end text-dark">
+                                            <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
+                                        </div>
+                                </div>
+                                
+                            </div>
+                
+                                </div>
+                                <hr class="marge">`
                             })
                             document.getElementById('displayNbArticles').innerHTML = quantity;
                             if (quantity > 0) {
@@ -261,13 +261,13 @@ document.getElementById('productsCart').addEventListener('click', (e) => {
                     <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
-                        <div class="col-lg-3 col-6 text-start text-dark">
-                            Qté : <br><button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
+                        <div class="col-lg-4 col-6 text-start text-dark">
+                            <button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
                         </div>
                         <div class="col-lg-3 col-6 text-center">
                             <span class="badge btnBlueDark">${value.option}</span>
                         </div>
-                        ${value.discount > 0 ? `<div class="col-lg-3 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-3 col-6 text-center"></div>'}
+                        ${value.discount > 0 ? `<div class="col-lg-2 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-2 col-6 text-center"></div>'}
                         <div class="col-lg-3 col-6 text-end text-dark">
                             <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
                         </div>
@@ -375,13 +375,13 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                     <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
-                        <div class="col-lg-3 col-6 text-start text-dark">
-                            Qté : <br><button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
+                        <div class="col-lg-4 col-6 text-start text-dark">
+                            <button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
                         </div>
                         <div class="col-lg-3 col-6 text-center">
                             <span class="badge btnBlueDark">${value.option}</span>
                         </div>
-                        ${value.discount > 0 ? `<div class="col-lg-3 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-3 col-6 text-center"></div>'}
+                        ${value.discount > 0 ? `<div class="col-lg-2 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-2 col-6 text-center"></div>'}
                         <div class="col-lg-3 col-6 text-end text-dark">
                             <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
                         </div>
@@ -453,13 +453,13 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                     <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
-                        <div class="col-lg-3 col-6 text-start text-dark">
-                            Qté : <br><button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
+                        <div class="col-lg-4 col-6 text-start text-dark">
+                            <button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
                         </div>
                         <div class="col-lg-3 col-6 text-center">
                             <span class="badge btnBlueDark">${value.option}</span>
                         </div>
-                        ${value.discount > 0 ? `<div class="col-lg-3 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-3 col-6 text-center"></div>'}
+                        ${value.discount > 0 ? `<div class="col-lg-2 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-2 col-6 text-center"></div>'}
                         <div class="col-lg-3 col-6 text-end text-dark">
                             <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
                         </div>
@@ -524,13 +524,13 @@ document.getElementById('addToCart').addEventListener('click', (e) => {
                     <span data-id="${index}" class="pointerCursor d-inline-block colorlink px-1 rounded-3" style="position: absolute; z-index: 999; top: 0px; right: -12px; border: 1px solid #267691">X</span>
 
                     <div class="row" style="font-size: 0.9rem;">
-                        <div class="col-lg-3 col-6 text-start text-dark">
-                            Qté : <br><button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
+                        <div class="col-lg-4 col-6 text-start text-dark">
+                            <button class="btn btn-sm rounded" data-action="-" data-idQty="${index}" data-actualQty="${value.quantity}"> - </button><span class="px-2">${value.quantity}</span><button type="button" class="btn btn-sm rounded" data-action="+" data-idQty="${index}" data-actualQty="${value.quantity}"> + </button>
                         </div>
                         <div class="col-lg-3 col-6 text-center">
                             <span class="badge btnBlueDark">${value.option}</span>
                         </div>
-                        ${value.discount > 0 ? `<div class="col-lg-3 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-3 col-6 text-center"></div>'}
+                        ${value.discount > 0 ? `<div class="col-lg-2 col-6 text-center"><span class="badge btnYellow text-dark">-${value.discount}%</span></div>` : '<div class="col-lg-2 col-6 text-center"></div>'}
                         <div class="col-lg-3 col-6 text-end text-dark">
                             <span>${new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR"}).format((value.price  - (Number(value.price * value.discount / 100).toFixed(2))) * value.quantity)}</span>
                         </div>
