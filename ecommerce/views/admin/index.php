@@ -76,7 +76,7 @@ require_once '../../controllers/admin/ctrIndex.php';
 
                     <!-- <div class="input-group mt-4"> -->
                     <form action="" method="GET" class="w-100 input-group mt-4">
-                    <input type="hidden" name="search" value="NameClient">
+                        <input type="hidden" name="search" value="NameClient">
                         <input id="name" type="text" list="res" value="<?= $req ?? '' ?>" class="form-control form-control-sm" placeholder="Nom du client" name="req" autocomplete="off" onkeyup="getdata();">
                         <div class="input-group-append">
                             <button class="btn btn-sm btnBlueDark" type="submit">Rechercher</button>
@@ -131,7 +131,7 @@ require_once '../../controllers/admin/ctrIndex.php';
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item" href="#">Consulter la fiche client</a></li>
                                                         <li>
-                                                            <form id="formDeleteUser" method="POST" action="">
+                                                            <form class="formDeleteUser" method="POST" action="">
                                                                 <input type="hidden" value="<?= $user->usr_firstname . ' ' . $user->usr_lastname ?>" name="nameUser">
                                                                 <input type="hidden" value="<?= $user->usr_id ?>" name="idUser">
                                                                 <input class="d-inline-block w-100 linkBtnDelete" type="submit" value="Supprimer l'utilisateur" name="deleteUser">
@@ -159,15 +159,15 @@ require_once '../../controllers/admin/ctrIndex.php';
                         <nav class="text-center d-inline-block" aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item <?= $pageActual == 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual - 1 ?>">Précédent</a>
+                                    <a class="page-link <?= $pageActual == 1 ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req=' . $req : '' ?>&page=<?= $pageActual - 1 ?>">Précédent</a>
                                 </li>
                                 <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
                                     <li class="page-item">
-                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $i ?>"><?= $i ?></a>
+                                        <a class="page-link <?= $i == $pageActual ? 'btnBlueDark' : 'text-dark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req=' . $req : '' ?>&page=<?= $i ?>"><?= $i ?></a>
                                     </li>
                                 <?php endfor; ?>
                                 <li class="page-item <?= $pageActual == $nbPages || ($pageActual == 1 && $nbPages == 0) ? 'disabled' : '' ?>">
-                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req='.$req : '' ?>&page=<?= $pageActual + 1 ?>">Suivant</a>
+                                    <a class="page-link <?= $pageActual == $nbPages || ($pageActual == 1  && $nbPages == 0) ? '' : 'btnBlueDark' ?>" href="?search=<?= $nameMethod ?><?= isset($req) ? '&req=' . $req : '' ?>&page=<?= $pageActual + 1 ?>">Suivant</a>
                                 </li>
                             </ul>
                         </nav>
@@ -181,14 +181,16 @@ require_once '../../controllers/admin/ctrIndex.php';
     </div>
 
     <script type="text/javascript">
-        document.getElementById('formDeleteUser').addEventListener('submit', (e) => {
-            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
-                e.preventDefault();
-            }
+        Array.from(document.getElementsByClassName('formDeleteUser')).forEach(elt => {
+            elt.addEventListener('submit', (e) => {
+                if (!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')) {
+                    e.preventDefault();
+                }
+            })
         })
 
         document.getElementById('formInputsDelete').addEventListener('submit', (e) => {
-            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+            if (!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')) {
                 e.preventDefault();
             }
         })
