@@ -18,7 +18,10 @@ include '../views/templates/header.php';
         <div class="card-body">
 
             <div class="row justify-content-center p-lg-3 p-1">
-                <h1>FAQ</h1>
+
+                <h1 class="mb-5">FAQ</h1>
+
+                <img class="img-fluid mt-5" src="../assets/img/under-construct.png" alt="Site en cours de realisation">
             </div>
         </div>
     </div>

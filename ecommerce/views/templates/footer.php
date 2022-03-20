@@ -65,7 +65,7 @@
                     <h3 class="h5 mb-3 text-white text-lg-start text-center">CONTACT</h3>
                     <p>Une question ou une suggestion, contactez-nous et vous recevrez une réponse en moins de 24h du lundi au vendredi entre 9 et 17h.</p>
                     <p>Par e-mail : <a class="footerlink" href="contact.php">cliquez ici</a></p>
-                    <p>Par téléphone : 07.54.12.54.87</p>
+                    <p>Par téléphone : 07 54 12 54 87</p>
                     <p>Athlectic'Sports appartient à:</p>
                     <p>ATHLECTIC'SPORTS</p>
                     <p>Adresse :</p>
@@ -89,16 +89,24 @@
                     <p><a class="footerlink" href="../views/contact.php">Contact</a></p>
                 </div>
                 <div class="col-lg-3 px-2 mt-lg-0 mt-3">
-                    <h3 class="h5 mb-3 text-white text-lg-start text-center">RESTE CONNECTÉ.E</h3>
+                    <h3 class="h5 mb-3 text-white text-lg-start text-center">RESTEZ CONNECTÉ.E</h3>
                 </div>
             </div>
         </div>
         <hr>
         <div class="container pb-2">
-            <div class="col-6">
-                <p class="footercolor">© 2022, <a class="footerlink" href="/views/home.php">Athlectic'Sports</a></p>
+            <div class="row">
+                <div class="col-6">
+                    <p class="footercolor">© 2022, <a class="footerlink" href="/views/home.php">Athlectic'Sports</a></p>
+                </div>
+                <div class="col-6 text-end">
+                    <img class="me-1" src="../../assets/img/visa.png" alt="badge de paiement visa" height="23px">
+                    <img class="me-1" src="../../assets/img/mastercard.png" alt="badge de paiement mastercard" height="23px">
+                    <img class="me-1" src="../../assets/img/maestro.png" alt="badge de paiement maestro" height="23px">
+                    <img class="me-1" src="../../assets/img/americanxpress.png" alt="badge de paiement american express" height="23px">
+                </div>
             </div>
-            <div class="col-6"></div>
+
         </div>
     </div>
 
