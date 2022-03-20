@@ -69,11 +69,15 @@ include '../views/templates/header.php';
 
                         <p class="text-start mt-4">Quantité</p>
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 col-12">
                                 <input id="quantityProduct" type="number" class="form-control" id="validationTooltip01" value="1" min="1" max="10" required>
                             </div>
-                            <div class="col-lg-9">
-                                <button id="addToCart" type="button" class="btn btnBlueDark4 w-100" data-id="<?= $product['id'] ?>" data-title="<?= $product['title'] ?>" data-price="<?= $product['price'] ?>" data-discount="<?= $product['discount'] ?>">Ajouter au panier</button>
+                            <div class="col-lg-9 col-12 mt-lg-0 mt-3">
+                                <?php if ($product['activated'] === '1') : ?>
+                                    <button id="addToCart" type="button" class="btn btnBlueDark4 w-100" data-id="<?= $product['id'] ?>">Ajouter au panier</button>
+                                <?php else : ?>
+                                    <button type="button" class="btn btnBlueDark4 w-100" disabled>Momentanément indisponible</button>
+                                <?php endif; ?>
                             </div>
 
 
@@ -88,9 +92,9 @@ include '../views/templates/header.php';
                             <p class="">
                                 <i class="bi bi-lock-fill fw-bold h4 fs-3 me-3"></i> Paiement sécurisé
                             </p>
-                            
-                            <?= $_SESSION['role'] == 2 ? '<p class="text-center"><a href="/views/admin/editProduct.php?id='. $product["id"] .'">Editer la fiche produit</a></p>' : '' ?>
-                            
+
+                            <?= $_SESSION['role'] == 2 ? '<p class="text-center"><a href="/views/admin/editProduct.php?id=' . $product["id"] . '">Editer la fiche produit</a></p>' : '' ?>
+
 
 
                         </div>
@@ -117,7 +121,7 @@ include '../views/templates/header.php';
     <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header btnBlueDark3">
-                
+
                 <strong class="me-auto">Ajout au panier</strong>
                 <small></small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>

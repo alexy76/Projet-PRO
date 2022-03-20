@@ -190,7 +190,7 @@ class Products extends Database
      * @param int (identifiant produit)
      * @return int
      * */
-    private function getStatusProduct(int $id): int
+    public function getStatusProduct(int $id): int
     {
         $db = $this->connectDB();
         return intval($db->query("SELECT `pdt_activated` as 'status' FROM `ec_products` WHERE `pdt_id` = $id")->fetch()->status);
