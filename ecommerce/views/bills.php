@@ -33,7 +33,7 @@ include '../views/templates/header.php';
                             Nous contacter
                         </a>
                     </div>
-                    
+
                     <?php if ($_SESSION['newsletters'] == 0) : ?>
                         <div class="card">
                             <img src="../assets/img/newsletters.png" class="card-img-top" alt="Solde">
@@ -45,10 +45,12 @@ include '../views/templates/header.php';
                         </div>
                     <?php endif; ?>
                 </div>
+                <div class="col-lg-8 col-12 px-5">
+                    <h1 class="mb-5">Mes factures</h1>
+                    <img class="img-fluid mt-5 px-5" src="../assets/img/under-construct.png" alt="Site en cours de realisation">
+                </div>
             </div>
-            <div class="col-lg-8 col-12">
 
-            </div>
 
 
         </div>

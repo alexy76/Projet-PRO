@@ -73,20 +73,20 @@
                 </div>
                 <div class="col-lg-3 px-2 mt-lg-0 mt-3">
                     <h3 class="h5 mb-3 text-white text-lg-start text-center">INFORMATIONS</h3>
-                    <p><a class="footerlink" href="">Blog</a></p>
-                    <p><a class="footerlink" href="">A Propos</a></p>
-                    <p><a class="footerlink" href="">Politique d'expédition</a></p>
-                    <p><a class="footerlink" href="">Politique de confidentialité</a></p>
-                    <p><a class="footerlink" href="">Politique de Retour et Remboursement</a></p>
-                    <p><a class="footerlink" href="">Mentions légales</a></p>
-                    <p><a class="footerlink" href="">Conditions Générales de Vente et d'Utilisation</a></p>
+                    <p><a class="footerlink" href="../views/blog.php">Blog</a></p>
+                    <p><a class="footerlink" href="../views/about.php">A Propos</a></p>
+                    <p><a class="footerlink" href="../views/shippingPolicy.php">Politique d'expédition</a></p>
+                    <p><a class="footerlink" href="../views/privacyPolicy.php">Politique de confidentialité</a></p>
+                    <p><a class="footerlink" href="../views/refundPolicy.php">Politique de Retour et Remboursement</a></p>
+                    <p><a class="footerlink" href="../views/legalNotice.php">Mentions légales</a></p>
+                    <p><a class="footerlink" href="../views/cgv.php">Conditions Générales de Vente et d'Utilisation</a></p>
                 </div>
                 <div class="col-lg-3 px-2 mt-lg-0 mt-3">
                     <h3 class="h5 mb-3 text-white text-lg-start text-center">LIENS UTILES</h3>
-                    <p><a class="footerlink" href="">FAQ</a></p>
-                    <p><a class="footerlink" href="">Avis clients</a></p>
-                    <p><a class="footerlink" href="">Suivi de colis</a></p>
-                    <p><a class="footerlink" href="">Contact</a></p>
+                    <p><a class="footerlink" href="../views/faq.php">FAQ</a></p>
+                    <p><a class="footerlink" href="../views/account.php">Avis clients</a></p>
+                    <p><a class="footerlink" href="../views/account.php">Suivi de colis</a></p>
+                    <p><a class="footerlink" href="../views/contact.php">Contact</a></p>
                 </div>
                 <div class="col-lg-3 px-2 mt-lg-0 mt-3">
                     <h3 class="h5 mb-3 text-white text-lg-start text-center">RESTE CONNECTÉ.E</h3>

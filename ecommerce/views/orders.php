@@ -25,9 +25,9 @@ include '../views/templates/header.php';
                         <a href="orders.php" class="list-group-item list-group-item-action btnBlueDark disabled">Mes commandes</a>
                         <a href="bills.php" class="list-group-item list-group-item-action buthover">Mes factures</a>
                     </div>
-                    
+
                     <p class="mt-3 fw-light">Inscrit(e) depuis le <span class=""><?= date('d/m/Y', strtotime($_SESSION['registered'])) ?></span></p>
-                    
+
                     <div class="list-group mb-4">
                         <a href="contact.php" class="btn btnBlueDarkOutline" aria-current="true">
                             Nous contacter
@@ -44,9 +44,10 @@ include '../views/templates/header.php';
                         </div>
                     <?php endif; ?>
                 </div>
-            </div>
-            <div class="col-lg-8 col-12">
-
+                <div class="col-lg-8 col-12 px-5">
+                    <h1 class="mb-5">Mes commandes</h1>
+                    <img class="img-fluid mt-5 px-5" src="../assets/img/under-construct.png" alt="Site en cours de realisation">
+                </div>
             </div>
 
 
