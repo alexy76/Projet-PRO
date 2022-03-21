@@ -29,7 +29,6 @@ $listCollections = $Collections->getListCollections();
 
 
 
-
 /** Contrôleur permettant l'ajout d'un nouveau produit ! */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
 
@@ -38,10 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
 
         if (isset($_POST['idColProduct']) && ctype_digit($_POST['idColProduct'])) {
 
-            if ($Products->setNewProduct(cleanData($_POST['nameProduct']), intval($_POST['idColProduct']), formatSlug(cleanData($_POST['nameProduct'])))) {
+            if ($id = $Products->setNewProduct(cleanData($_POST['nameProduct']), intval($_POST['idColProduct']), formatSlug(cleanData($_POST['nameProduct'])))) {
 
-                $flashToast = true;
-                $flashMsg = ['success', "Le produit a été créé"];
+                header('Location: editProduct.php?id='.$id);
+                exit();
+
             } else {
                 $flashToast = true;
                 $flashMsg = ['error', "Une erreur est survenue"];

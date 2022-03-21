@@ -7,7 +7,7 @@ Options All -Indexes
 RewriteEngine on
 
 RewriteRule ^views/$   /views/home.php [L]
-RewriteRule ^collection/([a-zA-Z-]+)/([0-9]+)/([0-9]+)/([a-zA-Z-]+)$ /views/collection.php?query=$1&page=$2&id=$3&slug=$4 [L]
+RewriteRule ^collection/([a-zA-Z-]+)/([0-9]+)/([0-9]+)/([a-zA-Z0-9-]+)$ /views/collection.php?query=$1&page=$2&id=$3&slug=$4 [L]
 RewriteRule ^product/([0-9]+)/([a-zA-Z0-9-]+)$ /views/product.php?id=$1&slug=$2 [L]
 
 ErrorDocument 404 /views/404.php

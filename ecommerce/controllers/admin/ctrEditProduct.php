@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changePrice'])) {
     $discount = intval(cleanData($_POST['discount']));
     $id = intval($_POST['idProduct']);
 
-    if ($discount >= 0 && $price >= 0 && is_int($discount) && is_float($price)) {
+    if ($discount >= 0 && $discount <= 100 && $price >= 0 && is_int($discount) && is_float($price)) {
 
         if ($Products->setNewPrice($id, $price, $discount)) {
 

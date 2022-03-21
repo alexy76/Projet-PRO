@@ -12,6 +12,7 @@ if(session_status() === PHP_SESSION_NONE) session_start();
 
 $Collections = new Collections;
 
+//var_dump($_GET);
 
 if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Collections->getExistIdCollection(intval($_GET['id']))){
     header('Location: 404');

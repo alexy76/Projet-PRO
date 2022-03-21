@@ -93,7 +93,7 @@ include '../views/templates/header.php';
                                 <i class="bi bi-lock-fill fw-bold h4 fs-3 me-3"></i> Paiement sécurisé
                             </p>
 
-                            <?= $_SESSION['role'] == 2 ? '<p class="text-center"><a href="/views/admin/editProduct.php?id=' . $product["id"] . '">Editer la fiche produit</a></p>' : '' ?>
+                            <?= isset($_SESSION['id']) && $_SESSION['role'] == 2 ? '<p class="text-center"><a href="/views/admin/editProduct.php?id=' . $product["id"] . '">Editer la fiche produit</a></p>' : '' ?>
 
 
 

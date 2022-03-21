@@ -18,7 +18,8 @@ include '../views/templates/header.php';
         <div class="card-body">
 
             <div class="row justify-content-center p-lg-3 p-1">
-                <h1>Erreur 404 : Page non trouvée !</h1>
+                <h1></h1>
+                <img src="../assets/img/404.png" alt="page not found" class="img-fluid">
             </div>
         </div>
     </div>

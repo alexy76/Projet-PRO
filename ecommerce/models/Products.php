@@ -7,21 +7,25 @@ class Products extends Database
      * Méthode permettant d'enregistrer un produit en base de données
      * @param string (titre du produit)
      * @param int (identifiant de la collection)
-     * @return bool
+     * @return int | bool (false)s
      */
-    public function setNewProduct(string $title, int $idCol, string $slug): bool
+    public function setNewProduct(string $title, int $idCol, string $slug)
     {
         $db = $this->connectDB();
 
-        $query = "INSERT INTO `ec_products` (`pdt_title`,`pdt_price`,`pdt_activated`, `pdt_slug`, `col_id`) 
-                VALUES (:title, 0, 0, :slug, :idCol)";
+        $query = "INSERT INTO `ec_products` (`pdt_title`,`pdt_price`, `pdt_discount`, `pdt_activated`, `pdt_slug`, `col_id`) 
+                VALUES (:title, 0, 0, 0, :slug, :idCol)";
 
         $statment = $db->prepare($query);
         $statment->bindValue(':title', $title, PDO::PARAM_STR);
         $statment->bindValue(':idCol', $idCol, PDO::PARAM_INT);
         $statment->bindValue(':slug', $slug, PDO::PARAM_STR);
 
-        return $statment->execute();
+        if ($statment->execute()) {
+            return $db->lastInsertId();
+        } else {
+            return false;
+        }
     }
 
 
@@ -383,6 +387,7 @@ class Products extends Database
 
     /**
      * Méthode permettant de récupérer le nombre de produits selon la collection (aide à la pagination)
+     * @param int (identifiant de la collection)
      * @return int (nombre total de produits)
      */
     public function getCount_displayByCollection(int $idCollection): int
@@ -402,8 +407,11 @@ class Products extends Database
 
 
     /**
-     * Méthode permettant de savoir si la catégorie existe
-     * @param int (identifiant de la catégorie)
+     * Méthode permettant de récuperer la liste des produits par collection
+     * @param int (identifiant de la collection)
+     * @param string (nom de la requete)
+     * @param int (nombre d element a recuperer)
+     * @param int (nombre de départ offset)
      * @return array
      */
     public function get_displayByCollection(int $idCollection, string $query, int $nbElt, int $offset)
@@ -452,8 +460,9 @@ class Products extends Database
     }
 
     /**
-     * Méthode permettant de savoir si la catégorie existe
-     * @param int (identifiant de la catégorie)
+     * Méthode permettant de récupérer les informations d'un produit
+     * @param int (identifiant du produit)
+     * @return array
      */
     public function get_displayByIdProduct(int $idProduct)
     {
@@ -483,7 +492,7 @@ class Products extends Database
         unset($product['nameImages']);
         unset($product['altImages']);
 
-        for($i = 0; $i < count($images); $i++){
+        for ($i = 0; $i < count($images); $i++) {
             $product['images'][] = [
                 'image' => $images[$i],
                 'alt' => $altImages[$i]

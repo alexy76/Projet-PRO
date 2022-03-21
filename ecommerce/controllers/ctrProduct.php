@@ -15,14 +15,16 @@ $Collections = new Collections;
 $Product = new Products;
 
 if(!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Product->getExistProduct(intval($_GET['id']))){
-    header('Location: 404.php');
+    header('Location: /views/404.php');
     exit();
 }
 
 $product = $Product->get_displayByIdProduct(intval($_GET['id']));
 
-//var_dump($_SESSION);
-
+if(empty($product['images'][0]['image'])){
+    header('Location: ../views/404.php');
+    exit();
+}
 /** Valeur des metas */
 $meta_title = $product['metaTitle'];
 $meta_description = $product['metaDescription'];
