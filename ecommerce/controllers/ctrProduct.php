@@ -5,6 +5,7 @@ require_once '../models/Database.php';
 require_once '../models/Users.php';
 require_once '../models/Collections.php';
 require_once '../models/Products.php';
+require_once '../models/Newsletters.php';
 require_once '../tools/tools.php';
 require_once '../controllers/ctrCartAjax.php';
 
@@ -28,3 +29,15 @@ if(empty($product['images'][0]['image'])){
 /** Valeur des metas */
 $meta_title = $product['metaTitle'];
 $meta_description = $product['metaDescription'];
+
+
+
+/** Contrôleur d'ajout de mail dans la table Newsletters  */
+if(isset($_POST['subscribeNews'], $_POST['NewsLetterMail']) && filter_var($_POST['NewsLetterMail'], FILTER_VALIDATE_EMAIL)){
+
+    $Newsletters = new Newsletters;
+    if($Newsletters->setMail(strtolower(cleanData($_POST['NewsLetterMail'])))){
+        $flashToast = true;
+        $flashMsg = ['success', 'Inscription validée'];
+    }
+}

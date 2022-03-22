@@ -37,18 +37,49 @@
 
 
 <footer class="mt-5" style="min-height: 350px;">
-    <?php if (isset($messageFlash)) : ?>
-        <span id="messageFlash"></span>
-    <?php endif; ?>
+
+    <?php //if (isset($messageFlash)) : ?>
+        <!-- <span id="messageFlash"></span> -->
+    <?php //endif; ?>
+
     <div class="container mb-5">
         <div class="card text-center">
 
             <div class="card-body p-0">
-                <div class="row">
-                    <div class="col-lg-5">
+                <div class="row p-0 m-0">
+                    <div class="col-lg-5 p-0 m-0">
                         <img class="img-fluid rounded" src="../../assets/img/newslettershome.webp" alt="Femme enthousiaste au sport d hiver">
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-7 p-0 m-0">
+
+                        <div class="row h-100 justify-content-center align-items-center m-0 px-lg-5 px-2">
+                            <div class="mx-auto">
+
+                                <h3 class="mb-4 mt-lg-0 mt-2">Inscrivez-vous à notre Newsletter</h3>
+
+                                <p class="mb-4">Et comme plus de 3600 membres avant vous, profitez dès maintenant de 10% offert sur votre prochaine commande dans notre boutique !</p>
+
+                                <form class="d-lg-block d-none" method="POST" action="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="NewsLetterMail" placeholder="email@domaine.fr" aria-label="Recipient's username" aria-describedby="button-addon2">
+
+                                        <div class="g-recaptcha" data-sitekey="6Le-4HceAAAAAO_LO-NXQ-WDye4M9aIPQFO5laVH" data-size="invisible"></div>
+                                        <button class="btn btnBlueDark4" type="submit" id="button-addon2" name="subscribeNews">Je profite des offres privées</button>
+                                    </div>
+                                </form>
+
+                                <form class="d-lg-none d-block" method="POST" action="">
+
+                                        <input type="text" class="form-control w-100" name="NewsLetterMail" placeholder="email@domaine.fr" aria-label="Recipient's username" aria-describedby="button-addon2">
+
+                                        <div class="g-recaptcha" data-sitekey="6Le-4HceAAAAAO_LO-NXQ-WDye4M9aIPQFO5laVH" data-size="invisible"></div>
+                                        <button class="btn w-100 my-3 btnBlueDark4" type="submit" id="button-addon2" name="subscribeNews">Je profite des offres privées</button>
+
+                                </form>
+                            </div>
+                        </div>
+
+
 
                     </div>
                 </div>

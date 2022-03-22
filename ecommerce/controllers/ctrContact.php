@@ -37,7 +37,7 @@ if(isset($_POST['fromName'], $_POST['fromMail'], $_POST['messageMail'], $_POST['
         }
 
         if(strlen($formContact['messageMail']) > 250)
-            $errors['messageMail'] = "Attention vous êtes limité a 250 caractères.";
+            $errors['messageMail'] = "Attention vous êtes limité a 500 caractères.";
 
 
         if (empty($_POST['g-recaptcha-response']))
@@ -73,4 +73,14 @@ if(isset($_POST['fromName'], $_POST['fromMail'], $_POST['messageMail'], $_POST['
         $messageAlert = ['danger', 'Tous les champs doivent être complétés !'];
 }
 
-?>
+
+
+/** Contrôleur d'ajout de mail dans la table Newsletters  */
+if(isset($_POST['subscribeNews'], $_POST['NewsLetterMail']) && filter_var($_POST['NewsLetterMail'], FILTER_VALIDATE_EMAIL)){
+
+    $Newsletters = new Newsletters;
+    if($Newsletters->setMail(strtolower(cleanData($_POST['NewsLetterMail'])))){
+        $flashToast = true;
+        $flashMsg = ['success', 'Inscription validée'];
+    }
+}

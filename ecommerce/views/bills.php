@@ -40,7 +40,7 @@ include '../views/templates/header.php';
                             <div class="card-body">
                                 <h5 class="card-title">Profitez-en maintenant</h5>
                                 <p class="card-text">En s'inscrivant à notre Newsletter, vous bénéficierez d'offres exceptionnelles</p>
-                                <a href="?action=subscribeNewsletters" class="btn btnBlueDarkOutline">Je profite des offres privées</a>
+                                <a href="account.php?action=subscribeNewsletters" class="btn btnBlueDarkOutline">Je profite des offres privées</a>
                             </div>
                         </div>
                     <?php endif; ?>

@@ -4,6 +4,7 @@ require_once '../config.php';
 require_once '../models/Database.php';
 require_once '../models/Users.php';
 require_once '../models/Collections.php';
+require_once '../models/Newsletters.php';
 require_once '../tools/tools.php';
 
 /** Initialisation des paramètres de la page */
@@ -61,8 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['renewPwd'])) {
     }
 }
 
-// $Users = new Users;
-// if($Users->setTokenPassword('alexy.lepretre76@laposte.net'))
-//     echo "ok";
-// else
-//     echo "pas ok";
+
+
+/** Contrôleur d'ajout de mail dans la table Newsletters  */
+if(isset($_POST['subscribeNews'], $_POST['NewsLetterMail']) && filter_var($_POST['NewsLetterMail'], FILTER_VALIDATE_EMAIL)){
+
+    $Newsletters = new Newsletters;
+    if($Newsletters->setMail(strtolower(cleanData($_POST['NewsLetterMail'])))){
+        $flashToast = true;
+        $flashMsg = ['success', 'Inscription validée'];
+    }
+}
