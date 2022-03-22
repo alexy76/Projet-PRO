@@ -72,7 +72,7 @@
 
                                         <input type="text" class="form-control w-100" name="NewsLetterMail" placeholder="email@domaine.fr" aria-label="Recipient's username" aria-describedby="button-addon2">
 
-                                        <div class="g-recaptcha" data-sitekey="6Le-4HceAAAAAO_LO-NXQ-WDye4M9aIPQFO5laVH" data-size="invisible"></div>
+                                        <!-- <div class="g-recaptcha" data-sitekey="6Le-4HceAAAAAO_LO-NXQ-WDye4M9aIPQFO5laVH" data-size="invisible"></div> -->
                                         <button class="btn w-100 my-3 btnBlueDark4" type="submit" id="button-addon2" name="subscribeNews">Je profite des offres privées</button>
 
                                 </form>
