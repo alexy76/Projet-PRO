@@ -6,7 +6,7 @@ include '../views/templates/header.php';
 <div class="container mt-3 text-bluedark">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb colorlink">
-            <li class="breadcrumb-item colorlink"><a href="../../views/home.php">SportXtrem</a></li>
+            <li class="breadcrumb-item colorlink"><a href="../../views/home.php">Athlectic'Sports</a></li>
             <li class="breadcrumb-item active"><?= ucfirst(strtolower($product['catName'])) ?></li>
             <li class="breadcrumb-item active"><a href="/collection/all/1/<?= $product['idCol'] ?>/<?= $product['slugCol'] ?>"><?= $product['colName'] ?></a></li>
             <li class="breadcrumb-item active" aria-current="page"><?= ucfirst(strtolower($product['title'])) ?></li>

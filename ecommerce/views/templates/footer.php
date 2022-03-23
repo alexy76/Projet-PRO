@@ -38,9 +38,11 @@
 
 <footer class="mt-5" style="min-height: 350px;">
 
-    <?php //if (isset($messageFlash)) : ?>
-        <!-- <span id="messageFlash"></span> -->
-    <?php //endif; ?>
+    <?php //if (isset($messageFlash)) : 
+    ?>
+    <!-- <span id="messageFlash"></span> -->
+    <?php //endif; 
+    ?>
 
     <div class="container mb-5">
         <div class="card text-center">
@@ -70,10 +72,10 @@
 
                                 <form class="d-lg-none d-block" method="POST" action="">
 
-                                        <input type="text" class="form-control w-100" name="NewsLetterMail" placeholder="email@domaine.fr" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <input type="text" class="form-control w-100" name="NewsLetterMail" placeholder="email@domaine.fr" aria-label="Recipient's username" aria-describedby="button-addon2">
 
-                                        <!-- <div class="g-recaptcha" data-sitekey="6Le-4HceAAAAAO_LO-NXQ-WDye4M9aIPQFO5laVH" data-size="invisible"></div> -->
-                                        <button class="btn w-100 my-3 btnBlueDark4" type="submit" id="button-addon2" name="subscribeNews">Je profite des offres privées</button>
+                                    <!-- <div class="g-recaptcha" data-sitekey="6Le-4HceAAAAAO_LO-NXQ-WDye4M9aIPQFO5laVH" data-size="invisible"></div> -->
+                                    <button class="btn w-100 my-3 btnBlueDark4" type="submit" id="button-addon2" name="subscribeNews">Je profite des offres privées</button>
 
                                 </form>
                             </div>
@@ -92,7 +94,7 @@
         <div class="container">
 
             <div class="row pt-lg-4 pt-0 pb-lg-1 pb-0 footercolor">
-                <div class="col-lg-3 px-2 mt-lg-0 mt-3">
+                <div class="col-lg-3 px-2 mt-lg-0 mt-3 d-lg-block d-none">
                     <h3 class="h5 mb-3 text-white text-lg-start text-center">CONTACT</h3>
                     <p>Une question ou une suggestion, contactez-nous et vous recevrez une réponse en moins de 24h du lundi au vendredi entre 9 et 17h.</p>
                     <p>Par e-mail : <a class="footerlink" href="contact.php">cliquez ici</a></p>
@@ -112,7 +114,7 @@
                     <p><a class="footerlink" href="../views/legalNotice.php">Mentions légales</a></p>
                     <p><a class="footerlink" href="../views/cgv.php">Conditions Générales de Vente et d'Utilisation</a></p>
                 </div>
-                <div class="col-lg-3 px-2 mt-lg-0 mt-3">
+                <div class="col-lg-3 px-2 mt-lg-0 mt-3 d-lg-block d-none">
                     <h3 class="h5 mb-3 text-white text-lg-start text-center">LIENS UTILES</h3>
                     <p><a class="footerlink" href="../views/faq.php">FAQ</a></p>
                     <p><a class="footerlink" href="../views/account.php">Avis clients</a></p>
@@ -120,11 +122,17 @@
                     <p><a class="footerlink" href="../views/contact.php">Contact</a></p>
                 </div>
                 <div class="col-lg-3 px-2 mt-lg-0 mt-3">
-                    <h3 class="h5 mb-3 text-white text-lg-start text-center">RESTEZ CONNECTÉ.E</h3>
+                    <h3 class="h5 mb-3 text-white text-lg-start text-center">REJOIGNEZ-NOUS SUR NOS RESEAUX</h3>
+                    <div class="text-lg-start text-center">
+                        <a href="/"><img src="../../assets/img/facebook.png" alt="logo facebook" width="50px" height="auto"></a>
+                        <a href="/"><img class="ms-2" src="../../assets/img/insta.png" alt="logo instagram" width="50px" height="auto"></a>
+                        <a href="/"><img class="ms-2" src="../../assets/img/twitter.png" alt="logo twitter" width="50px" height="auto"></a>
+                    </div>
                 </div>
             </div>
         </div>
         <hr>
+
         <div class="container pb-2">
             <div class="row">
                 <div class="col-6">

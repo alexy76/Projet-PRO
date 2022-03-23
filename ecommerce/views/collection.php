@@ -6,7 +6,7 @@ include '../views/templates/header.php';
 <div class="container mt-3 text-bluedark">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../views/home.php">SportXtrem</a></li>
+            <li class="breadcrumb-item"><a href="../../views/home.php">Athletic'Sports</a></li>
             <li class="breadcrumb-item active"><?= ucfirst(strtolower($collectionName['cat_name'])) ?></li>
             <li class="breadcrumb-item active" aria-current="page"><?= $collectionName['col_name'] ?></li>
         </ol>
@@ -16,7 +16,7 @@ include '../views/templates/header.php';
         <div class="card-body">
 
             <div class="row mb-5">
-                <h1 class="col-lg-6 col-12 text-lg-start text-center ps-lg-5 ps-0 h3"><?= $collectionName['col_name'] ?> <?= ucfirst(strtolower($collectionName['cat_name'])) ?> SportXtrem</h1>
+                <h1 class="col-lg-6 col-12 text-lg-start text-center ps-lg-5 ps-0 h3"><?= $collectionName['col_name'] ?> <?= ucfirst(strtolower($collectionName['cat_name'])) ?> Athletic'Sports</h1>
                 <div class="d-flex col-lg-6 col-12 text-end pe-lg-5 pe-1 justify-content-end">
                     <select id="sortsProducts" class="form-select form-select-sm w-lg-25 w-50 h-75 mt-lg-0 mt-3" aria-label=".form-select-sm example">
                         <option <?= strtolower($_GET['query']) == 'all' ? 'selected' : '' ?> disabled>Trier par</option>

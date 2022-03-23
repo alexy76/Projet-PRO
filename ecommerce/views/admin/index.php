@@ -17,14 +17,13 @@ require_once '../../controllers/admin/ctrIndex.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
 </head>
 
 
 <body class="m-0 p-0">
 
-
     <div class="card text-center border-dark text-white m-0 p-0" style="min-height: 100vh">
-
 
         <div class="card-header btnBlue pt-4 pb-4">
             <ul class="nav nav-tabs card-header-tabs bg-light mx-4 border-bottom border-light rounded-3">
@@ -36,6 +35,8 @@ require_once '../../controllers/admin/ctrIndex.php';
                 </li>
             </ul>
         </div>
+
+
 
 
         <div class="card-body bg-grey pt-5">
@@ -243,6 +244,7 @@ require_once '../../controllers/admin/ctrIndex.php';
     <script src="../../assets/js/appAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
