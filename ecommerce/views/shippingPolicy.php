@@ -26,6 +26,7 @@ include '../views/templates/header.php';
     </div>
 </div>
 
+
 <?php
 include '../views/templates/footer.php';
 ?>

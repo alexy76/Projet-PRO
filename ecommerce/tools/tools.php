@@ -28,12 +28,15 @@ function smtpmailer($to, $from, $from_name, $subject, $body) : bool
     return $mail->Send();
 }
 
+
+/* Fonction retournant un tableau nettoyé */
 function cleanDataArray(array $dataArray) : array
 {
     return array_map(function($elt){ 
         return trim(stripslashes(htmlspecialchars($elt))); }, $dataArray);
 }
 
+/* Fonction retournant une chaine de caractère nettoyée */
 function cleanData(string $elt) : string
 {
     return trim(stripslashes(htmlspecialchars($elt)));
