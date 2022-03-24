@@ -32,7 +32,6 @@ $listCollections = $Collections->getListCollections();
 /** Contrôleur permettant l'ajout d'un nouveau produit ! */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
 
-
     if (!empty($_POST['nameProduct'])) {
 
         if (isset($_POST['idColProduct']) && ctype_digit($_POST['idColProduct'])) {
@@ -41,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
 
                 header('Location: editProduct.php?id='.$id);
                 exit();
-
+                
             } else {
                 $flashToast = true;
                 $flashMsg = ['error', "Une erreur est survenue"];
