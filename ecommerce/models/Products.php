@@ -4,10 +4,10 @@ class Products extends Database
 {
 
     /**
-     * Méthode permettant d'enregistrer un produit en base de données
-     * @param string (titre du produit)
-     * @param int (identifiant de la collection)
-     * @return int | bool (false)s
+     * Méthode permettant d'enregistrer un nouveau produit
+     * @param string        (nom du produit)
+     * @param int           (identifiant de la collection)
+     * @return int|bool     (identifiant de l'id nouvellement créé | false)
      */
     public function setNewProduct(string $title, int $idCol, string $slug)
     {
@@ -21,11 +21,10 @@ class Products extends Database
         $statment->bindValue(':idCol', $idCol, PDO::PARAM_INT);
         $statment->bindValue(':slug', $slug, PDO::PARAM_STR);
 
-        if ($statment->execute()) {
+        if ($statment->execute())
             return $db->lastInsertId();
-        } else {
+        else
             return false;
-        }
     }
 
 
