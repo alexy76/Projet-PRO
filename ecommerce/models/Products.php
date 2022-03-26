@@ -406,12 +406,12 @@ class Products extends Database
 
 
     /**
-     * Méthode permettant de récuperer la liste des produits par collection
+     * Méthode permettant de récuperer la liste des produits par collection (pagination + tri)
      * @param int (identifiant de la collection)
      * @param string (nom de la requete)
      * @param int (nombre d element a recuperer)
-     * @param int (nombre de départ offset)
-     * @return array
+     * @param int (offset)
+     * @return array|null
      */
     public function get_displayByCollection(int $idCollection, string $query, int $nbElt, int $offset)
     {
