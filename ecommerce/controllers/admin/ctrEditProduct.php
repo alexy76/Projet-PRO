@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeName'])) {
 
     if (!empty($_POST['nameProduct'])) {
 
-        if (isset($_POST['idProduct']) && ctype_digit($_POST['idProduct']) && $Products->getExistProduct($_POST['idProduct'])) {
+        if (isset($_POST['idProduct']) && ctype_digit($_POST['idProduct']) && $Products->getExistProduct(intval($_POST['idProduct']))) {
 
             $name = cleanData($_POST['nameProduct']);
             $slug = formatSlug($name);
@@ -48,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeName'])) {
                 if ($Products->setNewName(intval($_POST['idProduct']), $name, $slug)) {
 
                     $flashMsg = [true, 'success', 'Le nom a été changé'];
-
                 } else
                     $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
             } else
@@ -64,17 +63,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeName'])) {
 /** Contrôleur permettant de modifier la collection d'un produit */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeCollection'])) {
 
-    if (ctype_digit($_POST['idProduct']) && ctype_digit($_POST['idColProduct'])) {
+    if (isset($_POST['idProduct']) && ctype_digit($_POST['idProduct']) && $Products->getExistProduct(intval($_POST['idProduct']))) {
 
-        if ($Products->setChangeCollection(intval($_POST['idProduct']), intval($_POST['idColProduct']))) {
+        if (isset($_POST['idColProduct']) && ctype_digit($_POST['idColProduct']) && $Collections->getExistIdCollection(intval($_POST['idColProduct']))) {
 
-            $flashToast = true;
-            $flashMsg = ['success', 'Le produit a été migré vers une autre collection'];
-        } else {
-            $flashToast = true;
-            $flashMsg = ['error', 'Une erreur s\'est produite'];
-        }
-    }
+            if ($Products->setChangeCollection(intval(cleanData($_POST['idProduct'])), intval(cleanData($_POST['idColProduct'])))) {
+
+                $flashMsg = [true, 'success', 'Le produit a été migré vers une autre collection'];
+            } else
+                $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
+        } else
+            $flashMsg = [true, 'warning', 'L\'ID de la collection que vous souhaitez modifier n\'existe pas'];
+    } else
+        $flashMsg = [true, 'warning', 'L\'ID du produit que vous souhaitez modifier n\'existe pas'];
 }
 
 
@@ -90,16 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changePrice'])) {
 
         if ($Products->setNewPrice($id, $price, $discount)) {
 
-            $flashToast = true;
-            $flashMsg = ['success', 'Les prix ont été changés'];
-        } else {
-            $flashToast = true;
-            $flashMsg = ['error', 'Une erreur s\'est produite'];
-        }
-    } else {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Les champs doivent contenir des valeurs numériques positives'];
-    }
+            $flashMsg = [true, 'success', 'Les prix ont été changés'];
+        } else
+            $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
+    } else
+        $flashMsg = [true, 'warning', 'Les champs doivent contenir des valeurs numériques positives'];
 }
 
 
@@ -108,12 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changePrice'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeOption'])) {
 
     if ($Products->setOptionsProduct(intval($_POST['idProduct']), cleanData($_POST['optionProduct']))) {
-        $flashToast = true;
-        $flashMsg = ['success', 'Les options ont été modifiées'];
-    } else {
-        $flashToast = true;
-        $flashMsg = ['error', 'Une erreur s\'est produite'];
-    }
+
+        $flashMsg = [true, 'success', 'Les options ont été modifiées'];
+    } else
+        $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
 }
 
 
