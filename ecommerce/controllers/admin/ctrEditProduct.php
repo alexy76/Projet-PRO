@@ -42,11 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeName'])) {
 
             $name = cleanData($_POST['nameProduct']);
             $slug = formatSlug($name);
-            $id = intval($_POST['idProduct']);
 
             if (!$Products->getExistSlug($slug)) {
 
-                if ($Products->setNewName($id, $name, $slug)) {
+                if ($Products->setNewName(intval($_POST['idProduct']), $name, $slug)) {
 
                     $flashMsg = [true, 'success', 'Le nom a été changé'];
 
