@@ -373,7 +373,7 @@ require_once '../../controllers/admin/ctrEditProduct.php';
 
 
     <script type="text/javascript">
-        if (<?= $flashToast ?? 'false' ?>) {
+        if (<?= $flashMsg[0] ?? 'false' ?>) {
 
             const Toast = Swal.mixin({
                 toast: true,
@@ -390,8 +390,8 @@ require_once '../../controllers/admin/ctrEditProduct.php';
             })
 
             Toast.fire({
-                icon: "<?= $flashMsg[0] ?? '' ?>",
-                title: "<?= $flashMsg[1] ?? '' ?>"
+                icon: "<?= $flashMsg[1] ?? '' ?>",
+                title: "<?= $flashMsg[2] ?? '' ?>"
             })
         }
     </script>

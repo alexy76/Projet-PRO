@@ -36,24 +36,28 @@ if (!isset($_GET['id']) || !ctype_digit($_GET['id']) || !$Products->getExistProd
 /** Contrôleur permettant de modifier le nom d'un produit */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeName'])) {
 
-    $name = cleanData($_POST['nameProduct']);
-    $slug = formatSlug($name);
-    $id = intval($_POST['idProduct']);
+    if (!empty($_POST['nameProduct'])) {
 
-    if (!$Products->getExistSlug($slug) && !empty($name) && !empty($id)) {
+        if (isset($_POST['idProduct']) && ctype_digit($_POST['idProduct']) && $Products->getExistProduct($_POST['idProduct'])) {
 
-        if ($Products->setNewName($id, $name, $slug)) {
+            $name = cleanData($_POST['nameProduct']);
+            $slug = formatSlug($name);
+            $id = intval($_POST['idProduct']);
 
-            $flashToast = true;
-            $flashMsg = ['success', 'Le nom a été changé'];
-        } else {
-            $flashToast = true;
-            $flashMsg = ['error', 'Une erreur s\'est produite'];
-        }
-    } else {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Le nom de produit est déjà utilisé'];
-    }
+            if (!$Products->getExistSlug($slug)) {
+
+                if ($Products->setNewName($id, $name, $slug)) {
+
+                    $flashMsg = [true, 'success', 'Le nom a été changé'];
+
+                } else
+                    $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
+            } else
+                $flashMsg = [true, 'warning', 'Le nom de produit est déjà utilisé'];
+        } else
+            $flashMsg = [true, 'warning', 'L\'ID que vous souhaitez modifier n\'existe pas'];
+    } else
+        $flashMsg = [true, 'warning', 'Veuillez entrez un nom de produit'];
 }
 
 
@@ -83,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changePrice'])) {
     $discount = intval(cleanData($_POST['discount']));
     $id = intval($_POST['idProduct']);
 
-    if ($discount >= 0 && $discount <= 100 && $price >= 0 && is_int($discount) && is_float($price)) {
+    if ($discount >= 0 && $discount <= 100 && $price >= 0) {
 
         if ($Products->setNewPrice($id, $price, $discount)) {
 
@@ -95,13 +99,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changePrice'])) {
         }
     } else {
         $flashToast = true;
-        $flashMsg = ['warning', 'Les champs doivent contenir une valeur minimale à 0'];
+        $flashMsg = ['warning', 'Les champs doivent contenir des valeurs numériques positives'];
     }
 }
 
 
 
-/** Contrôleur permettant d'ajouter des déclinaisons du produits (options du produit) */
+/** Contrôleur permettant d'ajouter des déclinaisons du produit (options du produit) */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeOption'])) {
 
     if ($Products->setOptionsProduct(intval($_POST['idProduct']), cleanData($_POST['optionProduct']))) {
@@ -172,7 +176,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
                     $flashToast = true;
                     $flashMsg = ['error', $e->errorInfo[2]];
                 }
-
             } else {
                 $flashToast = true;
                 $flashMsg = ['error', "Une erreur s'est produite."];
@@ -218,10 +221,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editImage'])) {
 /** Contrôleur permettant de changer le descriptif du produit */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['saveDescription'])) {
 
-    if($Products->setDescriptionProduct($_POST['descriptionProduct'], $_POST['idProduct'])){
+    if ($Products->setDescriptionProduct($_POST['descriptionProduct'], $_POST['idProduct'])) {
         $flashToast = true;
         $flashMsg = ['success', "La description produit a été modifiée"];
-    }else{
+    } else {
         $flashToast = true;
         $flashMsg = ['error', "Une erreur s'est produite."];
     }
