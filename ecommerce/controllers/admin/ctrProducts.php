@@ -42,16 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
                 exit();
                 
             } else {
-                $flashToast = true;
-                $flashMsg = ['error', "Une erreur est survenue"];
+                $flashMsg = [true, 'error', "Une erreur est survenue"];
             }
         } else {
-            $flashToast = true;
-            $flashMsg = ['warning', 'Veuillez choisir une collection'];
+            $flashMsg = [true, 'warning', 'Veuillez choisir une collection'];
         }
     } else {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Veuillez saisir un nom de produit'];
+        $flashMsg = [true, 'warning', 'Veuillez saisir un nom de produit'];
     }
 }
 
@@ -68,11 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteAll'])) {
     }
 
     if (empty($errors)) {
-        $flashToast = true;
-        $flashMsg = ['success', 'Les produits ont été supprimés'];
+        $flashMsg = [true, 'success', 'Les produits ont été supprimés'];
     } else {
-        $flashToast = true;
-        $flashMsg = ['error', 'Une erreur est survenue'];
+        $flashMsg = [true, 'error', 'Une erreur est survenue'];
     }
 }
 
@@ -81,11 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteAll'])) {
 /** Contrôleur de suppression d'un produit */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteProduct'])) {
     if ($Products->deleteProduct(intval($_POST['idProduct']))) {
-        $flashToast = true;
-        $flashMsg = ['success', 'Le produit " ' . $_POST['nameProduct'] . ' " a été supprimé'];
+        $flashMsg = [true, 'success', 'Le produit ' . $_POST['nameProduct'] . ' a été supprimé'];
     } else {
-        $flashToast = true;
-        $flashMsg = ['error', 'Une erreur est survenue'];
+        $flashMsg = [true, 'error', 'Une erreur est survenue'];
     }
 }
 
@@ -95,11 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteProduct'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['activateProduct'])) {
 
     if ($Products->activateProduct(intval($_POST['idProduct']))) {
-        $flashToast = true;
-        $flashMsg = ['success', 'Le status du produit ' . $_POST['nameProduct'] . ' a changé'];
+        $flashMsg = [true, 'success', 'Le status du produit ' . $_POST['nameProduct'] . ' a changé'];
     } else {
-        $flashToast = true;
-        $flashMsg = ['error', 'Une erreur est survenue'];
+        $flashMsg = [true, 'error', 'Une erreur est survenue'];
     }
 }
 

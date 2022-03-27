@@ -61,7 +61,7 @@ require_once '../../controllers/admin/ctrCollections.php';
                             <i class="bi bi-bag-plus-fill"></i><span class="ms-3 d-inline-block m-auto">Ajouter un produit</span>
                         </a>
 
-                        
+
                         <a href="" class="list-group-item list-group-item-action bg-light d-inline-block text-start">
                             <i class="bi bi-pencil-square"></i><span class="ms-3 d-inline-block m-auto">Modifier un produit</span>
                         </a>
@@ -146,11 +146,11 @@ require_once '../../controllers/admin/ctrCollections.php';
 
 
     <script type="text/javascript">
-        if (<?= $flashToast ?? 'false' ?>) {
+        if (<?= $flashMsg[0] ?? 'false' ?>) {
 
             const Toast = Swal.mixin({
                 toast: true,
-                position: 'middle-middle',
+                position: 'center',
                 background: "#2e3c50",
                 color: "#fff",
                 showConfirmButton: false,
@@ -163,8 +163,8 @@ require_once '../../controllers/admin/ctrCollections.php';
             })
 
             Toast.fire({
-                icon: '<?= $flashMsg[0] ?? '' ?>',
-                title: '<?= $flashMsg[1] ?? '' ?>'
+                icon: "<?= $flashMsg[1] ?? '' ?>",
+                title: "<?= $flashMsg[2] ?? '' ?>"
             })
         }
     </script>

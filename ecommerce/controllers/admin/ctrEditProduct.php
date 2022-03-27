@@ -83,19 +83,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeCollection'])) {
 /** Contrôleur permettant de modifier le prix ou la remise (%) d'un produit */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changePrice'])) {
 
-    $price = floatval(cleanData($_POST['price']));
-    $discount = intval(cleanData($_POST['discount']));
-    $id = intval($_POST['idProduct']);
+    if (isset($_POST['idProduct']) && ctype_digit($_POST['idProduct']) && $Products->getExistProduct(intval($_POST['idProduct']))) {
 
-    if ($discount >= 0 && $discount <= 100 && $price >= 0) {
+        $price = floatval(cleanData($_POST['price']));
+        $discount = intval(cleanData($_POST['discount']));
 
-        if ($Products->setNewPrice($id, $price, $discount)) {
+        if ($discount >= 0 && $discount <= 100 && $price >= 0) {
 
-            $flashMsg = [true, 'success', 'Les prix ont été changés'];
+            if ($Products->setNewPrice(intval($_POST['idProduct']), $price, $discount)) {
+
+                $flashMsg = [true, 'success', 'Les prix ont été changés'];
+            } else
+                $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
         } else
-            $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
+            $flashMsg = [true, 'warning', 'Les champs doivent contenir des valeurs numériques positives'];
     } else
-        $flashMsg = [true, 'warning', 'Les champs doivent contenir des valeurs numériques positives'];
+        $flashMsg = [true, 'warning', 'L\'ID du produit que vous souhaitez modifier n\'existe pas'];
 }
 
 
@@ -103,11 +106,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changePrice'])) {
 /** Contrôleur permettant d'ajouter des déclinaisons du produit (options du produit) */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeOption'])) {
 
-    if ($Products->setOptionsProduct(intval($_POST['idProduct']), cleanData($_POST['optionProduct']))) {
+    if (isset($_POST['idProduct']) && ctype_digit($_POST['idProduct']) && $Products->getExistProduct(intval($_POST['idProduct']))) {
 
-        $flashMsg = [true, 'success', 'Les options ont été modifiées'];
+        if ($Products->setOptionsProduct(intval($_POST['idProduct']), cleanData($_POST['optionProduct']))) {
+
+            $flashMsg = [true, 'success', 'Les options ont été modifiées'];
+        } else
+            $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
     } else
-        $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
+        $flashMsg = [true, 'warning', 'L\'ID du produit que vous souhaitez modifier n\'existe pas'];
 }
 
 
@@ -119,11 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changeMeta'])) {
     $metaDescription = cleanData($_POST['metaDescriptionPost']);
 
     if ($Products->setMetaProduct($metaTitle, $metaDescription, intval($_POST['idProduct']))) {
-        $flashToast = true;
-        $flashMsg = ['success', 'Google vous remercie :D'];
+        $flashMsg = [true, 'success', 'Google vous remercie :D'];
     } else {
-        $flashToast = true;
-        $flashMsg = ['error', 'Une erreur s\'est produite'];
+        $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
     }
 }
 
@@ -135,20 +140,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
     extract($_FILES["fileToUpload"]);
 
     if (empty($_POST['altImg'])) {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Le texte alternatif est obligatoire'];
+        $flashMsg = [true, 'warning', 'Le texte alternatif est obligatoire'];
     } elseif ($error > 0) {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Veuillez choisir un fichier'];
+        $flashMsg = [true, 'warning', 'Veuillez choisir un fichier'];
     } elseif (!@getimagesize($tmp_name)) {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Le fichier n\'est pas une image'];
+        $flashMsg = [true, 'warning', 'Le fichier n\'est pas une image'];
     } elseif ($size > 3 * 1024 ** 2) {
-        $flashToast = true;
-        $flashMsg = ['warning', 'L\'image est trop volumineuse'];
+        $flashMsg = [true, 'warning', 'L\'image est trop volumineuse'];
     } elseif (!in_array(getimagesize($tmp_name)['mime'], ['image/avif', 'image/webp', 'image/png', 'image/jpeg', 'image/tiff', 'image/gif', 'image/bmp'])) {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Le format de l\'image n\'est pas autorisé'];
+        $flashMsg = [true, 'warning', 'Le format de l\'image n\'est pas autorisé'];
     } else {
 
         $explodeNameFile = explode('/', getimagesize($tmp_name)['mime']);
@@ -163,19 +163,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['uploadFile'])) {
                 try {
                     $GetImages->insertIntermediateTableImage(intval($idImage), intval($_POST['idProduct']));
 
-                    $flashToast = true;
-                    $flashMsg = ['success', "L'image a été uploadée."];
+                    $flashMsg = [true, 'success', "L'image a été uploadée."];
                 } catch (PDOException $e) {
-                    $flashToast = true;
-                    $flashMsg = ['error', $e->errorInfo[2]];
+                    $flashMsg = [true, 'error', $e->errorInfo[2]];
                 }
             } else {
-                $flashToast = true;
-                $flashMsg = ['error', "Une erreur s'est produite."];
+                $flashMsg = [true, 'error', "Une erreur s'est produite."];
             }
         } else {
-            $flashToast = true;
-            $flashMsg = ['error', "Une erreur s'est produite lors de l'upload."];
+            $flashMsg = [true, 'error', "Une erreur s'est produite lors de l'upload."];
         }
     }
 }
@@ -187,11 +183,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteImage'])) {
 
     if (unlink($_POST['pathImg'])) {
         if ($Images->deleteImage(intval($_POST['idImage']))) {
-            $flashToast = true;
-            $flashMsg = ['success', "L'image a été supprimée."];
+            $flashMsg = [true, 'success', "L'image a été supprimée."];
         } else {
-            $flashToast = true;
-            $flashMsg = ['error', "Une erreur s'est produite."];
+            $flashMsg = [true, 'error', "Une erreur s'est produite."];
         }
     }
 }
@@ -202,10 +196,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteImage'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editImage'])) {
 
     if ($Images->updateAltText(intval($_POST['idImage']), cleanData($_POST['textAlt']))) {
-        $flashToast = true;
-        $flashMsg = ['success', "Le texte alternatif a été modifié"];
+        $flashMsg = [true, 'success', "Le texte alternatif a été modifié"];
     } else {
-        $flashToast = true;
         $flashMsg = ['error', "Une erreur s'est produite."];
     }
 }
@@ -215,11 +207,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editImage'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['saveDescription'])) {
 
     if ($Products->setDescriptionProduct($_POST['descriptionProduct'], $_POST['idProduct'])) {
-        $flashToast = true;
-        $flashMsg = ['success', "La description produit a été modifiée"];
+        $flashMsg = [true, 'success', "La description produit a été modifiée"];
     } else {
-        $flashToast = true;
-        $flashMsg = ['error', "Une erreur s'est produite."];
+        $flashMsg = [true, 'error', "Une erreur s'est produite."];
     }
 }
 

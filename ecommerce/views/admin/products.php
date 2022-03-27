@@ -222,14 +222,14 @@ require_once '../../controllers/admin/ctrProducts.php';
 
     <script type="text/javascript">
         document.getElementById('deleteProductForm').addEventListener('submit', (e) => {
-            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+            if (!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')) {
                 e.preventDefault();
             }
         })
     </script>
     <script type="text/javascript">
         document.getElementById('formInputsDelete').addEventListener('submit', (e) => {
-            if(!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')){
+            if (!window.confirm('Voulez-vous supprimer cet élement, cette action est irréversible')) {
                 e.preventDefault();
             }
         })
@@ -256,7 +256,7 @@ require_once '../../controllers/admin/ctrProducts.php';
         }
     </script>
     <script type="text/javascript">
-        if (<?= $flashToast ?? 'false' ?>) {
+        if (<?= $flashMsg[0] ?? 'false' ?>) {
 
             const Toast = Swal.mixin({
                 toast: true,
@@ -273,8 +273,8 @@ require_once '../../controllers/admin/ctrProducts.php';
             })
 
             Toast.fire({
-                icon: '<?= $flashMsg[0] ?? '' ?>',
-                title: '<?= $flashMsg[1] ?? '' ?>'
+                icon: "<?= $flashMsg[1] ?? '' ?>",
+                title: "<?= $flashMsg[2] ?? '' ?>"
             })
         }
     </script>

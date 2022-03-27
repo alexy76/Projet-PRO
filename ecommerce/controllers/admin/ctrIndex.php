@@ -27,22 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteAll']) && isset(
     }
 
     if (empty($errors)) {
-        $flashToast = true;
-        $flashMsg = ['success', 'Les comptes ont été supprimés'];
+        $flashMsg = [true, 'success', 'Les comptes ont été supprimés'];
     } else {
-        $flashToast = true;
-        $flashMsg = ['error', 'Une erreur est survenue'];
+        $flashMsg = [true, 'error', 'Une erreur est survenue'];
     }
 }
 
 /** Contrôleur de suppression d'un utilisateur */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteUser'])) {
     if ($Users->deleteUser(intval($_POST['idUser']))) {
-        $flashToast = true;
-        $flashMsg = ['success', 'Le compte de ' . $_POST['nameUser'] . ' a été supprimé'];
+        $flashMsg = [true, 'success', 'Le compte de ' . $_POST['nameUser'] . ' a été supprimé'];
     } else {
-        $flashToast = true;
-        $flashMsg = ['error', 'Une erreur est survenue'];
+        $flashMsg = [true, 'error', 'Une erreur est survenue'];
     }
 }
 

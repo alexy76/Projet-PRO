@@ -27,20 +27,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCategory'], $_POST[
         $nameCategory = cleanData($_POST['nameCategory']);
 
         if (!$Category->getExistCategory($nameCategory)) {
+
             if ($Category->setCategory($nameCategory, formatSlug($nameCategory))) {
-                $flashToast = true;
-                $flashMsg = ['success', 'La catégorie "' . $nameCategory . '" a été ajoutée'];
+var_dump('lfdkljf');
+                $flashMsg = [true, 'success', 'La catégorie ' . $nameCategory . ' a été ajoutée'];
+                var_dump($flashMsg);
             } else {
-                $flashToast = true;
-                $flashMsg = ['error', 'Une erreur s\'est produite'];
+                $flashMsg = [true, 'error', 'Une erreur s\'est produite'];
             }
         } else {
-            $flashToast = true;
-            $flashMsg = ['warning', 'Le nom de catégorie existe déjà'];
+            $flashMsg = [true, 'warning', 'Le nom de catégorie existe déjà'];
         }
     } else {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Entrez un nom de catégorie'];
+        $flashMsg = [true, 'warning', 'Entrez un nom de catégorie'];
     }
 }
 
@@ -63,25 +62,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addCollection'])) {
                     if (!$Collections->getExistCollection($nameCollection)) {
 
                         if ($Collections->setNameCollection($nameCollection, formatSlug($nameCollection), intval($_POST['catCollection']))) {
-                            $flashToast = true;
-                            $flashMsg = ['success', "La collection a été ajoutée"];
+
+                            $flashMsg = [true, 'success', "La collection a été ajoutée"];
                         }
                     } else {
-                        $flashToast = true;
-                        $flashMsg = ['warning', "Le nom de collection existe déjà"];
+                        $flashMsg = [true, 'warning', "Le nom de collection existe déjà"];
                     }
                 } else {
-                    $flashToast = true;
-                    $flashMsg = ['error', "La catégorie n'existe pas"];
+                    $flashMsg = [true, 'error', "La catégorie n'existe pas"];
                 }
             }
         } else {
-            $flashToast = true;
-            $flashMsg = ['warning', 'Veuillez choisir une catégorie'];
+            $flashMsg = [true, 'warning', 'Veuillez choisir une catégorie'];
         }
     } else {
-        $flashToast = true;
-        $flashMsg = ['warning', 'Veuillez saisir un nom de collection'];
+        $flashMsg = [true, 'warning', 'Veuillez saisir un nom de collection'];
     }
 }
 
