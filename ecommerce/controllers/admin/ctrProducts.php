@@ -38,9 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
 
             if ($id = $Products->setNewProduct(cleanData($_POST['nameProduct']), intval($_POST['idColProduct']), formatSlug(cleanData($_POST['nameProduct'])))) {
 
-                header('Location: editProduct.php?id='.$id);
+                header('Location: editProduct.php?id=' . $id);
                 exit();
-                
             } else {
                 $flashMsg = [true, 'error', "Une erreur est survenue"];
             }
@@ -75,11 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteAll'])) {
 
 /** Contrôleur de suppression d'un produit */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteProduct'])) {
-    if ($Products->deleteProduct(intval($_POST['idProduct']))) {
-        $flashMsg = [true, 'success', 'Le produit ' . $_POST['nameProduct'] . ' a été supprimé'];
-    } else {
-        $flashMsg = [true, 'error', 'Une erreur est survenue'];
-    }
+
+    if (isset($_POST['idProduct']) && ctype_digit($_POST['idProduct']) && $Products->getExistProduct(intval($_POST['idProduct']))) {
+
+        if ($Products->deleteProduct(intval($_POST['idProduct'])))
+            $flashMsg = [true, 'success', 'Le produit ' . cleanData($_POST['nameProduct']) . ' a été supprimé'];
+        else
+            $flashMsg = [true, 'error', 'Une erreur est survenue'];
+    } else
+        $flashMsg = [true, 'warning', 'L\'ID du produit que vous souhaitez supprimer n\'existe pas'];
 }
 
 
