@@ -29,26 +29,24 @@ $listCollections = $Collections->getListCollections();
 
 
 
-/** Contrôleur permettant l'ajout d'un nouveau produit ! */
+/** Contrôleur permettant l'ajout d'un nouveau produit  */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addProduct'])) {
 
-    if (!empty($_POST['nameProduct'])) {
+    if (!empty($_POST['nameProduct']) && !$Products->getExistSlug(formatSlug(cleanData($_POST['nameProduct'])))) {
 
-        if (isset($_POST['idColProduct']) && ctype_digit($_POST['idColProduct'])) {
+        if (isset($_POST['idColProduct']) && ctype_digit($_POST['idColProduct']) && $Collections->getExistIdCollection(intval($_POST['idColProduct']))) {
 
             if ($id = $Products->setNewProduct(cleanData($_POST['nameProduct']), intval($_POST['idColProduct']), formatSlug(cleanData($_POST['nameProduct'])))) {
 
                 header('Location: editProduct.php?id=' . $id);
                 exit();
-            } else {
+
+            } else
                 $flashMsg = [true, 'error', "Une erreur est survenue"];
-            }
-        } else {
+        } else
             $flashMsg = [true, 'warning', 'Veuillez choisir une collection'];
-        }
-    } else {
-        $flashMsg = [true, 'warning', 'Veuillez saisir un nom de produit'];
-    }
+    } else
+        $flashMsg = [true, 'warning', 'Veuillez saisir un nom de produit qui n\'existe pas'];
 }
 
 
